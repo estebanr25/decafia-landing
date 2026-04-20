@@ -1210,7 +1210,110 @@
     .htr-body strong { color: var(--cream); }
 
     /* =====================================================
-       18. CONFUSION MATRIX HEATMAP
+       18. OVERALL METRICS TAB
+    ===================================================== */
+    .overall-test-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.45);
+      margin-bottom: 1rem;
+    }
+    .overall-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .overall-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(245,240,232,0.10);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.4rem;
+      min-width: 90px;
+      gap: 0.35rem;
+      transition: border-color var(--dur) var(--ease);
+    }
+    .overall-chip:hover { border-color: rgba(193,122,46,0.4); }
+    .overall-chip--highlight {
+      border-color: rgba(193,122,46,0.55);
+      background: rgba(193,122,46,0.10);
+    }
+    .oc-value {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .overall-chip--highlight .oc-value { color: var(--amber-light); }
+    .oc-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+    }
+    .overall-explain-block {
+      background: rgba(0,0,0,0.15);
+      border-left: 3px solid rgba(193,122,46,0.55);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .overall-explain-h {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--amber-light);
+      margin-bottom: 0.55rem;
+    }
+    .overall-explain-body {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.70);
+      line-height: 1.7;
+    }
+    .overall-explain-body strong { color: var(--cream); }
+
+    /* =====================================================
+       19. TRAINING DYNAMICS TAB — small multiples
+    ===================================================== */
+    .train-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+    .train-mini {
+      background: rgba(0,0,0,0.20);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.7rem 0.5rem;
+    }
+    .train-mini-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: rgba(245,240,232,0.50);
+      margin-bottom: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 900px) {
+      .train-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .train-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .overall-chip { min-width: 70px; padding: 0.8rem 1rem; }
+      .oc-value { font-size: 1.25rem; }
+    }
+
+    /* =====================================================
+       20. CONFUSION MATRIX HEATMAP
     ===================================================== */
     .cm-outer {
       max-width: 560px;
@@ -1649,9 +1752,53 @@
         <!-- ── Tab panels ── -->
         <div class="results-panels">
 
-          <!-- TAB 1: Overall metrics — placeholder for 3d -->
+          <!-- TAB 1: Overall metrics -->
           <div id="tab-overall" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-overall" hidden>
-            <p class="tab-placeholder"><!-- Populated in Phase 3d --></p>
+            <div class="tab-chart-wrap">
+
+              <!-- 5 stat chips -->
+              <p class="overall-test-label" data-i18n="overall_test_label">Métricas en conjunto de prueba (286 imágenes)</p>
+              <div class="overall-chips" role="list">
+                <div class="overall-chip" role="listitem">
+                  <span class="oc-value">90.5%</span>
+                  <span class="oc-label" data-i18n="overall_p">Precisión</span>
+                </div>
+                <div class="overall-chip" role="listitem">
+                  <span class="oc-value">85.8%</span>
+                  <span class="oc-label" data-i18n="overall_r">Recall</span>
+                </div>
+                <div class="overall-chip" role="listitem">
+                  <span class="oc-value">88.0%</span>
+                  <span class="oc-label" data-i18n="overall_f1">F1</span>
+                </div>
+                <div class="overall-chip overall-chip--highlight" role="listitem">
+                  <span class="oc-value">92.4%</span>
+                  <span class="oc-label" data-i18n="overall_map50">mAP50</span>
+                </div>
+                <div class="overall-chip" role="listitem">
+                  <span class="oc-value">76.6%</span>
+                  <span class="oc-label" data-i18n="overall_map5095">mAP50-95</span>
+                </div>
+              </div>
+
+              <!-- Explanation paragraph -->
+              <div class="overall-explain-block">
+                <p class="overall-explain-h" data-i18n="overall_explain_h">La diferencia entre mAP50 y mAP50-95</p>
+                <p class="overall-explain-body" data-i18n-html="overall_explain"></p>
+              </div>
+
+              <!-- Comparison bar chart -->
+              <p class="overall-explain-h" style="margin-top:1.75rem;" data-i18n="overall_compare_h">Contexto bibliográfico (mAP50)</p>
+              <div class="chart-canvas-box" style="max-width:560px;">
+                <canvas id="chart-overall-compare"
+                        aria-label="Gráfico comparativo de mAP50: DECAFIA 92.4%, Araaf 2024 YOLOv8 73.2%, Araaf 2024 YOLOv5 70.5%"
+                        role="img"></canvas>
+              </div>
+              <p class="chart-note" style="margin-top:0.75rem;" data-i18n="overall_compare_note">
+                * Comparación referencial. Datasets, condiciones geográficas y número de clases distintas; no es comparación directa.
+              </p>
+
+            </div>
           </div>
 
           <!-- TAB 2: Per-class AP50 — FULLY POPULATED -->
@@ -1708,9 +1855,27 @@
             </div>
           </div>
 
-          <!-- TAB 5: Training dynamics — placeholder for 3d -->
+          <!-- TAB 5: Training dynamics -->
           <div id="tab-train" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-train" hidden>
-            <p class="tab-placeholder"><!-- Populated in Phase 3d --></p>
+            <div class="tab-chart-wrap">
+              <div class="train-grid" id="train-grid">
+                <!-- 8 mini charts rendered here; labels from JS config -->
+                <div class="train-mini"><p class="train-mini-label">train/box_loss</p>  <canvas id="ct0" role="img" aria-label="train/box_loss vs epoch"></canvas></div>
+                <div class="train-mini"><p class="train-mini-label">train/cls_loss</p>  <canvas id="ct1" role="img" aria-label="train/cls_loss vs epoch"></canvas></div>
+                <div class="train-mini"><p class="train-mini-label">train/dfl_loss</p>  <canvas id="ct2" role="img" aria-label="train/dfl_loss vs epoch"></canvas></div>
+                <div class="train-mini"><p class="train-mini-label">val/box_loss</p>    <canvas id="ct3" role="img" aria-label="val/box_loss vs epoch"></canvas></div>
+                <div class="train-mini"><p class="train-mini-label">val/cls_loss</p>    <canvas id="ct4" role="img" aria-label="val/cls_loss vs epoch"></canvas></div>
+                <div class="train-mini"><p class="train-mini-label">val/dfl_loss</p>    <canvas id="ct5" role="img" aria-label="val/dfl_loss vs epoch"></canvas></div>
+                <div class="train-mini"><p class="train-mini-label">metrics/mAP50</p>   <canvas id="ct6" role="img" aria-label="metrics/mAP50 vs epoch"></canvas></div>
+                <div class="train-mini"><p class="train-mini-label">metrics/mAP50-95</p><canvas id="ct7" role="img" aria-label="metrics/mAP50-95 vs epoch"></canvas></div>
+              </div>
+              <p class="chart-note" style="margin-top:1.25rem;" data-i18n="train_peak_note">
+                Mejor checkpoint: época 98 de 100 · mAP50 val = 0.929 · Optimizador: AdamW · RTX 5070 Laptop 8 GB
+              </p>
+              <p class="chart-note" style="margin-top:0.4rem;" data-i18n="train_note">
+                Curvas sintéticas que siguen la trayectoria descrita en el paper. Mejor checkpoint: época 98.
+              </p>
+            </div>
           </div>
 
         </div><!-- /results-panels -->
@@ -1882,6 +2047,24 @@
       pr_note:         { es: 'AP = área bajo la curva. Calculado sobre el conjunto de prueba (286 imágenes).', en: 'AP = area under the curve. Computed on the test set (286 images).' },
       train_epoch:     { es: 'Época', en: 'Epoch' },
       train_note:      { es: 'Curvas sintéticas que siguen la trayectoria descrita en el paper. Mejor checkpoint: época 98.', en: 'Synthetic curves following the trajectory described in the paper. Best checkpoint: epoch 98.' },
+
+      /* ── Overall metrics tab ── */
+      overall_test_label:  { es: 'Métricas en conjunto de prueba (286 imágenes)', en: 'Test-set metrics (286 images)' },
+      overall_explain_h:   { es: 'La diferencia entre mAP50 y mAP50-95', en: 'The gap between mAP50 and mAP50-95' },
+      overall_explain:     {
+        es: '<strong>mAP50 (92.4 %)</strong> exige que la caja detectada se solape al menos 50 % con la caja real — es el estándar habitual para "¿detectó la enfermedad?". <strong>mAP50-95 (76.6 %)</strong> promedia ese cálculo desde IoU 0.50 hasta 0.95 en pasos de 0.05: penaliza fuertemente las cajas ligeramente desplazadas. Para diagnóstico agrícola con WhatsApp — donde el objetivo es identificar la enfermedad, no medir la lesión con precisión milimétrica — mAP50 es la métrica relevante.',
+        en: '<strong>mAP50 (92.4 %)</strong> requires the detected box to overlap the ground truth by at least 50 % — the standard threshold for "did it detect the disease?". <strong>mAP50-95 (76.6 %)</strong> averages that calculation from IoU 0.50 to 0.95 in 0.05 steps: it heavily penalises slightly mis-positioned boxes. For agricultural WhatsApp diagnosis — where the goal is to identify the disease, not measure the lesion to the millimetre — mAP50 is the relevant metric.'
+      },
+      overall_compare_h:   { es: 'Contexto bibliográfico (mAP50)', en: 'Bibliographic context (mAP50)' },
+      overall_compare_note:{ es: '* Comparación referencial. Datasets, condiciones geográficas y número de clases distintas; no es comparación directa.', en: '* Referential comparison. Datasets, geographic conditions and number of classes differ; not a direct comparison.' },
+      overall_p:           { es: 'Precisión', en: 'Precision' },
+      overall_r:           { es: 'Recall', en: 'Recall' },
+      overall_f1:          { es: 'F1', en: 'F1' },
+      overall_map50:       { es: 'mAP50', en: 'mAP50' },
+      overall_map5095:     { es: 'mAP50-95', en: 'mAP50-95' },
+
+      /* ── Training dynamics tab ── */
+      train_peak_note:     { es: 'Mejor checkpoint: época 98 de 100 · mAP50 val = 0.929 · Optimizador: AdamW · RTX 5070 Laptop 8 GB', en: 'Best checkpoint: epoch 98 of 100 · val mAP50 = 0.929 · Optimizer: AdamW · RTX 5070 Laptop 8 GB' },
 
       /* ── Methodology ── */
       meth_eyebrow:    { es: 'Metodología', en: 'Methodology' },
@@ -2474,6 +2657,165 @@
 
     /* Wire confmat into theme-change refresh (non-Chart.js tabs use same registry) */
     /* Already handled by themeObserver → refreshAll() which calls CHART_INITS[id]() */
+
+    /* ============================================================
+       OVERALL METRICS — comparison bar chart  (Tab 1)
+    ============================================================ */
+    CHART_INITS['tab-overall'] = function() {
+      var canvas = document.getElementById('chart-overall-compare');
+      if (!canvas || !window.Chart) return;
+
+      /* Fill i18n explanation paragraph */
+      var lang = localStorage.getItem('decafia-lang') || 'es';
+      var S = window.DECAFIA_STRINGS;
+      var explainEl = document.querySelector('#tab-overall .overall-explain-body');
+      if (explainEl && S.overall_explain) explainEl.innerHTML = S.overall_explain[lang] || S.overall_explain.es;
+
+      var dark    = window.DECAFIA_CHART.isDark();
+      var noAnim  = window.DECAFIA_CHART.reduced;
+      var textColor  = dark ? 'rgba(232,237,230,0.70)' : 'rgba(26,26,24,0.65)';
+      var gridColor  = dark ? 'rgba(255,255,255,0.07)'  : 'rgba(15,30,20,0.08)';
+      var tooltipBg  = dark ? '#1a2418' : '#0F4C2A';
+
+      var labelDecafia   = 'DECAFIA — YOLOv8m (3 clases, Colombia)';
+      var labelAraafV8   = lang === 'es' ? 'Araaf et al. 2024 — YOLOv8 (1 clase, Indonesia)' : 'Araaf et al. 2024 — YOLOv8 (1 class, Indonesia)';
+      var labelAraafV5   = lang === 'es' ? 'Araaf et al. 2024 — YOLOv5 (1 clase, Indonesia)' : 'Araaf et al. 2024 — YOLOv5 (1 class, Indonesia)';
+
+      CHART_INSTANCES['tab-overall'] = new window.Chart(canvas, {
+        type: 'bar',
+        data: {
+          labels: [labelDecafia, labelAraafV8, labelAraafV5],
+          datasets: [{
+            label: 'mAP50 (%)',
+            data: [92.4, 73.2, 70.5],
+            backgroundColor: ['rgba(193,122,46,0.80)', 'rgba(245,240,232,0.18)', 'rgba(245,240,232,0.12)'],
+            borderColor:     ['#C17A2E',               'rgba(245,240,232,0.35)', 'rgba(245,240,232,0.25)'],
+            borderWidth: 1.5,
+            borderRadius: 5,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          animation: { duration: noAnim ? 0 : 600 },
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 2.5,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: tooltipBg,
+              titleColor: '#fff',
+              bodyColor: 'rgba(245,240,232,0.82)',
+              padding: 10,
+              cornerRadius: 8,
+              callbacks: { label: function(ctx) { return ' mAP50: ' + ctx.parsed.x.toFixed(1) + '%'; } }
+            }
+          },
+          scales: {
+            x: {
+              min: 60, max: 100,
+              ticks: { color: textColor, callback: function(v){ return v+'%'; }, font: { size: 10 } },
+              grid:  { color: gridColor },
+              border: { color: 'transparent' }
+            },
+            y: {
+              ticks: { color: textColor, font: { size: 10 }, maxRotation: 0 },
+              grid:  { display: false },
+              border: { color: 'transparent' }
+            }
+          }
+        }
+      });
+    };
+
+    /* ============================================================
+       TRAINING DYNAMICS — 8 mini charts  (Tab 5)
+    ============================================================ */
+    CHART_INITS['tab-train'] = function() {
+      if (!window.Chart) return;
+      var dark    = window.DECAFIA_CHART.isDark();
+      var noAnim  = window.DECAFIA_CHART.reduced;
+      var gridColor = dark ? 'rgba(255,255,255,0.06)' : 'rgba(15,30,20,0.07)';
+      var tickColor = dark ? 'rgba(232,237,230,0.45)' : 'rgba(26,26,24,0.50)';
+      var epochs = Array.from({length:100}, function(_,i){ return i+1; });
+
+      /* Deterministic curve generation — same formula as original spec */
+      function tc(start, end, s1, s2) {
+        return epochs.map(function(_, i) {
+          var t = i / 99;
+          var v = start + (end - start) * (1 - Math.exp(-4 * t));
+          var noise = (Math.sin(i * s1) * 0.5 + Math.cos(i * s2) * 0.3) * 0.008;
+          return Math.round(Math.max(0, v + noise) * 1000) / 1000;
+        });
+      }
+
+      /* Config for each of the 8 mini charts */
+      var CONFIGS = [
+        { id:'ct0', color:'#C17A2E', data: tc(2.40, 0.44, 7.3, 3.7) },
+        { id:'ct1', color:'#C17A2E', data: tc(1.75, 0.36, 6.1, 4.2) },
+        { id:'ct2', color:'#C17A2E', data: tc(1.38, 0.87, 8.5, 2.9) },
+        { id:'ct3', color:'#1D7A4F', data: tc(2.60, 0.52, 5.7, 6.3) },
+        { id:'ct4', color:'#1D7A4F', data: tc(1.90, 0.45, 7.1, 3.1) },
+        { id:'ct5', color:'#1D7A4F', data: tc(1.45, 0.92, 9.2, 2.4) },
+        { id:'ct6', color:'#2A9D60', data: tc(0.04, 0.929, 6.8, 4.5) },
+        { id:'ct7', color:'#D4943F', data: tc(0.02, 0.766, 7.9, 3.8) }
+      ];
+
+      /* Shared mini-chart options factory */
+      function miniOpts(cfg) {
+        return {
+          type: 'line',
+          data: {
+            labels: epochs,
+            datasets: [{
+              data: cfg.data,
+              borderColor: cfg.color,
+              borderWidth: 1.5,
+              pointRadius: 0,
+              tension: 0.4,
+              fill: false
+            }]
+          },
+          options: {
+            animation: { duration: noAnim ? 0 : 400 },
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1.5,
+            plugins: { legend: { display: false }, tooltip: { enabled: false } },
+            scales: {
+              x: {
+                ticks: { display: false },
+                grid: { color: gridColor, drawTicks: false },
+                border: { display: false }
+              },
+              y: {
+                ticks: { color: tickColor, font: { size: 9 }, maxTicksLimit: 4 },
+                grid: { color: gridColor },
+                border: { display: false }
+              }
+            }
+          }
+        };
+      }
+
+      /* Destroy any existing instances and re-create */
+      CONFIGS.forEach(function(cfg) {
+        var existKey = 'train-' + cfg.id;
+        if (CHART_INSTANCES[existKey]) { CHART_INSTANCES[existKey].destroy(); }
+        var canvas = document.getElementById(cfg.id);
+        if (!canvas) return;
+        CHART_INSTANCES[existKey] = new window.Chart(canvas, miniOpts(cfg));
+      });
+
+      /* Single sentinel for refreshAll() */
+      CHART_INSTANCES['tab-train'] = { destroy: function() {
+        CONFIGS.forEach(function(cfg) {
+          var k = 'train-' + cfg.id;
+          if (CHART_INSTANCES[k]) { CHART_INSTANCES[k].destroy(); delete CHART_INSTANCES[k]; }
+        });
+      }};
+    };
 
     /* ============================================================
        PR CURVES  (Tab 4)
