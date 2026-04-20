@@ -1415,6 +1415,254 @@
       .reveal { opacity: 1; transform: none; }
       a[href]::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; }
     }
+
+    /* =====================================================
+       METHODOLOGY — pipeline, hp-card, kappa, dataset charts
+    ===================================================== */
+    /* Pipeline flowchart */
+    .pipe-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      overflow-x: auto;
+      padding: 2rem 0 1rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .pipe-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 110px;
+      max-width: 140px;
+      flex: 1;
+      text-align: center;
+    }
+    .pipe-node strong {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .pipe-node span {
+      font-size: 0.68rem;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+    .pipe-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.25rem;
+    }
+    .pipe-icon svg { width: 28px; height: 28px; }
+    .pipe-icon--1 { background: rgba(43,157,96,0.12); color: var(--green-light); }
+    .pipe-icon--2 { background: rgba(43,157,96,0.18); color: var(--green-mid); }
+    .pipe-icon--3 { background: rgba(193,122,46,0.12); color: var(--amber); }
+    .pipe-icon--4 { background: rgba(15,76,42,0.12);  color: var(--green-deep); }
+    .pipe-icon--5 { background: rgba(43,157,96,0.12); color: var(--green-light); }
+    .pipe-icon--6 { background: rgba(193,122,46,0.12); color: var(--amber); }
+    [data-theme="dark"] .pipe-icon--1 { background: rgba(43,157,96,0.2); }
+    [data-theme="dark"] .pipe-icon--2 { background: rgba(43,157,96,0.25); }
+    [data-theme="dark"] .pipe-icon--3 { background: rgba(193,122,46,0.2); }
+    [data-theme="dark"] .pipe-icon--4 { background: rgba(43,157,96,0.15); }
+    [data-theme="dark"] .pipe-icon--5 { background: rgba(43,157,96,0.2); }
+    [data-theme="dark"] .pipe-icon--6 { background: rgba(193,122,46,0.2); }
+
+    .pipe-arrow {
+      font-size: 1.6rem;
+      color: var(--border);
+      align-self: center;
+      padding: 0 0.15rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Kappa callout */
+    .kappa-callout {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--green-light);
+      border-radius: 10px;
+      padding: 1.1rem 1.5rem;
+      margin: 2rem 0;
+      max-width: 520px;
+    }
+    .kappa-greek {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      color: var(--green-light);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .kappa-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .kappa-body strong {
+      font-size: 1.15rem;
+      color: var(--text-primary);
+    }
+    .kappa-body span {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+    }
+
+    /* Bottom grid */
+    .method-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 760px) {
+      .method-bottom { grid-template-columns: 1fr; }
+    }
+
+    /* Hyperparameter card */
+    .hp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .hp-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 1rem;
+    }
+    .hp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    .hp-table th, .hp-table td {
+      padding: 0.42rem 0.6rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .hp-table tr:last-child th,
+    .hp-table tr:last-child td { border-bottom: none; }
+    .hp-table th {
+      color: var(--text-mid);
+      font-weight: 500;
+      width: 52%;
+    }
+    .hp-table td {
+      color: var(--text-primary);
+      font-family: 'Courier New', monospace;
+      font-size: 0.80rem;
+    }
+
+    /* Dataset charts */
+    .ds-charts {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .ds-main-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 0.25rem;
+    }
+    .ds-chart-label {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      margin: 0.5rem 0 0.3rem;
+      font-weight: 500;
+    }
+
+    /* Stacked bar */
+    .ds-bar-wrap {
+      display: flex;
+      height: 34px;
+      border-radius: 6px;
+      overflow: hidden;
+      gap: 2px;
+    }
+    .ds-bar-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      transition: opacity 0.15s;
+    }
+    .ds-bar-segment:hover { opacity: 0.85; }
+    .ds-bar-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      padding: 0 0.4rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ds-train  { background: var(--green-light); }
+    .ds-val    { background: var(--amber); }
+    .ds-test   { background: var(--green-deep); }
+
+    /* Donut */
+    .ds-donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .ds-donut-wrap canvas {
+      max-width: 130px;
+      max-height: 130px;
+    }
+    .ds-donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .ds-leg-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--text-mid);
+    }
+    .ds-leg-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .ds-leg-coco    { background: var(--green-light); }
+    .ds-leg-roya    { background: var(--amber); }
+    .ds-leg-minador { background: var(--green-deep); }
+
+    /* Mobile pipe overflow indicator */
+    @media (max-width: 640px) {
+      .pipe-flow::after {
+        content: '';
+        min-width: 1rem;
+        flex-shrink: 0;
+      }
+      .pipe-arrow { font-size: 1.2rem; }
+    }
   </style>
 </head>
 <body>
@@ -1894,6 +2142,161 @@
       </div>
     </section>
 
+    <!-- =====================================================
+         METHODOLOGY
+    ===================================================== -->
+    <section id="metodologia" class="section bg-alt grain" aria-labelledby="method-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" data-i18n="method_eyebrow">Metodología</span>
+          <h2 class="section-title" id="method-heading" data-i18n="method_title">De la hoja al diagnóstico</h2>
+          <p class="section-sub" data-i18n="method_sub">Pipeline completo: recolección de campo, anotación semisupervisada, entrenamiento YOLOv8m y despliegue multi-plataforma.</p>
+        </div>
+
+        <!-- ── Pipeline flowchart ── -->
+        <div class="pipe-flow reveal" aria-label="Pipeline de 6 pasos">
+          <div class="pipe-node">
+            <div class="pipe-icon pipe-icon--1" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="6" y="10" width="28" height="20" rx="3"/>
+                <circle cx="20" cy="20" r="5"/>
+                <circle cx="20" cy="20" r="2.5" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <strong data-i18n="pipe1_title">Captura en campo</strong>
+            <span data-i18n="pipe1_sub">640×480 px · JPEG · luz natural</span>
+          </div>
+          <div class="pipe-arrow" aria-hidden="true">›</div>
+          <div class="pipe-node">
+            <div class="pipe-icon pipe-icon--2" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+                <polygon points="20,6 34,32 6,32"/>
+                <path d="M20 14 v10 M20 27 v2"/>
+              </svg>
+            </div>
+            <strong data-i18n="pipe2_title">Anotación VIA + SAM</strong>
+            <span data-i18n="pipe2_sub">12 810 polígonos · semi-sup.</span>
+          </div>
+          <div class="pipe-arrow" aria-hidden="true">›</div>
+          <div class="pipe-node">
+            <div class="pipe-icon pipe-icon--3" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="5" y="8" width="30" height="24" rx="2"/>
+                <path d="M5 16 h30 M14 16 v16"/>
+                <circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+                <circle cx="14" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+                <circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <strong data-i18n="pipe3_title">Augmentación</strong>
+            <span data-i18n="pipe3_sub">Mosaic 1.0 · MixUp 0.15 · AMP</span>
+          </div>
+          <div class="pipe-arrow" aria-hidden="true">›</div>
+          <div class="pipe-node">
+            <div class="pipe-icon pipe-icon--4" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+                <circle cx="20" cy="20" r="14"/>
+                <path d="M20 6 v28 M6 20 h28 M9.5 9.5 l21 21 M30.5 9.5 l-21 21"/>
+              </svg>
+            </div>
+            <strong data-i18n="pipe4_title">Fine-tune YOLOv8m</strong>
+            <span data-i18n="pipe4_sub">100 épocas · RTX 5070 · 640²</span>
+          </div>
+          <div class="pipe-arrow" aria-hidden="true">›</div>
+          <div class="pipe-node">
+            <div class="pipe-icon pipe-icon--5" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="8" y="12" width="24" height="16" rx="2"/>
+                <path d="M8 19 h24"/>
+                <path d="M16 12 v-4 M24 12 v-4 M12 28 v4 M28 28 v4"/>
+              </svg>
+            </div>
+            <strong data-i18n="pipe5_title">Exportación ONNX</strong>
+            <span data-i18n="pipe5_sub">FP16 · optimizado para CPU/GPU</span>
+          </div>
+          <div class="pipe-arrow" aria-hidden="true">›</div>
+          <div class="pipe-node">
+            <div class="pipe-icon pipe-icon--6" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="6" y="8" width="28" height="24" rx="3"/>
+                <path d="M14 26 q6-16 12 0"/>
+                <circle cx="20" cy="16" r="3"/>
+              </svg>
+            </div>
+            <strong data-i18n="pipe6_title">Despliegue</strong>
+            <span data-i18n="pipe6_sub">WhatsApp · Dashboard · Android</span>
+          </div>
+        </div><!-- /pipe-flow -->
+
+        <!-- ── Kappa callout ── -->
+        <div class="kappa-callout reveal" role="note" aria-label="Cohen kappa 0.91">
+          <span class="kappa-greek" aria-hidden="true">κ</span>
+          <div class="kappa-body">
+            <strong>Cohen's κ = 0.91</strong>
+            <span data-i18n="kappa_sub">Acuerdo inter-anotador casi perfecto (Landis &amp; Koch, 1977)</span>
+          </div>
+        </div>
+
+        <!-- ── Bottom grid: hyperparams + dataset charts ── -->
+        <div class="method-bottom reveal">
+
+          <!-- Hyperparameter card -->
+          <div class="hp-card">
+            <h3 class="hp-title" data-i18n="hp_card_title">Hiperparámetros de entrenamiento (Tabla 2)</h3>
+            <table class="hp-table" aria-label="Hyperparameters">
+              <tbody>
+                <tr><th data-i18n="hp_optimizer">Optimizador</th><td>AdamW</td></tr>
+                <tr><th data-i18n="hp_lr">Tasa de aprendizaje</th><td><span data-i18n="hp_lr_val">0.01 → 0.001 coseno</span></td></tr>
+                <tr><th data-i18n="hp_momentum">Momentum</th><td>0.937</td></tr>
+                <tr><th data-i18n="hp_wd">Weight decay</th><td>5 × 10⁻⁴</td></tr>
+                <tr><th data-i18n="hp_batch">Batch size</th><td>16</td></tr>
+                <tr><th data-i18n="hp_imgsize">Tamaño imagen</th><td>640 × 640 px</td></tr>
+                <tr><th data-i18n="hp_mosaic">Mosaic</th><td>1.0</td></tr>
+                <tr><th data-i18n="hp_mixup">MixUp</th><td>0.15</td></tr>
+                <tr><th data-i18n="hp_amp">AMP</th><td data-i18n="hp_enabled">Habilitada</td></tr>
+                <tr><th data-i18n="hp_gpu">GPU</th><td>RTX 5070 Laptop 8 GB</td></tr>
+                <tr><th data-i18n="hp_cuda">CUDA</th><td>12.8</td></tr>
+                <tr><th data-i18n="hp_patience">Early stopping</th><td>patience 50</td></tr>
+                <tr><th data-i18n="hp_epoch">Mejor época</th><td>98 / 100</td></tr>
+              </tbody>
+            </table>
+          </div><!-- /hp-card -->
+
+          <!-- Dataset composition charts -->
+          <div class="ds-charts">
+            <h3 class="ds-main-title" data-i18n="ds_composition_title">Composición del dataset</h3>
+
+            <!-- Stacked bar: image split -->
+            <p class="ds-chart-label" data-i18n="ds_images_title">Distribución de imágenes por partición</p>
+            <div class="ds-bar-wrap" role="img" aria-label="Train 1951, Val 549, Test 286">
+              <div class="ds-bar-segment ds-train" style="flex:1951" title="Train 1 951">
+                <span class="ds-bar-label"><span data-i18n="ds_train">Entrenamiento</span> 1 951</span>
+              </div>
+              <div class="ds-bar-segment ds-val" style="flex:549" title="Val 549">
+                <span class="ds-bar-label"><span data-i18n="ds_val">Validación</span> 549</span>
+              </div>
+              <div class="ds-bar-segment ds-test" style="flex:286" title="Test 286">
+                <span class="ds-bar-label"><span data-i18n="ds_test">Test</span> 286</span>
+              </div>
+            </div>
+
+            <!-- Donut: instance distribution -->
+            <p class="ds-chart-label" data-i18n="ds_instances_title">Instancias por clase</p>
+            <div class="ds-donut-wrap">
+              <canvas id="chart-donut-instances" width="200" height="200" aria-label="Coco 5394 Roya 5031 Minador 2385"></canvas>
+              <div class="ds-donut-legend">
+                <div class="ds-leg-item"><span class="ds-leg-dot ds-leg-coco"></span><span>Coco — 5 394</span></div>
+                <div class="ds-leg-item"><span class="ds-leg-dot ds-leg-roya"></span><span>Roya — 5 031</span></div>
+                <div class="ds-leg-item"><span class="ds-leg-dot ds-leg-minador"></span><span>Minador — 2 385</span></div>
+              </div>
+            </div>
+
+          </div><!-- /ds-charts -->
+        </div><!-- /method-bottom -->
+
+      </div><!-- /container -->
+    </section>
+
   </main>
 
   <!-- =====================================================
@@ -2076,6 +2479,51 @@
       meth_kappa_body: { es: 'Cohen\'s κ = <strong>0.91</strong> sobre 200 imágenes (7.2%) re-anotadas de forma independiente — acuerdo <em>casi perfecto</em> según Landis &amp; Koch (1977).', en: 'Cohen\'s κ = <strong>0.91</strong> on 200 independently re-annotated images (7.2%) — <em>almost perfect</em> agreement per Landis &amp; Koch (1977).' },
       meth_ds_label:   { es: 'Composición del dataset', en: 'Dataset composition' },
       meth_ds_note:    { es: '2,786 imágenes · 12,810 instancias poligonales · campo real · El Socorro, Santander · 2022–2023', en: '2,786 images · 12,810 polygon instances · real field · El Socorro, Santander · 2022–2023' },
+
+      /* ── Methodology section header ── */
+      method_eyebrow:  { es: 'Metodología',                en: 'Methodology' },
+      method_title:    { es: 'De la hoja al diagnóstico',  en: 'From leaf to diagnosis' },
+      method_sub:      { es: 'Pipeline completo: recolección de campo, anotación semisupervisada, entrenamiento YOLOv8m y despliegue multi-plataforma.',
+                         en: 'Full pipeline: field collection, semi-supervised annotation, YOLOv8m training, and multi-platform deployment.' },
+      kappa_sub:       { es: 'Acuerdo inter-anotador casi perfecto (Landis &amp; Koch, 1977)', en: 'Almost perfect inter-annotator agreement (Landis &amp; Koch, 1977)' },
+      ds_composition_title: { es: 'Composición del dataset', en: 'Dataset composition' },
+
+      /* ── Methodology pipeline steps ── */
+      pipe1_title: { es: 'Captura en campo',          en: 'Field capture' },
+      pipe1_sub:   { es: '640×480 px · JPEG · luz natural', en: '640×480 px · JPEG · natural light' },
+      pipe2_title: { es: 'Anotación VIA + SAM',        en: 'Annotation VIA + SAM' },
+      pipe2_sub:   { es: '2,786 imágenes · polígonos', en: '2,786 images · polygons' },
+      pipe3_title: { es: '12,810 instancias',           en: '12,810 instances' },
+      pipe3_sub:   { es: '3 clases · polígonos segmentados', en: '3 classes · segmented polygons' },
+      pipe4_title: { es: 'Fine-tuning YOLOv8m',        en: 'YOLOv8m fine-tuning' },
+      pipe4_sub:   { es: 'desde COCO preentrenado · época 98', en: 'from COCO weights · epoch 98' },
+      pipe5_title: { es: 'Exportación ONNX',            en: 'ONNX export' },
+      pipe5_sub:   { es: 'opset 12 · 99 MB FP32',       en: 'opset 12 · 99 MB FP32' },
+      pipe6_title: { es: '3 superficies de despliegue', en: '3 deployment surfaces' },
+      pipe6_sub:   { es: 'WhatsApp · Dashboard · Android', en: 'WhatsApp · Dashboard · Android' },
+      /* Hyperparameters */
+      hp_card_title: { es: 'Hiperparámetros de entrenamiento (Tabla 2)', en: 'Training hyperparameters (Table 2)' },
+      hp_optimizer:  { es: 'Optimizador',     en: 'Optimizer' },
+      hp_lr:         { es: 'Tasa de aprendizaje', en: 'Learning rate' },
+      hp_lr_val:     { es: '0.01 → 0.001 (coseno)', en: '0.01 → 0.001 (cosine)' },
+      hp_momentum:   { es: 'Momentum',        en: 'Momentum' },
+      hp_wd:         { es: 'Weight decay',    en: 'Weight decay' },
+      hp_batch:      { es: 'Batch size',      en: 'Batch size' },
+      hp_imgsize:    { es: 'Tamaño imagen',   en: 'Image size' },
+      hp_mosaic:     { es: 'Mosaic aug.',     en: 'Mosaic aug.' },
+      hp_mixup:      { es: 'Mixup aug.',      en: 'Mixup aug.' },
+      hp_amp:        { es: 'Precisión mixta', en: 'Mixed precision' },
+      hp_gpu:        { es: 'GPU',             en: 'GPU' },
+      hp_cuda:       { es: 'CUDA',            en: 'CUDA' },
+      hp_patience:   { es: 'Paciencia (early stop)', en: 'Patience (early stop)' },
+      hp_epoch:      { es: 'Mejor época',     en: 'Best epoch' },
+      hp_enabled:    { es: 'Habilitada',      en: 'Enabled' },
+      /* Dataset composition */
+      ds_images_title:  { es: 'Distribución de imágenes por partición', en: 'Image split distribution' },
+      ds_instances_title:{ es: 'Instancias por clase',                   en: 'Instances per class' },
+      ds_train:  { es: 'Entrenamiento', en: 'Train' },
+      ds_val:    { es: 'Validación',    en: 'Val' },
+      ds_test:   { es: 'Prueba',        en: 'Test' },
 
       /* ── Diseases ── */
       dis_eyebrow:     { es: 'Galería de enfermedades', en: 'Disease gallery' },
@@ -3160,6 +3608,81 @@
       setTimeout(runChat, 13000);
     }
     setTimeout(runChat, 400);
+  })();
+
+  /* ============================================================
+     METHODOLOGY — Dataset donut chart (lazy IntersectionObserver)
+  ============================================================ */
+  (function() {
+    var donutKey = 'chart-donut-instances';
+    var initialized = false;
+
+    function initDonut() {
+      if (initialized) return;
+      if (!window.Chart) { setTimeout(initDonut, 100); return; }
+      var canvas = document.getElementById(donutKey);
+      if (!canvas) return;
+      initialized = true;
+
+      var isDark = window.DECAFIA_CHART.isDark();
+      var reduced = window.DECAFIA_CHART.reduced;
+      var green = getComputedStyle(document.documentElement).getPropertyValue('--green-light').trim() || '#2A9D60';
+      var amber = getComputedStyle(document.documentElement).getPropertyValue('--amber').trim()       || '#C17A2E';
+      var deep  = getComputedStyle(document.documentElement).getPropertyValue('--green-deep').trim()  || '#0F4C2A';
+      var textMid = getComputedStyle(document.documentElement).getPropertyValue('--text-mid').trim()  || '#4A4A45';
+
+      var chart = new window.Chart(canvas, {
+        type: 'doughnut',
+        data: {
+          labels: ['Coco', 'Roya', 'Minador'],
+          datasets: [{
+            data: [5394, 5031, 2385],
+            backgroundColor: [green, amber, deep],
+            borderColor: isDark ? '#1a2418' : '#ffffff',
+            borderWidth: 3,
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          animation: { duration: reduced ? 0 : 600 },
+          cutout: '65%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  var total = 5394 + 5031 + 2385;
+                  var pct = ((ctx.parsed / total) * 100).toFixed(1);
+                  return ' ' + ctx.label + ': ' + ctx.parsed.toLocaleString('es-CO') + ' (' + pct + '%)';
+                }
+              }
+            }
+          }
+        }
+      });
+
+      /* Register for theme-change refresh */
+      CHART_INSTANCES[donutKey] = chart;
+      CHART_INITS[donutKey] = function() {
+        initialized = false;
+        initDonut();
+      };
+    }
+
+    /* Lazy init via IntersectionObserver */
+    var section = document.getElementById('metodologia');
+    if (section && 'IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          obs.disconnect();
+          waitForChartJS(initDonut);
+        }
+      }, { threshold: 0.15 });
+      obs.observe(section);
+    } else {
+      waitForChartJS(initDonut);
+    }
   })();
   </script>
 
