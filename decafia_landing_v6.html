@@ -162,6 +162,8 @@
     ul, ol { list-style: none; }
     button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
     [hidden] { display: none !important; }
+    /* Prevent fixed nav from obscuring anchor targets */
+    section[id], div[id] { scroll-margin-top: 80px; }
 
     /* =====================================================
        4. ACCESSIBILITY UTILITIES
@@ -1174,7 +1176,7 @@
          class="nav-cta"
          target="_blank"
          rel="noopener noreferrer"
-         data-i18n="nav_cta">Probar Bot</a>
+         data-i18n="nav_cta">Probar el bot</a>
 
       <!-- Hamburger for mobile -->
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false" onclick="toggleMobileMenu()">
@@ -1193,7 +1195,7 @@
     <div class="nav-mobile-actions">
       <a href="https://wa.me/573138812134?text=Hola%2C%20quiero%20probar%20DECAFIA"
          class="btn btn-wa" target="_blank" rel="noopener noreferrer"
-         data-i18n="nav_cta">Probar Bot</a>
+         data-i18n="nav_cta">Probar el bot</a>
     </div>
   </nav>
 
@@ -1263,7 +1265,7 @@
             <a href="https://wa.me/573138812134?text=Hola%2C%20quiero%20probar%20DECAFIA"
                target="_blank" rel="noopener noreferrer"
                class="btn btn-wa"
-               data-i18n="hero_btn1">📲 Probar en WhatsApp</a>
+               data-i18n="hero_btn1">📲 Probar el bot</a>
             <a href="#resultados" class="btn hero-btn-outline" data-i18n="hero_btn2">Ver resultados científicos</a>
           </div>
 
@@ -1422,7 +1424,7 @@
           <a href="https://wa.me/573138812134?text=Hola%2C%20quiero%20probar%20DECAFIA"
              target="_blank" rel="noopener noreferrer"
              class="btn btn-wa"
-             data-i18n="how_open_wa">Abrir en WhatsApp</a>
+             data-i18n="how_open_wa">Probar el bot en WhatsApp</a>
         </div>
       </div>
     </section>
@@ -1455,6 +1457,8 @@
           <li><a href="#resultados" data-i18n="nav_results">Resultados</a></li>
           <li><a href="#metodologia" data-i18n="nav_method">Metodología</a></li>
           <li><a href="#enfermedades" data-i18n="nav_diseases">Enfermedades</a></li>
+          <li><a href="#impacto" data-i18n="nav_map">Mapa</a></li>
+          <li><a href="#tecnologia" data-i18n="tech_eyebrow">Plataforma</a></li>
           <li><a href="#hoja-de-ruta" data-i18n="nav_roadmap">Hoja de ruta</a></li>
         </ul>
       </div>
@@ -1463,10 +1467,11 @@
       <div>
         <p class="footer-col-title" data-i18n="footer_col_research">Investigación</p>
         <ul class="footer-links">
+          <li><a href="#equipo" data-i18n="nav_team">Equipo</a></li>
           <li><a href="#citar" data-i18n="footer_cite">Citar</a></li>
           <li><a href="#agradecimientos" data-i18n="footer_ack">Agradecimientos</a></li>
-          <li><a href="#equipo" data-i18n="nav_team">Equipo</a></li>
           <li><a href="#preguntas" data-i18n="nav_faq">FAQ</a></li>
+          <li><a href="https://github.com/estebanr25/decafia" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
       </div>
 
@@ -1478,23 +1483,12 @@
           <li><a href="https://wa.me/573138812134" target="_blank" rel="noopener">+57 313 881 2134</a></li>
           <li><a href="https://uis.edu.co" target="_blank" rel="noopener">uis.edu.co</a></li>
         </ul>
-        <!-- Newsletter placeholder -->
-        <form style="margin-top:1.25rem;" onsubmit="event.preventDefault();window.location.href='mailto:rosas.esteban.10@gmail.com?subject=DECAFIA%20Newsletter';">
-          <p class="footer-col-title" style="margin-bottom:0.6rem;" data-i18n="footer_newsletter">Actualizaciones</p>
-          <div style="display:flex;gap:0.4rem;max-width:240px;">
-            <input type="email" placeholder="tu@correo.com"
-                   aria-label="Correo electrónico para actualizaciones"
-                   style="flex:1;padding:0.45rem 0.75rem;border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:inherit;font-family:inherit;font-size:0.8rem;" />
-            <button type="submit" class="btn btn-amber" style="padding:0.45rem 0.85rem;font-size:0.78rem;" data-i18n="footer_subscribe">Ok</button>
-          </div>
-        </form>
       </div>
     </div>
 
     <div class="footer-bottom">
       <p class="footer-copy">
-        © 2025 Luis Esteban Rosas Ruiz &amp; Andrey Fernando Salom Medina ·
-        Universidad Industrial de Santander
+        © 2025 Luis Esteban Rosas Ruiz · Universidad Industrial de Santander
       </p>
       <p class="footer-disclaimer" data-i18n="footer_disclaimer">
         DECAFIA es un prototipo de investigación. Las recomendaciones de tratamiento provienen
@@ -1525,7 +1519,7 @@
       nav_team:        { es: 'Equipo',                        en: 'Team' },
       nav_roadmap:     { es: 'Hoja de ruta',                  en: 'Roadmap' },
       nav_faq:         { es: 'Preguntas',                     en: 'FAQ' },
-      nav_cta:         { es: 'Probar Bot',                    en: 'Try Bot' },
+      nav_cta:         { es: 'Probar el bot',                  en: 'Try the bot' },
 
       /* ── Hero ── */
       hero_status:     { es: 'Bot en producción · responde en &lt;3 s', en: 'Bot in production · responds in &lt;3 s' },
@@ -1534,7 +1528,7 @@
       hero_h1_b:       { es: 'del mundo', en: 'in the world' },
       hero_sub:        { es: 'DECAFIA detecta Roya, Coco y Minador en hojas de café en menos de 3 segundos, directamente desde WhatsApp. Modelo YOLOv8m entrenado con datos reales de campo en Santander, Colombia.',
                          en: 'DECAFIA detects Roya, Coco and Minador on coffee leaves in under 3 seconds, directly via WhatsApp. YOLOv8m model trained on real field data from Santander, Colombia.' },
-      hero_btn1:       { es: '📲 Probar en WhatsApp', en: '📲 Try on WhatsApp' },
+      hero_btn1:       { es: '📲 Probar el bot',       en: '📲 Try the bot' },
       hero_btn2:       { es: 'Ver resultados científicos', en: 'View scientific results' },
       hero_meta_paper: { es: '📄 Leer paper', en: '📄 Read paper' },
       hero_meta_gh:    { es: '🐙 GitHub', en: '🐙 GitHub' },
@@ -1568,7 +1562,7 @@
       step3_desc:      { es: 'En menos de 3 segundos recibes la enfermedad detectada, la confianza del modelo y la recomendación de tratamiento.', en: 'In under 3 seconds you receive the detected disease, model confidence, and treatment recommendation.' },
       how_cta_title:   { es: 'Envía una foto de tu hoja de café y recibe el diagnóstico en segundos', en: 'Send a photo of your coffee leaf and receive the diagnosis in seconds' },
       how_cta_sub:     { es: 'Bot activo · El Socorro, Santander', en: 'Bot active · El Socorro, Santander' },
-      how_open_wa:     { es: 'Abrir en WhatsApp', en: 'Open in WhatsApp' },
+      how_open_wa:     { es: 'Probar el bot en WhatsApp', en: 'Try the bot on WhatsApp' },
 
       /* ── Results ── */
       res_eyebrow:     { es: 'Resultados científicos', en: 'Scientific results' },
@@ -1745,14 +1739,12 @@
 
       /* ── Footer ── */
       footer_brand_desc: { es: 'Sistema de detección de enfermedades del café mediante visión por computadora. Investigación de la Universidad Industrial de Santander, Bucaramanga, Colombia.', en: 'Coffee disease detection system using computer vision. Research from the Universidad Industrial de Santander, Bucaramanga, Colombia.' },
-      footer_try_bot:  { es: 'Probar bot →', en: 'Try bot →' },
+      footer_try_bot:  { es: 'Probar el bot →', en: 'Try the bot →' },
       footer_col_project: { es: 'Proyecto', en: 'Project' },
       footer_col_research:{ es: 'Investigación', en: 'Research' },
       footer_col_contact: { es: 'Contacto', en: 'Contact' },
       footer_cite:     { es: 'Citar', en: 'Cite' },
       footer_ack:      { es: 'Agradecimientos', en: 'Acknowledgments' },
-      footer_newsletter:{ es: 'Actualizaciones', en: 'Updates' },
-      footer_subscribe:{ es: 'Ok', en: 'Ok' },
       footer_disclaimer: { es: 'DECAFIA es un prototipo de investigación. Las recomendaciones de tratamiento provienen de las guías fitosanitarias oficiales de Cenicafé y son de carácter orientativo; consulte siempre a un agrónomo calificado antes de aplicar agroquímicos.', en: 'DECAFIA is a research prototype. Treatment recommendations are sourced from Cenicafé\'s official phytosanitary guidelines and are advisory only; always consult a qualified agronomist before applying agrochemicals.' }
     };
 
