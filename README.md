@@ -46,7 +46,7 @@ This repository contains the **project landing page** — a bilingual (ES/EN), a
 | Fonts | Google Fonts — Playfair Display + Inter |
 | Hosting | Netlify |
 
-No build step. No framework. No npm. Open `decafia_landing_v6.html` in any browser.
+No build step. No framework. No npm. Open `index.html` in any browser.
 
 ## Local development
 
@@ -58,9 +58,9 @@ cd decafia-landing
 Open directly in browser:
 
 ```bash
-start decafia_landing_v6.html      # Windows
-open decafia_landing_v6.html       # macOS
-xdg-open decafia_landing_v6.html   # Linux
+start index.html      # Windows
+open index.html       # macOS
+xdg-open index.html   # Linux
 ```
 
 For live-reload during development, any static server works:
