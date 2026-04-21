@@ -1663,6 +1663,395 @@
       }
       .pipe-arrow { font-size: 1.2rem; }
     }
+
+    /* =====================================================
+       SECTION: ENFERMEDADES
+    ===================================================== */
+    #enfermedades { background: var(--bg-alt); }
+    .disease-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .disease-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+      position: relative;
+      cursor: default;
+    }
+    .disease-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .disease-card-top { padding: 2rem 1.75rem 1.5rem; }
+    .disease-icon {
+      width: 56px; height: 56px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .disease-icon svg { width: 32px; height: 32px; }
+    .disease-badge {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 0.75rem;
+    }
+    .badge-red   { background: #FEE2E2; color: #991B1B; }
+    .badge-amber { background: #FEF3C7; color: #92400E; }
+    .disease-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 0.2rem;
+    }
+    .disease-sci {
+      font-size: 0.8rem; font-style: italic;
+      color: var(--text-light); margin-bottom: 0.75rem;
+    }
+    .disease-desc {
+      font-size: 0.88rem; color: var(--text-mid);
+      line-height: 1.65; margin-bottom: 1rem;
+    }
+    .disease-ap {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .disease-ap-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .disease-tax {
+      font-size: 0.75rem; color: var(--text-light); line-height: 1.55;
+      padding: 0.6rem 0.8rem;
+      background: var(--bg-alt);
+      border-radius: var(--radius-sm); margin-top: 0.75rem;
+    }
+    .disease-treatment {
+      position: absolute; inset: 0;
+      border-radius: var(--radius-lg);
+      display: flex; align-items: flex-end;
+      opacity: 0;
+      transition: opacity var(--dur) var(--ease);
+      pointer-events: none;
+    }
+    .disease-card:hover .disease-treatment { opacity: 1; }
+    .disease-treatment-inner {
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      width: 100%;
+    }
+    .treatment-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .treatment-text { font-size: 0.82rem; line-height: 1.55; }
+    @media (max-width: 900px) {
+      .disease-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+    }
+    /* on 2-col breakpoint show 4th card in its own row centered */
+    @media (min-width: 600px) and (max-width: 900px) {
+      .disease-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+    }
+
+    /* =====================================================
+       SECTION: IMPACTO (Leaflet map)
+    ===================================================== */
+    #impacto { background: var(--bg); }
+    .map-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    #decafia-map {
+      width: 100%; height: 420px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(15,76,42,0.15);
+      z-index: 0;
+    }
+    @keyframes mapPulse {
+      0%   { transform: scale(1);   opacity: 0.5; }
+      70%  { transform: scale(2.5); opacity: 0;   }
+      100% { transform: scale(1);   opacity: 0;   }
+    }
+    .map-stat {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+      color: var(--green-deep); margin-bottom: 0.25rem;
+    }
+    [data-theme="dark"] .map-stat { color: var(--green-light); }
+    .map-stat-label { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 2rem; }
+    .map-note-box {
+      background: rgba(15,76,42,0.05);
+      border-left: 4px solid var(--green-light);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 1rem 1.25rem; margin-top: 1.5rem;
+      font-size: 0.88rem; color: var(--text-mid); line-height: 1.65;
+    }
+    [data-theme="dark"] .map-note-box { background: rgba(42,157,96,0.08); }
+    .map-note-box strong { color: var(--green-deep); }
+    [data-theme="dark"] .map-note-box strong { color: var(--green-light); }
+    @media (max-width: 900px) {
+      .map-grid { grid-template-columns: 1fr; gap: 2rem; }
+      #decafia-map { height: 300px; }
+    }
+
+    /* =====================================================
+       SECTION: TECNOLOGIA
+    ===================================================== */
+    #tecnologia { background: var(--bg-dark-sec); }
+    .tech-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem; margin-bottom: 3.5rem;
+    }
+    .tech-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(245,240,232,0.1);
+      border-radius: var(--radius-md); padding: 1.75rem;
+      transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+    }
+    .tech-card:hover { background: rgba(255,255,255,0.10); transform: translateY(-4px); }
+    .tech-icon {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.10);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .tech-icon svg { width: 26px; height: 26px; stroke: var(--cream); fill: none; }
+    .tech-tag {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: var(--radius-pill); margin-bottom: 0.75rem;
+    }
+    .tag-live  { background: rgba(74,222,128,0.15);  color: #4ade80; }
+    .tag-beta  { background: rgba(251,191,36,0.15);  color: #fbbf24; }
+    .tag-proto { background: rgba(148,163,184,0.15); color: #94a3b8; }
+    .tag-avail { background: rgba(129,140,248,0.15); color: #818cf8; }
+    .tech-card-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.5rem;
+    }
+    .tech-card-desc { font-size: 0.88rem; color: rgba(245,240,232,0.65); line-height: 1.6; }
+    .arch-title {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(245,240,232,0.5); margin-bottom: 1.5rem;
+    }
+    .arch-diagram { display: flex; flex-direction: column; align-items: center; }
+    .arch-root-node { display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
+    .arch-root-note { font-size: 0.68rem; color: rgba(245,240,232,0.35); text-align: center; margin-top: 0.3rem; }
+    .arch-stem { width: 2px; height: 20px; background: rgba(245,240,232,0.2); position: relative; }
+    .arch-stem::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 1px; background: rgba(245,240,232,0.18);
+    }
+    .arch-two-branches { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; width: 100%; margin-top: 0; }
+    .arch-branch-col {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.35rem; padding-top: 1rem;
+      border-top: 1px solid rgba(245,240,232,0.15);
+    }
+    .arch-branch-label {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: rgba(245,240,232,0.38); margin-bottom: 0.4rem; text-align: center;
+    }
+    .arch-down-arrow { color: rgba(245,240,232,0.28); font-size: 0.9rem; line-height: 1; }
+    .arch-end-row { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .arch-node {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(245,240,232,0.15);
+      border-radius: 8px; padding: 0.5rem 0.9rem;
+      font-size: 0.76rem; font-weight: 600; color: var(--cream); white-space: nowrap; text-align: center;
+    }
+    .arch-node.highlight { background: rgba(193,122,46,0.25); border-color: var(--amber); color: var(--amber-light); }
+    @media (max-width: 768px) {
+      .tech-grid { grid-template-columns: 1fr; }
+      .arch-two-branches { grid-template-columns: 1fr; gap: 1.5rem; }
+      .arch-stem::after { width: 40px; }
+    }
+
+    /* =====================================================
+       SECTION: EQUIPO
+    ===================================================== */
+    #equipo { background: var(--bg-alt); }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .team-card {
+      background: var(--bg-card); border-radius: var(--radius-md);
+      padding: 2rem 1.75rem; box-shadow: var(--shadow-sm);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .team-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .team-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--green-deep);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--cream);
+      user-select: none;
+    }
+    .team-role {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.35rem;
+    }
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 0.75rem;
+    }
+    .team-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.65; }
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* =====================================================
+       SECTION: HOJA DE RUTA
+    ===================================================== */
+    #hoja-de-ruta { background: var(--bg); }
+    .road-timeline {
+      position: relative; margin-top: 3rem; padding-left: 2rem; list-style: none;
+    }
+    .road-timeline::before {
+      content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 2px;
+      background: linear-gradient(to bottom, var(--green-light), var(--amber), rgba(15,76,42,0.15));
+    }
+    .road-item { position: relative; padding-left: 2rem; padding-bottom: 2.5rem; }
+    .road-item:last-child { padding-bottom: 0; }
+    .road-dot {
+      position: absolute; left: -2.25rem; top: 5px;
+      width: 16px; height: 16px; border-radius: 50%;
+    }
+    .road-dot-done   { background: var(--green-light); box-shadow: 0 0 0 3px rgba(42,157,96,0.2); }
+    .road-dot-next   { background: var(--amber);       box-shadow: 0 0 0 3px rgba(193,122,46,0.2); }
+    .road-dot-future { background: var(--bg-alt); border: 2px solid var(--border); }
+    .road-status {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.15rem 0.55rem; border-radius: var(--radius-pill); margin-bottom: 0.4rem;
+    }
+    .road-status-done   { background: rgba(42,157,96,0.12);  color: var(--green-light); }
+    .road-status-next   { background: rgba(193,122,46,0.12); color: var(--amber); }
+    .road-status-future { background: var(--bg-alt); color: var(--text-light); }
+    .road-title {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 0.4rem;
+    }
+    .road-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* =====================================================
+       SECTION: FAQ
+    ===================================================== */
+    #preguntas { background: var(--bg-alt); }
+    .faq-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; list-style: none; }
+    .faq-item {
+      background: var(--bg-card); border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm); overflow: hidden;
+    }
+    .faq-btn {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.25rem 1.5rem; text-align: left; background: none; cursor: pointer;
+      font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--text-primary);
+    }
+    .faq-btn:hover { color: var(--green-mid); }
+    .faq-icon {
+      flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--bg-alt); display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; line-height: 1; color: var(--text-mid);
+      transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease);
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--green-deep); color: #fff; }
+    .faq-body {
+      display: none; padding: 0 1.5rem 1.25rem;
+      font-size: 0.93rem; color: var(--text-mid); line-height: 1.75;
+    }
+    .faq-body a { color: var(--green-mid); text-decoration: underline; }
+    .faq-item.open .faq-body { display: block; }
+
+    /* =====================================================
+       SECTION: CITAR
+    ===================================================== */
+    #citar { background: var(--bg); }
+    .cite-block {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); overflow: hidden; margin-top: 2rem;
+    }
+    .cite-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-alt); border-bottom: 1px solid var(--border);
+    }
+    .cite-lang { font-size: 0.72rem; font-weight: 700; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; }
+    .cite-copy-btn {
+      font-size: 0.78rem; font-weight: 600; color: var(--green-mid);
+      padding: 0.3rem 0.8rem; border: 1px solid var(--border);
+      border-radius: var(--radius-pill); background: var(--bg-card);
+      transition: background var(--dur), color var(--dur);
+    }
+    .cite-copy-btn:hover { background: var(--green-deep); color: var(--cream); }
+    .cite-pre {
+      margin: 0; padding: 1.25rem 1.5rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; line-height: 1.8; color: var(--text-primary);
+      overflow-x: auto; white-space: pre;
+    }
+    .cite-apa {
+      margin-top: 1.5rem; padding: 1.25rem 1.5rem;
+      background: var(--bg-alt); border-radius: var(--radius-md);
+      font-size: 0.9rem; color: var(--text-mid); line-height: 1.75;
+    }
+    .cite-apa-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.5rem;
+    }
+
+    /* =====================================================
+       SECTION: AGRADECIMIENTOS
+    ===================================================== */
+    #agradecimientos { background: var(--bg-alt); }
+    .ack-box {
+      max-width: 780px; margin: 2rem auto 0;
+      background: var(--bg-card); border-radius: var(--radius-md);
+      padding: 2rem 2.25rem; box-shadow: var(--shadow-sm);
+      font-size: 0.95rem; color: var(--text-mid); line-height: 1.8;
+    }
+    .ack-box strong { color: var(--text-primary); }
+
+    /* =====================================================
+       SECTION: CTA
+    ===================================================== */
+    #cta-section { padding: 0; }
+    .cta-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .cta-panel {
+      padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+      position: relative; overflow: hidden;
+    }
+    .cta-panel::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 120% 120%, rgba(255,255,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-panel > * { position: relative; z-index: 1; }
+    .cta-amber { background: var(--amber); }
+    .cta-dark  { background: var(--green-deep); }
+    .cta-title {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 700; margin-bottom: 1rem; line-height: 1.2;
+    }
+    .cta-amber .cta-title { color: #fff; }
+    .cta-dark  .cta-title { color: var(--cream); }
+    .cta-desc { font-size: 1rem; margin-bottom: 2rem; line-height: 1.65; }
+    .cta-amber .cta-desc { color: rgba(255,255,255,0.85); }
+    .cta-dark  .cta-desc { color: rgba(245,240,232,0.75); }
+    .cta-small { display: block; margin-top: 1rem; font-size: 0.78rem; }
+    .cta-amber .cta-small { color: rgba(255,255,255,0.65); }
+    .cta-dark  .cta-small { color: rgba(245,240,232,0.5); }
+    @media (max-width: 768px) { .cta-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -2295,6 +2684,504 @@
         </div><!-- /method-bottom -->
 
       </div><!-- /container -->
+    </section>
+
+    <!-- =====================================================
+         SECTION: ENFERMEDADES
+    ===================================================== -->
+    <section id="enfermedades" class="section" aria-labelledby="dis-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" data-i18n="dis_eyebrow">Galería de enfermedades</span>
+          <h2 class="section-title" id="dis-heading" data-i18n="dis_title">Tres enfermedades. Una sola foto.</h2>
+          <p class="section-sub" data-i18n="dis_sub">3 clases de enfermedad + clase de referencia sana. Identificación taxonómica según Cenicafé, Constantino et al. (2013).</p>
+        </div>
+
+        <div class="disease-grid">
+
+          <!-- ROYA -->
+          <div class="disease-card reveal" style="--delay:0ms">
+            <div class="disease-card-top">
+              <div class="disease-icon" style="background:rgba(224,120,32,0.12)">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M16 28C16 28 4 22 4 12C4 6.477 9.373 2 16 2C22.627 2 28 6.477 28 12C28 22 16 28 16 28Z" fill="#E07820" opacity="0.25" stroke="#E07820" stroke-width="1.5"/>
+                  <circle cx="11" cy="11" r="2" fill="#E07820" opacity="0.8"/>
+                  <circle cx="19" cy="14" r="1.5" fill="#E07820" opacity="0.6"/>
+                  <circle cx="14" cy="17" r="1.5" fill="#E07820" opacity="0.7"/>
+                  <circle cx="20" cy="9" r="1" fill="#E07820" opacity="0.5"/>
+                  <line x1="16" y1="5" x2="16" y2="26" stroke="#E07820" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.4"/>
+                </svg>
+              </div>
+              <span class="disease-badge badge-red">Alta severidad</span>
+              <h3 class="disease-title" data-i18n="roya_name">Roya del cafeto</h3>
+              <p class="disease-sci" data-i18n="roya_sci">Hemileia vastatrix Berk. &amp; Broome</p>
+              <p class="disease-desc" data-i18n="roya_desc">Pústulas polvorosas de color naranja-amarillo en el envés de la hoja. Causa defoliación severa y pérdidas de hasta 30% de cosecha sin manejo oportuno.</p>
+              <div class="disease-ap" style="color:#E07820">
+                <div class="disease-ap-dot" style="background:#E07820"></div>
+                AP50: 88.2%
+              </div>
+            </div>
+            <div class="disease-treatment" style="background:linear-gradient(to top,rgba(224,120,32,0.95),rgba(224,120,32,0.7) 60%,transparent)">
+              <div class="disease-treatment-inner">
+                <p class="treatment-label" style="color:rgba(255,255,255,0.7)" data-i18n="dis_treatment">Manejo recomendado</p>
+                <p class="treatment-text" style="color:#fff" data-i18n="roya_treat">Oxicloruro de cobre 300 g/20 L. Aplicar cada 21 días en período lluvioso. Cubrir envés de hojas.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- COCO -->
+          <div class="disease-card reveal" style="--delay:150ms">
+            <div class="disease-card-top">
+              <div class="disease-icon" style="background:rgba(29,122,79,0.10)">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M16 28C16 28 4 22 4 12C4 6.477 9.373 2 16 2C22.627 2 28 6.477 28 12C28 22 16 28 16 28Z" fill="#1D7A4F" opacity="0.2" stroke="#1D7A4F" stroke-width="1.5"/>
+                  <ellipse cx="11" cy="10" rx="2" ry="1.5" fill="#1D7A4F" opacity="0.7"/>
+                  <ellipse cx="20" cy="13" rx="1.8" ry="1.3" fill="#1D7A4F" opacity="0.6"/>
+                  <ellipse cx="15" cy="18" rx="2" ry="1.4" fill="#1D7A4F" opacity="0.8"/>
+                  <path d="M9 13 Q10 11 11 13" stroke="#1D7A4F" stroke-width="1" opacity="0.5"/>
+                  <path d="M18 16 Q20 14 21 16" stroke="#1D7A4F" stroke-width="1" opacity="0.5"/>
+                  <line x1="16" y1="5" x2="16" y2="26" stroke="#1D7A4F" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.35"/>
+                </svg>
+              </div>
+              <span class="disease-badge badge-amber">Severidad media</span>
+              <h3 class="disease-title" data-i18n="coco_name">Coco / Vaquita</h3>
+              <p class="disease-sci" data-i18n="coco_sci">Compsus sp. / Epicaerus sp. (Coleoptera: Curculionidae)</p>
+              <p class="disease-desc" data-i18n="coco_desc">Daño por adultos de gorgojos que producen escotaduras semicirculares en los márgenes foliares. No confundir con vaquitas benéficas (Coccinellidae).</p>
+              <div class="disease-ap" style="color:var(--green-mid)">
+                <div class="disease-ap-dot" style="background:var(--green-mid)"></div>
+                AP50: 94.1%
+              </div>
+              <p class="disease-tax" data-i18n-html="coco_tax"><strong>Nota taxonómica:</strong> "Coco" designa gorgojos del género <em>Compsus</em> sp. / <em>Epicaerus</em> sp. (Curculionidae), no Coccinellidae.</p>
+            </div>
+            <div class="disease-treatment" style="background:linear-gradient(to top,rgba(29,122,79,0.95),rgba(29,122,79,0.7) 60%,transparent)">
+              <div class="disease-treatment-inner">
+                <p class="treatment-label" style="color:rgba(255,255,255,0.7)" data-i18n="dis_treatment">Manejo recomendado</p>
+                <p class="treatment-text" style="color:#fff" data-i18n="coco_treat">Remoción manual de adultos. Beauveria bassiana. Monitoreo quincenal de bordes foliares.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MINADOR -->
+          <div class="disease-card reveal" style="--delay:300ms">
+            <div class="disease-card-top">
+              <div class="disease-icon" style="background:rgba(42,157,96,0.10)">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M16 28C16 28 4 22 4 12C4 6.477 9.373 2 16 2C22.627 2 28 6.477 28 12C28 22 16 28 16 28Z" fill="#2A9D60" opacity="0.2" stroke="#2A9D60" stroke-width="1.5"/>
+                  <path d="M8 14 Q10 8 14 10 Q16 12 18 8 Q20 6 22 10 Q24 14 20 18 Q18 22 16 20" stroke="#2A9D60" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.8"/>
+                  <circle cx="8" cy="14" r="1.2" fill="#2A9D60" opacity="0.7"/>
+                  <line x1="16" y1="5" x2="16" y2="26" stroke="#2A9D60" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.35"/>
+                </svg>
+              </div>
+              <span class="disease-badge badge-amber">Severidad media</span>
+              <h3 class="disease-title" data-i18n="minador_name">Minador de la hoja</h3>
+              <p class="disease-sci" data-i18n="minador_sci">Leucoptera coffeella Guérin-Méneville</p>
+              <p class="disease-desc" data-i18n="minador_desc">Larvas que minan el parénquima foliar dejando galerías serpentinas características. Alta incidencia en épocas secas; afecta principalmente hojas jóvenes.</p>
+              <div class="disease-ap" style="color:var(--green-light)">
+                <div class="disease-ap-dot" style="background:var(--green-light)"></div>
+                AP50: 94.9%
+              </div>
+            </div>
+            <div class="disease-treatment" style="background:linear-gradient(to top,rgba(42,157,96,0.95),rgba(42,157,96,0.7) 60%,transparent)">
+              <div class="disease-treatment-inner">
+                <p class="treatment-label" style="color:rgba(255,255,255,0.7)" data-i18n="dis_treatment">Manejo recomendado</p>
+                <p class="treatment-text" style="color:#fff" data-i18n="minador_treat">Aceite de neem 3 mL/L. Control con parasitoides naturales. Evitar exceso de sombrío.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- HOJA SANA -->
+          <div class="disease-card reveal" style="--delay:450ms">
+            <div class="disease-card-top">
+              <div class="disease-icon" style="background:rgba(15,76,42,0.08)">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M16 28C16 28 4 22 4 12C4 6.477 9.373 2 16 2C22.627 2 28 6.477 28 12C28 22 16 28 16 28Z" fill="#0F4C2A" opacity="0.18" stroke="#0F4C2A" stroke-width="1.5"/>
+                  <path d="M16 8 L16 24" stroke="#0F4C2A" stroke-width="1.5" stroke-linecap="round" opacity="0.55"/>
+                  <path d="M16 12 Q10 14 8 18" stroke="#0F4C2A" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+                  <path d="M16 12 Q22 14 24 18" stroke="#0F4C2A" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+                  <path d="M16 17 Q12 19 10 22" stroke="#0F4C2A" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+                  <path d="M16 17 Q20 19 22 22" stroke="#0F4C2A" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+                </svg>
+              </div>
+              <span class="disease-badge" style="background:rgba(15,76,42,0.08);color:var(--green-deep)">Referencia</span>
+              <h3 class="disease-title" data-i18n="sano_name">Hoja sana</h3>
+              <p class="disease-sci" data-i18n="sano_sci">Coffea arabica L. — sin síntomas visibles</p>
+              <p class="disease-desc" data-i18n="sano_desc">Clase de referencia negativa. Hoja vigorosa, verde uniforme, sin pústulas, galerías ni escotaduras. Incluida para reducir falsos positivos del modelo.</p>
+              <p style="font-size:0.8rem;color:var(--text-light);line-height:1.6;margin-top:0.5rem" data-i18n="sano_note">El modelo fue entrenado incluyendo esta clase implícitamente para mejorar la precisión en condiciones de hoja sana.</p>
+            </div>
+          </div>
+
+        </div><!-- /disease-grid -->
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: IMPACTO (Leaflet map)
+    ===================================================== -->
+    <section id="impacto" class="section bg-alt" aria-labelledby="map-heading">
+      <div class="container">
+        <div class="map-grid">
+
+          <!-- Map -->
+          <div class="reveal">
+            <div id="decafia-map" role="img" aria-label="Mapa interactivo de El Socorro, Santander — sitio de recolección del dataset"></div>
+          </div>
+
+          <!-- Info -->
+          <div class="reveal" style="--delay:200ms">
+            <span class="section-eyebrow" data-i18n="map_eyebrow">Área de estudio</span>
+            <h2 class="section-title" id="map-heading" data-i18n="map_title">Desde el corazón cafetero de Santander</h2>
+            <p class="section-sub" style="margin-bottom:2.5rem" data-i18n="map_sub">Dataset recolectado en campo real — una finca en El Socorro, Santander, a 1,500 m.s.n.m. durante 2022–2023.</p>
+
+            <div>
+              <div class="map-stat">2,786</div>
+              <div class="map-stat-label" data-i18n="map_stat1">imágenes de campo recolectadas · 12,810 instancias anotadas</div>
+            </div>
+            <div>
+              <div class="map-stat">30,000+</div>
+              <div class="map-stat-label" data-i18n="map_stat2">fincas cafeteras en Santander — mercado potencial a escalar</div>
+            </div>
+
+            <div class="map-note-box" data-i18n-html="map_note">
+              <strong>Estado actual:</strong> prueba de concepto validada en una finca.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: TECNOLOGIA
+    ===================================================== -->
+    <section id="tecnologia" class="section grain" aria-labelledby="tech-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" style="color:rgba(193,122,46,0.9)" data-i18n="tech_eyebrow">Plataforma</span>
+          <h2 class="section-title" id="tech-heading" style="color:var(--cream)" data-i18n="tech_title">Tres canales de acceso. Un solo modelo.</h2>
+          <p class="section-sub" style="color:rgba(245,240,232,0.6)" data-i18n="tech_sub">El mismo checkpoint best.pt exportado a ONNX y TFLite sirve tres superficies de despliegue independientes.</p>
+        </div>
+
+        <div class="tech-grid">
+          <!-- WhatsApp Bot -->
+          <div class="tech-card reveal" style="--delay:0ms">
+            <div class="tech-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <span class="tech-tag tag-live" data-i18n="tag_live">En producción</span>
+            <h3 class="tech-card-title" data-i18n="card_wa_title">Bot de WhatsApp</h3>
+            <p class="tech-card-desc" data-i18n="card_wa_desc">Diagnóstico en &lt;3 s sin instalar apps. ONNX opset 12 servido por Flask + Twilio.</p>
+          </div>
+          <!-- Dashboard -->
+          <div class="tech-card reveal" style="--delay:100ms">
+            <div class="tech-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <span class="tech-tag tag-proto" data-i18n="tag_proto">Prototipo</span>
+            <h3 class="tech-card-title" data-i18n="card_dash_title">Dashboard web</h3>
+            <p class="tech-card-desc" data-i18n="card_dash_desc">Mapa de alertas y estadísticas históricas. Flask + SQLite. Prototipo para cooperativas.</p>
+          </div>
+          <!-- Android -->
+          <div class="tech-card reveal" style="--delay:200ms">
+            <div class="tech-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18"/>
+              </svg>
+            </div>
+            <span class="tech-tag tag-beta" data-i18n="tag_beta">Beta</span>
+            <h3 class="tech-card-title" data-i18n="card_app_title">App Android offline</h3>
+            <p class="tech-card-desc" data-i18n="card_app_desc">Diagnóstico sin internet. TFLite INT8 on-device (&lt;15 MB), GPS + OpenStreetMap. Flutter.</p>
+          </div>
+          <!-- ONNX Model -->
+          <div class="tech-card reveal" style="--delay:300ms">
+            <div class="tech-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <span class="tech-tag tag-avail" data-i18n="tag_avail">Disponible</span>
+            <h3 class="tech-card-title" data-i18n="card_onnx_title">Modelo ONNX</h3>
+            <p class="tech-card-desc" data-i18n="card_onnx_desc">Integración directa para investigadores. ONNX opset 12 (99 MB FP32) del checkpoint best.pt.</p>
+          </div>
+        </div>
+
+        <!-- Architecture diagram -->
+        <div class="reveal" style="--delay:100ms">
+          <p class="arch-title" data-i18n="arch_title">Arquitectura del sistema — dos ramas de exportación</p>
+          <div class="arch-diagram" role="img" aria-label="Diagrama de arquitectura: YOLOv8m exportado a ONNX (Flask) y TFLite (Android)">
+            <div class="arch-root-node">
+              <div class="arch-node highlight">YOLOv8m &nbsp;·&nbsp; best.pt &nbsp;·&nbsp; época 98</div>
+              <p class="arch-root-note">Checkpoint único — punto de partida de ambas ramas</p>
+            </div>
+            <div class="arch-stem" aria-hidden="true"></div>
+            <div class="arch-two-branches">
+              <div class="arch-branch-col">
+                <p class="arch-branch-label" data-i18n="arch_server">Rama A — Servidor</p>
+                <div class="arch-node">Exportación ONNX (opset 12)</div>
+                <div class="arch-down-arrow" aria-hidden="true">↓</div>
+                <div class="arch-node">Flask API</div>
+                <div class="arch-down-arrow" aria-hidden="true">↓</div>
+                <div class="arch-end-row">
+                  <div class="arch-node">WhatsApp Bot</div>
+                  <div class="arch-node">Dashboard Web</div>
+                </div>
+              </div>
+              <div class="arch-branch-col">
+                <p class="arch-branch-label" data-i18n="arch_device">Rama B — Dispositivo</p>
+                <div class="arch-node">Exportación TFLite INT8</div>
+                <div class="arch-down-arrow" aria-hidden="true">↓</div>
+                <div class="arch-node">App Android (Beta)</div>
+                <div class="arch-down-arrow" aria-hidden="true">↓</div>
+                <div class="arch-node" style="opacity:0.6" data-i18n="arch_pending">Inferencia local (pendiente)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: EQUIPO
+    ===================================================== -->
+    <section id="equipo" class="section bg-alt" aria-labelledby="team-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" data-i18n="team_eyebrow">El equipo</span>
+          <h2 class="section-title" id="team-heading" data-i18n="team_title">Construido en la UIS.</h2>
+          <p class="section-sub" data-i18n="team_sub">Escuela de Ingenierías Eléctrica, Electrónica y de Telecomunicaciones · Universidad Industrial de Santander · Bucaramanga, Colombia</p>
+        </div>
+        <div class="team-grid">
+          <!-- Autor principal -->
+          <div class="team-card reveal" style="--delay:0ms">
+            <div class="team-avatar" aria-hidden="true">LR</div>
+            <p class="team-role" data-i18n="team1_role">Autor principal</p>
+            <h3 class="team-name" data-i18n="team1_name">Luis Esteban Rosas Ruiz</h3>
+            <p class="team-desc" data-i18n="team1_desc">Ingeniero Electrónico, UIS. Diseño del dataset, entrenamiento del modelo, arquitectura del sistema y desarrollo del bot de WhatsApp.</p>
+          </div>
+          <!-- Co-autor -->
+          <div class="team-card reveal" style="--delay:150ms">
+            <div class="team-avatar" aria-hidden="true">AS</div>
+            <p class="team-role" data-i18n="team2_role">Co-autor</p>
+            <h3 class="team-name" data-i18n="team2_name">Andrey Fernando Salom Medina</h3>
+            <p class="team-desc" data-i18n="team2_desc">Ingeniero Electrónico, UIS. Co-diseño de la metodología de anotación y evaluación experimental.</p>
+          </div>
+          <!-- Director -->
+          <div class="team-card reveal" style="--delay:300ms">
+            <div class="team-avatar" style="background:var(--amber)" aria-hidden="true">JB</div>
+            <p class="team-role" data-i18n="team3_role">Director</p>
+            <h3 class="team-name" data-i18n="team3_name">Prof. Jaime Guillermo Barrero Pérez</h3>
+            <p class="team-desc" data-i18n="team3_desc">Profesor titular, Escuela de Ing. Eléctrica, Electrónica y de Telecomunicaciones, UIS. Dirección académica y supervisión científica.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: HOJA DE RUTA
+    ===================================================== -->
+    <section id="hoja-de-ruta" class="section" aria-labelledby="road-heading">
+      <div class="container" style="max-width:760px">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" data-i18n="road_eyebrow">Hoja de ruta</span>
+          <h2 class="section-title" id="road-heading" data-i18n="road_title">Del prototipo a escala regional.</h2>
+          <p class="section-sub" data-i18n="road_sub">Limitaciones y trabajo futuro documentados en el paper. Cronograma tentativo sujeto a financiamiento y colaboraciones externas.</p>
+        </div>
+        <ol class="road-timeline reveal" aria-label="Hoja de ruta del proyecto DECAFIA">
+          <li class="road-item">
+            <div class="road-dot road-dot-done" aria-hidden="true"></div>
+            <span class="road-status road-status-done" data-i18n="road_done">Completado</span>
+            <h3 class="road-title" data-i18n="road1_title">Prueba de concepto</h3>
+            <p class="road-desc" data-i18n="road1_desc">Validación en una finca en El Socorro, Santander. Bot de WhatsApp activo.</p>
+          </li>
+          <li class="road-item">
+            <div class="road-dot road-dot-next" aria-hidden="true"></div>
+            <span class="road-status road-status-next" data-i18n="road_next">Siguiente</span>
+            <h3 class="road-title" data-i18n="road2_title">WhatsApp Business verificado</h3>
+            <p class="road-desc" data-i18n="road2_desc">Verificación Meta Business + número dedicado de producción.</p>
+          </li>
+          <li class="road-item">
+            <div class="road-dot road-dot-future" aria-hidden="true"></div>
+            <span class="road-status road-status-future" data-i18n="road_future">Futuro</span>
+            <h3 class="road-title" data-i18n="road3_title">Dataset 10,000+ imágenes</h3>
+            <p class="road-desc" data-i18n="road3_desc">Expansión multi-departamento: Santander, Huila, Nariño, Antioquia.</p>
+          </li>
+          <li class="road-item">
+            <div class="road-dot road-dot-future" aria-hidden="true"></div>
+            <span class="road-status road-status-future" data-i18n="road_future">Futuro</span>
+            <h3 class="road-title" data-i18n="road4_title">Clase broca</h3>
+            <p class="road-desc" data-i18n="road4_desc">Incorporación de Hypothenemus hampei (broca del café) como cuarta clase.</p>
+          </li>
+          <li class="road-item">
+            <div class="road-dot road-dot-future" aria-hidden="true"></div>
+            <span class="road-status road-status-future" data-i18n="road_future">Futuro</span>
+            <h3 class="road-title" data-i18n="road5_title">Ablación YOLOv8n</h3>
+            <p class="road-desc" data-i18n="road5_desc">Variante ultra-ligera para inferencia on-device en smartphones de gama baja.</p>
+          </li>
+          <li class="road-item">
+            <div class="road-dot road-dot-future" aria-hidden="true"></div>
+            <span class="road-status road-status-future" data-i18n="road_future">Futuro</span>
+            <h3 class="road-title" data-i18n="road6_title">Ensayo multi-municipio</h3>
+            <p class="road-desc" data-i18n="road6_desc">Colaboración con Comité de Cafeteros de Santander para validación a escala.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: FAQ
+    ===================================================== -->
+    <section id="preguntas" class="section bg-alt" aria-labelledby="faq-heading">
+      <div class="container" style="max-width:800px">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" data-i18n="faq_eyebrow">Preguntas frecuentes</span>
+          <h2 class="section-title" id="faq-heading" data-i18n="faq_title">Lo que caficultores, agrónomos y revisores preguntan.</h2>
+        </div>
+        <ul class="faq-list reveal" role="list">
+          <li class="faq-item">
+            <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
+              <span data-i18n="faq1_q">¿Qué tan preciso es realmente?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-body" data-i18n-html="faq1_a">mAP50 de 92.4% en el conjunto de prueba (286 imágenes no vistas).</div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
+              <span data-i18n="faq2_q">¿Funciona sin internet?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-body" data-i18n-html="faq2_a">El bot de WhatsApp requiere conexión; la app Android funciona offline.</div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
+              <span data-i18n="faq3_q">¿Por qué solo 3 enfermedades?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-body" data-i18n-html="faq3_a">El dataset fue recolectado en una única finca donde estas tres plagas son las de mayor incidencia.</div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
+              <span data-i18n="faq4_q">¿En qué variedades de café se validó?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-body" data-i18n-html="faq4_a">Coffea arabica L., variedades Colombia y Castillo. Ver limitaciones en el paper.</div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
+              <span data-i18n="faq5_q">¿Cómo puede acceder mi cooperativa?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-body" data-i18n-html="faq5_a">Escríbenos a rosas.esteban.10@gmail.com con el asunto "DECAFIA — Demo cooperativa".</div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
+              <span data-i18n="faq6_q">¿Cómo fue anotado el dataset?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-body" data-i18n-html="faq6_a">2,786 imágenes con polígonos usando VIA + SAM. Cohen's κ = 0.91.</div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
+              <span data-i18n="faq7_q">¿Está disponible el dataset públicamente?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-body" data-i18n-html="faq7_a">Se está preparando para Zenodo bajo CC-BY-4.0 como parte del proceso de revisión.</div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
+              <span data-i18n="faq8_q">¿Cómo cito este trabajo?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-body" data-i18n-html="faq8_a">Ver la sección <a href="#citar">Citar esta investigación</a> para el bloque BibTeX.</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: CITAR
+    ===================================================== -->
+    <section id="citar" class="section" aria-labelledby="cite-heading">
+      <div class="container" style="max-width:800px">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" data-i18n="cite_eyebrow">Citar esta investigación</span>
+          <h2 class="section-title" id="cite-heading" data-i18n="cite_title">Referencia bibliográfica.</h2>
+        </div>
+        <div class="cite-block reveal">
+          <div class="cite-header">
+            <span class="cite-lang">BibTeX</span>
+            <button class="cite-copy-btn" onclick="decafiaCopyBibtex(this)" data-i18n="cite_copy">Copiar BibTeX</button>
+          </div>
+          <pre class="cite-pre" id="bibtex-text">@article{rosas2025decafia,
+  title     = {{DECAFIA}: {YOLOv8}-Based Detection of Coffee Leaf Diseases
+               Using a Field-Collected Dataset from Santander, Colombia},
+  author    = {Rosas Ruiz, Luis Esteban and Salom Medina, Andrey Fernando
+               and Barrero P{\'{e}}rez, Jaime Guillermo},
+  journal   = {Sensors},
+  volume    = {},
+  number    = {},
+  pages     = {},
+  year      = {2025},
+  doi       = {},
+  publisher = {MDPI}
+}</pre>
+        </div>
+        <div class="cite-apa reveal" style="--delay:200ms">
+          <p class="cite-apa-label" data-i18n="cite_apa_label">Formato APA</p>
+          <p>Rosas Ruiz, L. E., Salom Medina, A. F., &amp; Barrero Pérez, J. G. (2025). DECAFIA: YOLOv8-based detection of coffee leaf diseases using a field-collected dataset from Santander, Colombia. <em>Sensors</em>. MDPI.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: AGRADECIMIENTOS
+    ===================================================== -->
+    <section id="agradecimientos" class="section bg-alt" aria-labelledby="ack-heading">
+      <div class="container" style="max-width:800px; text-align:center">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" data-i18n="ack_eyebrow">Agradecimientos</span>
+          <h2 class="section-title" id="ack-heading" data-i18n="ack_title">Con el apoyo del campo colombiano.</h2>
+        </div>
+        <div class="ack-box reveal">
+          <p data-i18n-html="ack_body">Los autores expresan su gratitud a los propietarios de la finca en El Socorro, Santander, por el acceso a las plantaciones y su disposición durante las campañas de recolección de datos en 2022–2023. A <strong>Cenicafé</strong> por las guías fitosanitarias y el <em>Manual del Cafetero Colombiano</em> (Constantino et al., 2013). A la <strong>Universidad Industrial de Santander</strong> por el acceso a recursos computacionales e infraestructura institucional.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: CTA
+    ===================================================== -->
+    <section id="cta-section" aria-label="Llamada a la acción">
+      <div class="cta-grid">
+        <!-- Caficultor panel -->
+        <div class="cta-panel cta-amber">
+          <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.75rem" data-i18n="cta_farmer_tag">Para caficultores</p>
+          <h2 class="cta-title" data-i18n="cta_farmer_h">¿Eres caficultor en Santander?</h2>
+          <p class="cta-desc" data-i18n="cta_farmer_desc">Solicita acceso al bot de WhatsApp y participa en la validación del sistema. Sin costo, sin complicaciones.</p>
+          <a href="https://wa.me/573138812134?text=Hola%2C%20quiero%20probar%20DECAFIA"
+             target="_blank" rel="noopener noreferrer"
+             class="btn btn-dark"
+             style="display:inline-flex;align-items:center;gap:0.5rem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-i18n="cta_farmer_btn">Abrir WhatsApp</span>
+          </a>
+          <span class="cta-small" data-i18n="cta_farmer_sub">Sistema activo · +57 313 881 2134</span>
+        </div>
+        <!-- Researcher panel -->
+        <div class="cta-panel cta-dark">
+          <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.5);margin-bottom:0.75rem" data-i18n="cta_res_tag">Para cooperativas e investigadores</p>
+          <h2 class="cta-title" data-i18n="cta_res_h">¿Eres cooperativa o investigador?</h2>
+          <p class="cta-desc" data-i18n="cta_res_desc">Agenda una demostración técnica: modelo, datos, arquitectura y resultados científicos.</p>
+          <a href="mailto:rosas.esteban.10@gmail.com?subject=DECAFIA%20%E2%80%94%20Demo%20t%C3%A9cnico"
+             class="btn btn-amber" data-i18n="cta_res_btn">Agendar demo técnico</a>
+          <span class="cta-small" data-i18n="cta_res_sub">rosas.esteban.10@gmail.com</span>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -3682,6 +4569,147 @@
       obs.observe(section);
     } else {
       waitForChartJS(initDonut);
+    }
+  })();
+
+  /* =====================================================
+     IIFE: FAQ accordion
+  ===================================================== */
+  (function() {
+    'use strict';
+
+    window.decafiaToggleFaq = function(btn) {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+
+      /* Close all items */
+      document.querySelectorAll('.faq-item').forEach(function(el) {
+        el.classList.remove('open');
+        el.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+      });
+
+      /* Open clicked item (unless it was already open) */
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    };
+  })();
+
+  /* =====================================================
+     IIFE: BibTeX copy button
+  ===================================================== */
+  (function() {
+    'use strict';
+
+    window.decafiaCopyBibtex = function(btn) {
+      var pre = document.getElementById('bibtex-text');
+      if (!pre) return;
+      var text = pre.textContent;
+      if (!navigator.clipboard) {
+        /* Fallback: textarea select */
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        try { document.execCommand('copy'); } catch(e) {}
+        document.body.removeChild(ta);
+        showCopied(btn);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(function() { showCopied(btn); });
+    };
+
+    function showCopied(btn) {
+      var lang = localStorage.getItem('decafia-lang') || 'es';
+      var S = window.DECAFIA_STRINGS;
+      var label = S && S.cite_copied ? (S.cite_copied[lang] || '¡Copiado!') : '¡Copiado!';
+      var orig = btn.textContent;
+      btn.textContent = label;
+      btn.disabled = true;
+      setTimeout(function() {
+        /* Restore from i18n string if possible */
+        var copyLabel = S && S.cite_copy ? (S.cite_copy[lang] || orig) : orig;
+        btn.textContent = copyLabel;
+        btn.disabled = false;
+      }, 2200);
+    }
+  })();
+
+  /* =====================================================
+     IIFE: Leaflet map (lazy init on #impacto intersection)
+  ===================================================== */
+  (function() {
+    'use strict';
+
+    var mapEl = document.getElementById('decafia-map');
+    if (!mapEl) return;
+
+    function initLeaflet() {
+      if (!window.L || mapEl._mapInit) return;
+      mapEl._mapInit = true;
+
+      var map = L.map(mapEl, {
+        center: [6.4667, -73.3167],
+        zoom: 9,
+        zoomControl: true,
+        scrollWheelZoom: false
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18
+      }).addTo(map);
+
+      var pulsingIcon = L.divIcon({
+        className: '',
+        html: '<div style="position:relative;width:32px;height:32px;">' +
+                '<div style="position:absolute;inset:0;border-radius:50%;background:#EF4444;opacity:0.35;animation:mapPulse 2s infinite;"></div>' +
+                '<div style="position:absolute;top:8px;left:8px;width:16px;height:16px;border-radius:50%;background:#EF4444;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>' +
+              '</div>',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -18]
+      });
+
+      L.marker([6.4667, -73.3167], { icon: pulsingIcon })
+        .addTo(map)
+        .bindPopup(
+          '<b style="font-family:serif;font-size:14px">El Socorro, Santander</b><br>' +
+          '<span style="font-size:12px;color:#555">Sitio de recolección del dataset DECAFIA<br>' +
+          '2,786 imágenes &nbsp;·&nbsp; 2022–2023</span>'
+        )
+        .openPopup();
+
+      setTimeout(function() { map.invalidateSize(); }, 300);
+    }
+
+    var section = document.getElementById('impacto');
+    if (section && 'IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          obs.disconnect();
+          /* Wait briefly for Leaflet CDN if not yet loaded */
+          if (window.L) {
+            initLeaflet();
+          } else {
+            var t = setInterval(function() {
+              if (window.L) { clearInterval(t); initLeaflet(); }
+            }, 100);
+            setTimeout(function() { clearInterval(t); }, 5000);
+          }
+        }
+      }, { threshold: 0.1 });
+      obs.observe(section);
+    } else {
+      /* Fallback: init after DOMContentLoaded */
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLeaflet);
+      } else {
+        initLeaflet();
+      }
     }
   })();
   </script>
