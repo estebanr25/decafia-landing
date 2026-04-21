@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DECAFIA — OG Image Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #111;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 2rem;
+      font-family: 'Inter', sans-serif;
+      color: #ccc;
+    }
+    h1 { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: #666; }
+    canvas {
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      max-width: 100%;
+    }
+    .actions { display: flex; gap: 1rem; }
+    button {
+      padding: 0.65rem 1.75rem;
+      border: none; border-radius: 8px;
+      font-family: inherit; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    #btn-dl  { background: #C17A2E; color: #fff; }
+    #btn-rdr { background: #1D7A4F; color: #fff; }
+    p.note { font-size: 0.78rem; color: #555; max-width: 600px; text-align: center; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<h1>DECAFIA · OG Image Generator · 1200 × 630</h1>
+<canvas id="og" width="1200" height="630"></canvas>
+<div class="actions">
+  <button id="btn-rdr" onclick="render()">Re-render</button>
+  <button id="btn-dl"  onclick="download()">⬇ Download og-image.png</button>
+</div>
+<p class="note">
+  Save as <code>og-image.png</code> in the repo root, then
+  <code>git add og-image.png &amp;&amp; git push</code>.
+</p>
+
+<script>
+/* ─── palette ─────────────────────────────────────── */
+const C = {
+  bgDeep:    '#0A2F1A',
+  bgMid:     '#0F4C2A',
+  bgLight:   '#143D22',
+  amber:     '#C17A2E',
+  amberL:    '#D4943F',
+  cream:     '#F5F0E8',
+  creamDim:  'rgba(245,240,232,0.72)',
+  creamMid:  'rgba(245,240,232,0.42)',
+  creamFaint:'rgba(245,240,232,0.16)',
+  white:     '#ffffff',
+  roya:      '#E07820',
+  coco:      '#1D7A4F',
+  minador:   '#2A9D60',
+};
+
+/* ─── helpers ─────────────────────────────────────── */
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function pill(ctx, label, x, y, color) {
+  ctx.font = '500 13px Inter, Arial, sans-serif';
+  const tw = ctx.measureText(label).width;
+  const pw = tw + 22, ph = 26;
+  roundRect(ctx, x, y - 18, pw, ph, 13);
+  ctx.fillStyle = color + '28';
+  ctx.fill();
+  ctx.strokeStyle = color + '70';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.fillText(label, x + 11, y);
+  return pw + 10;
+}
+
+/* ─── main draw ───────────────────────────────────── */
+function render() {
+  const canvas = document.getElementById('og');
+  const ctx    = canvas.getContext('2d');
+  const W = 1200, H = 630;
+
+  /* 1 · background gradient */
+  const bg = ctx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0,   '#0F4C2A');
+  bg.addColorStop(0.55,'#0A3018');
+  bg.addColorStop(1,   '#07200F');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  /* 2 · subtle radial glow (right side, behind metric) */
+  const glow = ctx.createRadialGradient(950, 315, 20, 950, 315, 340);
+  glow.addColorStop(0,   'rgba(193,122,46,0.18)');
+  glow.addColorStop(0.6, 'rgba(193,122,46,0.06)');
+  glow.addColorStop(1,   'rgba(193,122,46,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, H);
+
+  /* 3 · decorative leaf silhouette (top-right, very faint) */
+  ctx.save();
+  ctx.globalAlpha = 0.045;
+  ctx.fillStyle = C.cream;
+  ctx.beginPath();
+  /* large organic leaf shape */
+  ctx.moveTo(1050, -30);
+  ctx.bezierCurveTo(1150, 80, 1200, 200, 1100, 320);
+  ctx.bezierCurveTo(1060, 390, 980,  390, 970,  310);
+  ctx.bezierCurveTo(960,  230, 1020, 100, 1050, -30);
+  ctx.closePath();
+  ctx.fill();
+  /* vein */
+  ctx.globalAlpha = 0.03;
+  ctx.strokeStyle = C.cream;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(1050, -30);
+  ctx.bezierCurveTo(1020, 120, 990, 230, 970, 310);
+  ctx.stroke();
+  ctx.restore();
+
+  /* 4 · top amber stripe */
+  ctx.fillStyle = C.amber;
+  ctx.fillRect(0, 0, W, 5);
+
+  /* 5 · vertical divider */
+  const divX = 680;
+  const divGrad = ctx.createLinearGradient(divX, 80, divX, H - 80);
+  divGrad.addColorStop(0,   'rgba(245,240,232,0)');
+  divGrad.addColorStop(0.2, 'rgba(245,240,232,0.18)');
+  divGrad.addColorStop(0.8, 'rgba(245,240,232,0.18)');
+  divGrad.addColorStop(1,   'rgba(245,240,232,0)');
+  ctx.strokeStyle = divGrad;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(divX, 80);
+  ctx.lineTo(divX, H - 80);
+  ctx.stroke();
+
+  /* ── LEFT COLUMN ─────────────────────────────────── */
+  const lx = 80;
+
+  /* eyebrow */
+  ctx.font = '600 12px Inter, Arial, sans-serif';
+  ctx.letterSpacing = '0.14em';
+  ctx.fillStyle = C.amber;
+  ctx.fillText('UNIVERSIDAD INDUSTRIAL DE SANTANDER · COLOMBIA · 2025', lx, 88);
+  ctx.letterSpacing = '0';
+
+  /* DECAFIA wordmark */
+  ctx.font = 'bold 108px "Playfair Display", Georgia, serif';
+  ctx.fillStyle = C.cream;
+  ctx.fillText('DECAFIA', lx - 4, 202);
+
+  /* accent bar under wordmark */
+  ctx.fillStyle = C.amber;
+  ctx.fillRect(lx, 214, 200, 4);
+
+  /* tagline line 1 */
+  ctx.font = '400 26px "Playfair Display", Georgia, serif';
+  ctx.fillStyle = C.creamDim;
+  ctx.fillText('Detección de enfermedades del café con IA', lx, 264);
+
+  /* tagline line 2 — subtitle */
+  ctx.font = '400 17px Inter, Arial, sans-serif';
+  ctx.fillStyle = C.creamMid;
+  ctx.fillText('YOLOv8m · Dataset colombiano de campo · Bot activo en WhatsApp', lx, 300);
+
+  /* disease pills */
+  let px = lx;
+  const py = 358;
+  px += pill(ctx, 'Roya · H. vastatrix',           px, py, C.roya);
+  px += pill(ctx, 'Coco · Compsus sp.',             px, py, C.coco);
+  px += pill(ctx, 'Minador · L. coffeella',         px, py, C.minador);
+
+  /* stats row */
+  const stats = [
+    { val: '2,786',  lbl: 'imágenes' },
+    { val: '12,810', lbl: 'instancias' },
+    { val: '< 3 s',  lbl: 'latencia' },
+  ];
+  let sx = lx;
+  stats.forEach((s, i) => {
+    ctx.font = 'bold 26px "Playfair Display", Georgia, serif';
+    ctx.fillStyle = C.amberL;
+    ctx.fillText(s.val, sx, 440);
+    const vw = ctx.measureText(s.val).width;
+    ctx.font = '400 13px Inter, Arial, sans-serif';
+    ctx.fillStyle = C.creamMid;
+    ctx.fillText(s.lbl, sx, 460);
+    sx += vw + 48;
+  });
+
+  /* WhatsApp label */
+  roundRect(ctx, lx, 487, 248, 34, 17);
+  ctx.fillStyle = 'rgba(37,211,102,0.12)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(37,211,102,0.35)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  /* WA circle */
+  ctx.beginPath();
+  ctx.arc(lx + 16, 487 + 17, 7, 0, Math.PI * 2);
+  ctx.fillStyle = '#25D366';
+  ctx.fill();
+  ctx.font = '600 13px Inter, Arial, sans-serif';
+  ctx.fillStyle = 'rgba(37,211,102,0.9)';
+  ctx.fillText('Bot en producción · +57 313 881 2134', lx + 30, 487 + 21);
+
+  /* ── RIGHT COLUMN — big metric ─────────────────── */
+  const rx = 950; /* center x */
+
+  /* label above */
+  ctx.font = '600 13px Inter, Arial, sans-serif';
+  ctx.fillStyle = C.creamMid;
+  ctx.textAlign = 'center';
+  ctx.fillText('TEST SET · 286 IMÁGENES · YOLOV8m', rx, 168);
+
+  /* 92.4% */
+  ctx.font = 'bold 148px "Playfair Display", Georgia, serif';
+  ctx.fillStyle = C.amber;
+  ctx.fillText('92.4%', rx, 310);
+
+  /* "mAP50" label */
+  ctx.font = '700 22px Inter, Arial, sans-serif';
+  ctx.fillStyle = C.cream;
+  ctx.fillText('mAP50', rx, 348);
+
+  /* secondary metrics grid */
+  const metrics = [
+    { v: '90.5%', l: 'Precisión' },
+    { v: '85.8%', l: 'Recall' },
+    { v: '88.0%', l: 'F1' },
+    { v: '76.6%', l: 'mAP50-95' },
+  ];
+  const mColW = 110;
+  const mStartX = rx - (metrics.length * mColW) / 2 + mColW / 2;
+  metrics.forEach((m, i) => {
+    const mx = mStartX + i * mColW;
+    ctx.font = 'bold 20px Inter, Arial, sans-serif';
+    ctx.fillStyle = C.creamDim;
+    ctx.fillText(m.v, mx, 408);
+    ctx.font = '400 12px Inter, Arial, sans-serif';
+    ctx.fillStyle = C.creamMid;
+    ctx.fillText(m.l, mx, 427);
+  });
+
+  /* per-class AP50 mini bars */
+  const bars = [
+    { lbl: 'Roya',    v: 88.2, color: C.roya    },
+    { lbl: 'Coco',    v: 94.1, color: C.coco    },
+    { lbl: 'Minador', v: 94.9, color: C.minador },
+  ];
+  const barW = 200, barH = 7, barX = rx - barW / 2, barY0 = 460;
+  bars.forEach((b, i) => {
+    const y = barY0 + i * 26;
+    /* track */
+    roundRect(ctx, barX, y, barW, barH, 3.5);
+    ctx.fillStyle = C.creamFaint;
+    ctx.fill();
+    /* fill */
+    roundRect(ctx, barX, y, barW * (b.v / 100), barH, 3.5);
+    ctx.fillStyle = b.color;
+    ctx.fill();
+    /* label */
+    ctx.font = '500 11px Inter, Arial, sans-serif';
+    ctx.fillStyle = C.creamMid;
+    ctx.textAlign = 'left';
+    ctx.fillText(b.lbl, barX - 68, y + 7);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = C.creamDim;
+    ctx.fillText(b.v + '%', barX + barW + 36, y + 7);
+  });
+
+  ctx.textAlign = 'left'; /* reset */
+
+  /* ── BOTTOM BAR ──────────────────────────────────── */
+  ctx.fillStyle = C.creamFaint;
+  ctx.fillRect(lx, H - 78, W - lx * 2, 1);
+
+  ctx.font = '400 13px Inter, Arial, sans-serif';
+  ctx.fillStyle = C.creamMid;
+  ctx.textAlign = 'center';
+  ctx.fillText(
+    'Universidad Industrial de Santander · Ingeniería Electrónica · Bucaramanga, Colombia  ·  decaf-ia.netlify.app',
+    W / 2, H - 48
+  );
+
+  /* paper badge */
+  roundRect(ctx, W / 2 - 115, H - 36, 230, 22, 11);
+  ctx.fillStyle = 'rgba(193,122,46,0.12)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(193,122,46,0.3)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.font = '600 11px Inter, Arial, sans-serif';
+  ctx.fillStyle = C.amber;
+  ctx.fillText('Submitted to Sensors (MDPI) · Paper preprint available on request', W / 2, H - 21);
+
+  ctx.textAlign = 'left';
+}
+
+function download() {
+  const canvas = document.getElementById('og');
+  const link   = document.createElement('a');
+  link.download = 'og-image.png';
+  link.href     = canvas.toDataURL('image/png');
+  link.click();
+}
+
+/* Wait for Google Fonts to load before drawing */
+document.fonts.ready.then(render);
+</script>
+</body>
+</html>
