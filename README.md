@@ -7,7 +7,7 @@
 **🔬 Main research repo:** [estebanr25/decafia](https://github.com/estebanr25/decafia)
 **📸 Webcam demo source:** [estebanr25/decafia-webcam](https://github.com/estebanr25/decafia-webcam)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/PLACEHOLDER/deploy-status)](https://decaf-ia.netlify.app)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8f1427c5-41ed-45f1-942c-9148f4694fa3/deploy-status)](https://app.netlify.com/projects/decaf-ia/deploys)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![HTML](https://img.shields.io/badge/built_with-vanilla_HTML%2FCSS%2FJS-orange)
 ![Chart.js](https://img.shields.io/badge/Chart.js-4-ff6384)
