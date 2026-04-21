@@ -1,0 +1,46 @@
+# ── OS junk ─────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Thumbs.db:encryptable
+desktop.ini
+ehthumbs.db
+
+# ── Editor / IDE ─────────────────────────────────────
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# ── Node / build artifacts ───────────────────────────
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+.netlify/
+.next/
+out/
+
+# ── Environment / secrets ────────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+
+# ── Logs ─────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Backup / temp files ──────────────────────────────
+*~
+*.bak
+*.tmp
+*.orig
