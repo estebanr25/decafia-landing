@@ -1,0 +1,9 @@
+# _headers — Netlify plain-file headers fallback
+# Mirrors netlify.toml [[headers]] so whichever config Netlify
+# resolves first will apply the required COOP/COEP headers.
+#
+# Required for SharedArrayBuffer → onnxruntime-web WASM threads.
+
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp

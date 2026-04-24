@@ -70,6 +70,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js" defer></script>
 
   <style>
     /* =====================================================
@@ -2056,6 +2057,248 @@
     .cta-amber .cta-small { color: rgba(255,255,255,0.65); }
     .cta-dark  .cta-small { color: rgba(245,240,232,0.5); }
     @media (max-width: 768px) { .cta-grid { grid-template-columns: 1fr; } }
+
+    /* =====================================================
+       DEMO — Live Camera Section
+    ===================================================== */
+    .demo-panel {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 2rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    .demo-viewport {
+      position: relative;
+      background: #0a0f0a;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .demo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.875rem;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #webcam-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      inset: 0;
+    }
+
+    #webcam-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .demo-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .demo-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--bg-alt);
+      color: var(--text-mid);
+      border: 1px solid var(--border);
+      transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .demo-status.status-ready {
+      background: rgba(29,122,79,0.12);
+      color: var(--green-mid);
+      border-color: rgba(29,122,79,0.30);
+    }
+    .demo-status.status-detecting {
+      background: rgba(42,157,96,0.15);
+      color: var(--green-light);
+      border-color: rgba(42,157,96,0.35);
+    }
+    [data-theme="dark"] .demo-status.status-detecting { color: #7dd3a8; }
+    .demo-status.status-loading {
+      background: rgba(193,122,46,0.10);
+      color: var(--amber);
+      border-color: rgba(193,122,46,0.28);
+    }
+    .demo-status.status-loading .demo-status-dot { animation: demoDotPulse 0.75s ease-in-out infinite; }
+    .demo-status.status-error {
+      background: rgba(200,50,50,0.10);
+      color: #b54040;
+      border-color: rgba(200,50,50,0.22);
+    }
+
+    .demo-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    .demo-status.status-detecting .demo-status-dot { animation: demoDotPulse 1.1s ease-in-out infinite; }
+    @keyframes demoDotPulse { 0%,100% { opacity:1; } 50% { opacity:0.25; } }
+    @media (prefers-reduced-motion: reduce) { .demo-status-dot { animation: none !important; } }
+
+    .demo-sidebar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .demo-sidebar-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+    .demo-detections-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      min-height: 100px;
+    }
+    .demo-detection-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-md);
+      background: var(--bg-alt);
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      border: 1px solid var(--border-light);
+    }
+    .demo-det-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .demo-det-conf {
+      margin-left: auto;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-light);
+      font-variant-numeric: tabular-nums;
+    }
+    .demo-no-detections {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80px;
+      color: var(--text-light);
+      font-size: 0.84rem;
+    }
+
+    @media (max-width: 900px) {
+      .demo-panel { grid-template-columns: 1fr; }
+    }
+
+    /* ── Demo: model download progress bar ─────────────── */
+    .demo-progress {
+      margin-top: 1.25rem;
+      padding: 0.7rem 1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .demo-progress-msg {
+      font-size: 0.81rem;
+      color: var(--text-mid);
+      margin-bottom: 0.5rem;
+    }
+    .demo-progress-track {
+      height: 5px;
+      background: var(--border);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .demo-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--amber);
+      border-radius: var(--radius-pill);
+      transition: width 0.25s var(--ease);
+    }
+    .demo-progress-fill.indeterminate {
+      width: 35%;
+      animation: demoProgressSlide 1.4s ease-in-out infinite;
+    }
+    @keyframes demoProgressSlide {
+      0%   { transform: translateX(-105%); }
+      100% { transform: translateX(320%); }
+    }
+
+    /* ── Demo: FPS overlay ──────────────────────────────── */
+    #demo-fps {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 3;
+      background: rgba(0,0,0,0.52);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.18rem 0.52rem;
+      border-radius: var(--radius-sm);
+      font-variant-numeric: tabular-nums;
+      pointer-events: none;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+
+    /* ── Demo: graceful error detail box ───────────────── */
+    .demo-error-box {
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      background: rgba(180,50,50,0.07);
+      border: 1px solid rgba(180,50,50,0.20);
+      border-radius: var(--radius-md);
+      font-size: 0.83rem;
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+    .demo-error-box a {
+      color: var(--green-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .demo-error-box code {
+      font-family: monospace;
+      font-size: 0.82em;
+      background: var(--border-light);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+    }
+    [data-theme="dark"] .demo-error-box {
+      background: rgba(220,60,60,0.10);
+      border-color: rgba(220,60,60,0.24);
+    }
   </style>
 </head>
 <body>
@@ -2086,6 +2329,7 @@
       <li><a href="#metodologia" data-i18n="nav_method">Metodología</a></li>
       <li><a href="#enfermedades" data-i18n="nav_diseases">Enfermedades</a></li>
       <li><a href="#impacto" data-i18n="nav_map">Mapa</a></li>
+      <li><a href="#demo" data-i18n="nav_demo">Demo</a></li>
       <li><a href="#equipo" data-i18n="nav_team">Equipo</a></li>
     </ul>
 
@@ -2130,6 +2374,7 @@
     <a href="#metodologia" onclick="closeMobileMenu()" data-i18n="nav_method">Metodología</a>
     <a href="#enfermedades" onclick="closeMobileMenu()" data-i18n="nav_diseases">Enfermedades</a>
     <a href="#impacto" onclick="closeMobileMenu()" data-i18n="nav_map">Mapa</a>
+    <a href="#demo" onclick="closeMobileMenu()" data-i18n="nav_demo">Demo</a>
     <a href="#equipo" onclick="closeMobileMenu()" data-i18n="nav_team">Equipo</a>
     <div class="nav-mobile-actions">
       <a href="https://wa.me/573138812134?text=Hola%2C%20quiero%20probar%20DECAFIA"
@@ -2951,6 +3196,100 @@
     </section>
 
     <!-- =====================================================
+         SECTION: DEMO EN VIVO
+    ===================================================== -->
+    <section id="demo" class="section" aria-labelledby="demo-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow" data-i18n="demo_eyebrow">Demo en vivo</span>
+          <h2 class="section-title" id="demo-heading" data-i18n="demo_title">Prueba el modelo en tu cámara.</h2>
+          <p class="section-sub" data-i18n="demo_sub">Apunta tu cámara a una hoja de café y observa las detecciones en tiempo real. El modelo YOLOv8m corre directamente en tu navegador usando ONNX Runtime Web.</p>
+        </div>
+
+        <div class="demo-panel reveal" style="--delay:80ms">
+
+          <!-- Left column: viewport + controls -->
+          <div>
+            <div class="demo-viewport">
+              <!-- Idle placeholder (hidden when camera is active) -->
+              <div class="demo-placeholder" id="demo-placeholder" aria-hidden="true">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M23 7l-7 5 7 5V7z"/>
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                </svg>
+                <span data-i18n="demo_btn_start">Activar cámara</span>
+              </div>
+              <video id="webcam-video" autoplay playsinline muted style="display:none"></video>
+              <canvas id="webcam-overlay"></canvas>
+              <!-- Live FPS counter — top-right corner of viewport -->
+              <div id="demo-fps" style="display:none" aria-hidden="true">
+                <span id="demo-fps-value">0</span>&thinsp;<span data-i18n="demo_fps_label">FPS</span>
+              </div>
+            </div>
+
+            <!-- Model download progress bar (shown only during fetch) -->
+            <div class="demo-progress" id="demo-progress" style="display:none" aria-live="polite">
+              <p class="demo-progress-msg" id="demo-progress-msg"
+                 data-i18n="demo_progress_downloading">Descargando modelo ONNX (~25 MB)…</p>
+              <div class="demo-progress-track"
+                   role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                   id="demo-progress-bar">
+                <div class="demo-progress-fill" id="demo-progress-fill"></div>
+              </div>
+            </div>
+
+            <div class="demo-controls">
+              <!-- Start / Stop toggle -->
+              <button class="btn btn-primary" id="demo-btn"
+                      onclick="decafiaDemo.toggle()"
+                      aria-label="Activar o detener cámara">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path d="M23 7l-7 5 7 5V7z"/>
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                </svg>
+                <span data-i18n="demo_btn_start">Activar cámara</span>
+              </button>
+
+              <!-- Capture button — visible only when camera is active -->
+              <button class="btn btn-outline" id="demo-capture-btn"
+                      onclick="decafiaDemo.capture()"
+                      style="display:none"
+                      aria-label="Descargar frame anotado como PNG">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                <span data-i18n="demo_btn_capture">Capturar</span>
+              </button>
+
+              <div class="demo-status" id="demo-status" role="status" aria-live="polite">
+                <span class="demo-status-dot" aria-hidden="true"></span>
+                <span id="demo-status-text" data-i18n="demo_status_idle">Cámara inactiva</span>
+              </div>
+            </div>
+
+            <!-- Graceful error detail box — shown on specific failures -->
+            <div class="demo-error-box" id="demo-error-box"
+                 style="display:none" role="alert" aria-live="assertive">
+              <span id="demo-error-msg"></span>
+            </div>
+          </div>
+
+          <!-- Right column: detections sidebar -->
+          <aside class="demo-sidebar" aria-labelledby="demo-sidebar-heading">
+            <p class="demo-sidebar-title" id="demo-sidebar-heading"
+               data-i18n="demo_detections_title">Detecciones del frame actual</p>
+            <div class="demo-detections-list" id="demo-detections-list"
+                 aria-live="polite" aria-atomic="true">
+              <p class="demo-no-detections" data-i18n="demo_no_detections">Sin detecciones</p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
          SECTION: EQUIPO
     ===================================================== -->
     <section id="equipo" class="section bg-alt" aria-labelledby="team-heading">
@@ -3567,7 +3906,44 @@
       footer_col_contact: { es: 'Contacto', en: 'Contact' },
       footer_cite:     { es: 'Citar', en: 'Cite' },
       footer_ack:      { es: 'Agradecimientos', en: 'Acknowledgments' },
-      footer_disclaimer: { es: 'DECAFIA es un prototipo de investigación. Las recomendaciones de tratamiento provienen de las guías fitosanitarias oficiales de Cenicafé y son de carácter orientativo; consulte siempre a un agrónomo calificado antes de aplicar agroquímicos.', en: 'DECAFIA is a research prototype. Treatment recommendations are sourced from Cenicafé\'s official phytosanitary guidelines and are advisory only; always consult a qualified agronomist before applying agrochemicals.' }
+      footer_disclaimer: { es: 'DECAFIA es un prototipo de investigación. Las recomendaciones de tratamiento provienen de las guías fitosanitarias oficiales de Cenicafé y son de carácter orientativo; consulte siempre a un agrónomo calificado antes de aplicar agroquímicos.', en: 'DECAFIA is a research prototype. Treatment recommendations are sourced from Cenicafé\'s official phytosanitary guidelines and are advisory only; always consult a qualified agronomist before applying agrochemicals.' },
+
+      /* ── Demo en vivo ── */
+      nav_demo:              { es: 'Demo',                                   en: 'Demo' },
+      demo_eyebrow:          { es: 'Demo en vivo',                           en: 'Live demo' },
+      demo_title:            { es: 'Prueba el modelo en tu cámara.',         en: 'Test the model with your camera.' },
+      demo_sub:              { es: 'Apunta tu cámara a una hoja de café y observa las detecciones en tiempo real. El modelo YOLOv8m corre directamente en tu navegador usando ONNX Runtime Web.',
+                               en: 'Point your camera at a coffee leaf and watch detections in real time. The YOLOv8m model runs directly in your browser using ONNX Runtime Web.' },
+      demo_btn_start:        { es: 'Activar cámara',                         en: 'Start camera' },
+      demo_btn_stop:         { es: 'Detener cámara',                         en: 'Stop camera' },
+      demo_status_idle:      { es: 'Cámara inactiva',                        en: 'Camera inactive' },
+      demo_status_loading:   { es: 'Cargando modelo…',                       en: 'Loading model…' },
+      demo_status_ready:     { es: 'Modelo listo',                           en: 'Model ready' },
+      demo_status_detecting: { es: 'Detectando…',                            en: 'Detecting…' },
+      demo_detections_title: { es: 'Detecciones del frame actual',           en: 'Current frame detections' },
+      demo_no_detections:    { es: 'Sin detecciones',                        en: 'No detections' },
+      demo_permission_err:   { es: 'Permiso de cámara denegado.',            en: 'Camera permission denied.' },
+      demo_not_supported:    { es: 'Tu navegador no soporta acceso a la cámara.', en: 'Your browser does not support camera access.' },
+      /* Progress, FPS, capture */
+      demo_progress_downloading: { es: 'Descargando modelo ONNX (~25 MB)…', en: 'Downloading ONNX model (~25 MB)…' },
+      demo_btn_capture:      { es: 'Capturar',                               en: 'Capture' },
+      demo_fps_label:        { es: 'FPS',                                    en: 'FPS' },
+      /* Short badge labels for errors */
+      demo_err_wasm_status:  { es: 'Sin WebAssembly',                        en: 'No WebAssembly' },
+      demo_err_model_status: { es: 'Error: modelo',                          en: 'Error: model' },
+      /* Full error detail messages (may contain HTML) */
+      demo_err_wasm:         {
+        es: 'Tu navegador no soporta WebAssembly. Abre la demo en <strong>Chrome 57+</strong>, <strong>Firefox 52+</strong> o <strong>Edge 16+</strong>.',
+        en: 'Your browser does not support WebAssembly. Open the demo in <strong>Chrome 57+</strong>, <strong>Firefox 52+</strong>, or <strong>Edge 16+</strong>.'
+      },
+      demo_err_camera:       {
+        es: 'Permiso de cámara denegado. Ve a <strong>Configuración del navegador → Privacidad → Cámara</strong> y permite el acceso para este sitio. En móvil: <em>Ajustes → Apps → Navegador → Permisos → Cámara</em>.',
+        en: 'Camera permission denied. Go to <strong>Browser Settings → Privacy → Camera</strong> and allow access for this site. On mobile: <em>Settings → Apps → Browser → Permissions → Camera</em>.'
+      },
+      demo_err_model:        {
+        es: 'No se pudo descargar el modelo (<code>assets/model/decafia_best.onnx</code>). Descárgalo desde <a href="https://huggingface.co/estebanr25/decafia" target="_blank" rel="noopener noreferrer" style="color:var(--green-light)">Hugging Face</a> y colócalo en la ruta indicada.',
+        en: 'Could not download the model (<code>assets/model/decafia_best.onnx</code>). Download it from <a href="https://huggingface.co/estebanr25/decafia" target="_blank" rel="noopener noreferrer" style="color:var(--green-light)">Hugging Face</a> and place it at the indicated path.'
+      }
     };
 
     /* Apply translations to current DOM */
@@ -4715,6 +5091,500 @@
         initLeaflet();
       }
     }
+  })();
+
+  /* =====================================================
+     DEMO SECTION — ONNX Inference via onnxruntime-web
+     Model : assets/model/decafia_best.onnx
+     Input : Float32 [1, 3, 640, 640]  /255, CHW, letterboxed
+     Output: Float32 [1, 7, 8400]
+             channels → cx cy w h conf_roya conf_coco conf_minador
+     Conf  : 0.35   IOU : 0.45
+     Loop  : setInterval every 200 ms while camera is active
+  ===================================================== */
+  (function() {
+    'use strict';
+
+    /* ── Constants ─────────────────────────────────────── */
+    /* Model URL — fetched at runtime, never committed to git (~25 MB).
+     * Default: HuggingFace CDN (no local file required).
+     * Local dev: change to 'assets/model/decafia_best.onnx' after
+     *            downloading from https://huggingface.co/estebanr25/decafia  */
+    var MODEL_URL    = 'https://huggingface.co/estebanr25/decafia/resolve/main/decafia_best.onnx';
+    var INPUT_SIZE   = 640;
+    var CONF_THRESH  = 0.35;
+    var IOU_THRESH   = 0.45;
+    var INFER_MS     = 200;
+    var PAD_VAL      = 114;
+    var NUM_CLASSES  = 3;
+    var ANCHORS      = 8400;
+    var CLASS_NAMES  = ['roya', 'coco', 'minador'];
+    var CLASS_COLORS = ['#FF4444', '#FF8C00', '#44BB44'];
+
+    /* ── Module state ──────────────────────────────────── */
+    var _stream    = null;     /* MediaStream                               */
+    var _session   = null;     /* ort.InferenceSession (kept across stops)  */
+    var _active    = false;
+    var _loading   = false;
+    var _inferLoop = null;
+    var _lastDets  = [];       /* last decoded detections — used by capture */
+    var _fpsTs     = [];       /* rolling inference timestamps for FPS calc */
+
+    /* ── i18n helper ───────────────────────────────────── */
+    function str(key) {
+      var lang = localStorage.getItem('decafia-lang') || 'es';
+      var dict = window.DECAFIA_STRINGS || {};
+      return (dict[key] && dict[key][lang]) ? dict[key][lang] : key;
+    }
+
+    /* ── Status badge ──────────────────────────────────── */
+    function setStatus(state, shortText) {
+      var wrap = document.getElementById('demo-status');
+      var txt  = document.getElementById('demo-status-text');
+      if (!wrap || !txt) return;
+      wrap.classList.remove('status-loading', 'status-ready', 'status-detecting', 'status-error');
+      switch (state) {
+        case 'loading':
+          wrap.classList.add('status-loading');
+          txt.textContent = shortText || str('demo_status_loading');
+          break;
+        case 'ready':
+          wrap.classList.add('status-ready');
+          txt.textContent = str('demo_status_ready');
+          break;
+        case 'detecting':
+          wrap.classList.add('status-detecting');
+          txt.textContent = str('demo_status_detecting');
+          break;
+        case 'error':
+          wrap.classList.add('status-error');
+          txt.textContent = shortText || str('demo_permission_err');
+          break;
+        default:
+          txt.textContent = str('demo_status_idle');
+      }
+    }
+
+    /* ── Button label ──────────────────────────────────── */
+    function setBtnLabel(key) {
+      var span = document.querySelector('#demo-btn span[data-i18n]');
+      if (!span) return;
+      span.setAttribute('data-i18n', key);
+      span.textContent = str(key);
+    }
+
+    /* ── Progress bar ──────────────────────────────────── */
+    function showProgress(indeterminate) {
+      var box  = document.getElementById('demo-progress');
+      var fill = document.getElementById('demo-progress-fill');
+      if (box)  box.style.display = '';
+      if (fill) {
+        fill.style.width = indeterminate ? '' : '0%';
+        fill.classList.toggle('indeterminate', !!indeterminate);
+      }
+    }
+    function setProgress(pct) {
+      var fill = document.getElementById('demo-progress-fill');
+      var bar  = document.getElementById('demo-progress-bar');
+      if (fill) { fill.classList.remove('indeterminate'); fill.style.width = pct + '%'; }
+      if (bar)  bar.setAttribute('aria-valuenow', Math.round(pct));
+    }
+    function hideProgress() {
+      var box = document.getElementById('demo-progress');
+      if (box) box.style.display = 'none';
+    }
+
+    /* ── Error detail box ──────────────────────────────── */
+    /* key must exist in DECAFIA_STRINGS; its value may contain HTML.
+       Setting data-i18n-html keeps it in sync when the user switches
+       language via the existing applyLang() loop.                    */
+    function showErrorBox(key) {
+      var box = document.getElementById('demo-error-box');
+      var msg = document.getElementById('demo-error-msg');
+      if (!box || !msg) return;
+      var lang = localStorage.getItem('decafia-lang') || 'es';
+      var S    = window.DECAFIA_STRINGS || {};
+      msg.setAttribute('data-i18n-html', key);
+      msg.innerHTML = (S[key] && S[key][lang]) ? S[key][lang] : key;
+      box.style.display = '';
+    }
+    function hideErrorBox() {
+      var box = document.getElementById('demo-error-box');
+      var msg = document.getElementById('demo-error-msg');
+      if (box) box.style.display = 'none';
+      if (msg) msg.removeAttribute('data-i18n-html');
+    }
+
+    /* ── FPS counter ───────────────────────────────────── */
+    function tickFps() {
+      var now = performance.now();
+      _fpsTs.push(now);
+      /* Keep only timestamps within the last 2 s */
+      while (_fpsTs.length > 1 && now - _fpsTs[0] > 2000) _fpsTs.shift();
+      var fps = (_fpsTs.length > 1)
+        ? Math.round((_fpsTs.length - 1) / ((now - _fpsTs[0]) / 1000))
+        : 0;
+      var el = document.getElementById('demo-fps-value');
+      if (el) el.textContent = fps;
+    }
+    function showFps(visible) {
+      var el = document.getElementById('demo-fps');
+      if (el) el.style.display = visible ? '' : 'none';
+    }
+
+    /* ── Capture button visibility ─────────────────────── */
+    function showCaptureBtn(visible) {
+      var btn = document.getElementById('demo-capture-btn');
+      if (btn) btn.style.display = visible ? '' : 'none';
+    }
+
+    /* ── Letterbox: video → 640×640 preserving aspect ratio,
+         gray (PAD_VAL) padding.
+         Returns { canvas, scale, padX, padY }                */
+    function letterbox(video) {
+      var vw    = video.videoWidth, vh = video.videoHeight;
+      var scale = Math.min(INPUT_SIZE / vw, INPUT_SIZE / vh);
+      var newW  = Math.round(vw * scale), newH = Math.round(vh * scale);
+      var padX  = Math.round((INPUT_SIZE - newW) / 2);
+      var padY  = Math.round((INPUT_SIZE - newH) / 2);
+      var c     = document.createElement('canvas');
+      c.width   = INPUT_SIZE; c.height = INPUT_SIZE;
+      var ctx   = c.getContext('2d');
+      ctx.fillStyle = 'rgb(' + PAD_VAL + ',' + PAD_VAL + ',' + PAD_VAL + ')';
+      ctx.fillRect(0, 0, INPUT_SIZE, INPUT_SIZE);
+      ctx.drawImage(video, padX, padY, newW, newH);
+      return { canvas: c, scale: scale, padX: padX, padY: padY };
+    }
+
+    /* ── Canvas ImageData → Float32Array CHW /255 ──────── */
+    function toTensor(canvas) {
+      var pixels = INPUT_SIZE * INPUT_SIZE;
+      var rgba   = canvas.getContext('2d').getImageData(0, 0, INPUT_SIZE, INPUT_SIZE).data;
+      var buf    = new Float32Array(3 * pixels);
+      for (var i = 0; i < pixels; i++) {
+        buf[i]              = rgba[i * 4]     / 255.0;
+        buf[i + pixels]     = rgba[i * 4 + 1] / 255.0;
+        buf[i + pixels * 2] = rgba[i * 4 + 2] / 255.0;
+      }
+      return buf;
+    }
+
+    /* ── IoU ───────────────────────────────────────────── */
+    function iou(a, b) {
+      var ix1 = Math.max(a.x1, b.x1), iy1 = Math.max(a.y1, b.y1);
+      var ix2 = Math.min(a.x2, b.x2), iy2 = Math.min(a.y2, b.y2);
+      var inter = Math.max(0, ix2 - ix1) * Math.max(0, iy2 - iy1);
+      if (inter === 0) return 0;
+      return inter / ((a.x2-a.x1)*(a.y2-a.y1) + (b.x2-b.x1)*(b.y2-b.y1) - inter);
+    }
+
+    /* ── Greedy per-class NMS ──────────────────────────── */
+    function nms(cands) {
+      cands.sort(function(a, b) { return b.conf - a.conf; });
+      var kept = [], dead = new Uint8Array(cands.length);
+      for (var i = 0; i < cands.length; i++) {
+        if (dead[i]) continue;
+        kept.push(cands[i]);
+        for (var j = i + 1; j < cands.length; j++) {
+          if (!dead[j] && cands[i].cls === cands[j].cls && iou(cands[i], cands[j]) > IOU_THRESH)
+            dead[j] = 1;
+        }
+      }
+      return kept;
+    }
+
+    /* ── Parse raw output [7 × 8400] flat Float32Array
+         Layout (channels-first): raw[c * ANCHORS + i]
+         Falls back to channels-last [8400 × 7] if needed.   */
+    function parseOutput(raw, vw, vh, scale, padX, padY) {
+      var chanFirst = (raw.length === (4 + NUM_CLASSES) * ANCHORS);
+      var cands = [], stride = 4 + NUM_CLASSES;
+      for (var i = 0; i < ANCHORS; i++) {
+        var cx, cy, bw, bh, best = -1, bestCls = -1, cf;
+        if (chanFirst) {
+          cx = raw[0*ANCHORS+i]; cy = raw[1*ANCHORS+i];
+          bw = raw[2*ANCHORS+i]; bh = raw[3*ANCHORS+i];
+          for (var c = 0; c < NUM_CLASSES; c++) {
+            cf = raw[(4+c)*ANCHORS+i];
+            if (cf > best) { best = cf; bestCls = c; }
+          }
+        } else {
+          cx = raw[i*stride];   cy = raw[i*stride+1];
+          bw = raw[i*stride+2]; bh = raw[i*stride+3];
+          for (var c2 = 0; c2 < NUM_CLASSES; c2++) {
+            cf = raw[i*stride+4+c2];
+            if (cf > best) { best = cf; bestCls = c2; }
+          }
+        }
+        if (best < CONF_THRESH) continue;
+        /* Undo letterbox → video-pixel space, clamp */
+        var x1 = Math.max(0, Math.min(vw, ((cx-bw/2)-padX)/scale));
+        var y1 = Math.max(0, Math.min(vh, ((cy-bh/2)-padY)/scale));
+        var x2 = Math.max(0, Math.min(vw, ((cx+bw/2)-padX)/scale));
+        var y2 = Math.max(0, Math.min(vh, ((cy+bh/2)-padY)/scale));
+        if (x2 > x1 && y2 > y1)
+          cands.push({ x1:x1, y1:y1, x2:x2, y2:y2, conf:best, cls:bestCls });
+      }
+      return nms(cands);
+    }
+
+    /* ── Video-pixel → canvas coords (object-fit:cover) ── */
+    function toCanvas(x, y, vw, vh, cw, ch) {
+      var s = Math.max(cw/vw, ch/vh);
+      return { x: x*s + (cw-vw*s)/2, y: y*s + (ch-vh*s)/2 };
+    }
+
+    /* ── Draw bboxes on overlay canvas ────────────────── */
+    function drawDetections(dets, canvas, vw, vh) {
+      var cw = canvas.width, ch = canvas.height;
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, cw, ch);
+      dets.forEach(function(d) {
+        var tl    = toCanvas(d.x1, d.y1, vw, vh, cw, ch);
+        var br    = toCanvas(d.x2, d.y2, vw, vh, cw, ch);
+        var color = CLASS_COLORS[d.cls];
+        var label = CLASS_NAMES[d.cls] + ' ' + d.conf.toFixed(2);
+        var bx = tl.x, by = tl.y, bw = br.x-tl.x, bh = br.y-tl.y;
+        ctx.strokeStyle = color; ctx.lineWidth = 2.5;
+        ctx.strokeRect(bx, by, bw, bh);
+        ctx.font = 'bold 12px Inter, system-ui, sans-serif';
+        var tw = ctx.measureText(label).width;
+        var lx = bx, ly = (by >= 20) ? by - 20 : by + 2;
+        ctx.fillStyle = color;
+        ctx.beginPath(); ctx.roundRect(lx, ly, tw+8, 18, 3); ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.fillText(label, lx+4, ly+13);
+      });
+    }
+
+    /* ── Update detections sidebar ─────────────────────── */
+    function updateSidebar(dets) {
+      var list = document.getElementById('demo-detections-list');
+      if (!list) return;
+      if (!dets.length) {
+        list.innerHTML = '<p class="demo-no-detections" data-i18n="demo_no_detections">'
+                       + str('demo_no_detections') + '</p>';
+        return;
+      }
+      var counts = [0, 0, 0];
+      dets.forEach(function(d) { counts[d.cls]++; });
+      var html = '';
+      CLASS_NAMES.forEach(function(name, c) {
+        if (!counts[c]) return;
+        html += '<div class="demo-detection-item">'
+              + '<span class="demo-det-dot" style="background:' + CLASS_COLORS[c] + '"></span>'
+              + '<span>' + name.charAt(0).toUpperCase() + name.slice(1) + '</span>'
+              + '<span class="demo-det-conf">' + counts[c] + ' det.</span>'
+              + '</div>';
+      });
+      list.innerHTML = html;
+    }
+
+    /* ── Fetch model with real download progress ────────── */
+    function loadModelWithProgress() {
+      showProgress(false);
+      return fetch(MODEL_URL).then(function(resp) {
+        if (!resp.ok) throw new Error('HTTP ' + resp.status + ' ' + resp.statusText);
+        var total = parseInt(resp.headers.get('content-length') || '0', 10);
+        /* No Content-Length or no streaming support → indeterminate bar */
+        if (!total || !resp.body || !resp.body.getReader) {
+          showProgress(true);
+          return resp.arrayBuffer();
+        }
+        var received = 0, reader = resp.body.getReader(), chunks = [];
+        function pump() {
+          return reader.read().then(function(r) {
+            if (r.done) {
+              var merged = new Uint8Array(received), off = 0;
+              chunks.forEach(function(ch) { merged.set(ch, off); off += ch.length; });
+              return merged.buffer;
+            }
+            chunks.push(r.value);
+            received += r.value.length;
+            setProgress(received / total * 100);
+            return pump();
+          });
+        }
+        return pump();
+      }).then(function(arrayBuf) {
+        return ort.InferenceSession.create(arrayBuf, {
+          executionProviders: ['wasm'],
+          graphOptimizationLevel: 'all'
+        });
+      });
+    }
+
+    /* ── Single inference pass ─────────────────────────── */
+    function runInference() {
+      if (!_session || !_active) return;
+      var video   = document.getElementById('webcam-video');
+      var overlay = document.getElementById('webcam-overlay');
+      if (!video || !overlay || !video.videoWidth) return;
+
+      var vw = video.videoWidth, vh = video.videoHeight;
+      var vp = overlay.parentElement;
+      var cw = vp.clientWidth, ch = vp.clientHeight;
+      if (overlay.width  !== cw) overlay.width  = cw;
+      if (overlay.height !== ch) overlay.height = ch;
+
+      var lb  = letterbox(video);
+      var buf = toTensor(lb.canvas);
+      var t   = new ort.Tensor('float32', buf, [1, 3, INPUT_SIZE, INPUT_SIZE]);
+
+      _session.run({ images: t }).then(function(out) {
+        var key  = Object.keys(out)[0];
+        var dets = parseOutput(out[key].data, vw, vh, lb.scale, lb.padX, lb.padY);
+        _lastDets = dets;
+        drawDetections(dets, overlay, vw, vh);
+        updateSidebar(dets);
+        tickFps();
+      }).catch(function(err) {
+        console.warn('[DECAFIA Demo] inference error:', err);
+      });
+    }
+
+    /* ── Capture annotated frame as PNG download ────────── */
+    function captureFrame() {
+      var video = document.getElementById('webcam-video');
+      if (!video || !video.videoWidth) return;
+      var vw = video.videoWidth, vh = video.videoHeight;
+      var c  = document.createElement('canvas');
+      c.width = vw; c.height = vh;
+      var ctx = c.getContext('2d');
+      /* Composite video frame */
+      ctx.drawImage(video, 0, 0, vw, vh);
+      /* Redraw last detections at native video resolution */
+      var lw = Math.max(2, vw / 320);
+      var fs = Math.max(13, Math.round(vw / 48));
+      _lastDets.forEach(function(d) {
+        var color = CLASS_COLORS[d.cls];
+        var label = CLASS_NAMES[d.cls] + ' ' + d.conf.toFixed(2);
+        ctx.strokeStyle = color; ctx.lineWidth = lw;
+        ctx.strokeRect(d.x1, d.y1, d.x2-d.x1, d.y2-d.y1);
+        ctx.font = 'bold ' + fs + 'px Inter, system-ui, sans-serif';
+        var tw = ctx.measureText(label).width;
+        var lx = d.x1, ly = (d.y1 >= fs+6) ? d.y1-(fs+6) : d.y1+2;
+        ctx.fillStyle = color;
+        ctx.fillRect(lx, ly, tw+8, fs+6);
+        ctx.fillStyle = '#fff';
+        ctx.fillText(label, lx+4, ly+fs);
+      });
+      var a = document.createElement('a');
+      a.download = 'decafia_detection.png';
+      a.href = c.toDataURL('image/png');
+      a.click();
+    }
+
+    /* ── Load model + open camera + start inference loop ── */
+    function loadAndStart() {
+      if (_loading) return;
+      hideErrorBox();
+
+      /* 1. WebAssembly support check */
+      if (typeof WebAssembly === 'undefined' || typeof WebAssembly.instantiate !== 'function') {
+        setStatus('error', str('demo_err_wasm_status'));
+        showErrorBox('demo_err_wasm');
+        return;
+      }
+      /* 2. getUserMedia availability (requires HTTPS or localhost) */
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        setStatus('error', str('demo_not_supported'));
+        showErrorBox('demo_err_wasm');
+        return;
+      }
+      /* 3. ORT script not yet ready (edge case: very fast click) */
+      if (typeof ort === 'undefined') {
+        setStatus('error', 'onnxruntime-web not loaded — try again.');
+        return;
+      }
+
+      _loading = true;
+      setBtnLabel('demo_btn_start');   /* keep "start" label while loading */
+      setStatus('loading');
+
+      /* Point ORT WASM loader at the same CDN base as ort.min.js */
+      ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/';
+
+      /* Use cached session if already loaded; otherwise fetch with progress */
+      var modelP = _session ? Promise.resolve(_session) : loadModelWithProgress();
+
+      modelP.then(
+        /* ── Model loaded OK → open camera ── */
+        function(session) {
+          _session = session;
+          hideProgress();
+          return navigator.mediaDevices.getUserMedia({
+            video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'environment' }
+          }).then(
+            /* ── Camera OK → activate inference loop ── */
+            function(stream) {
+              _stream = stream;
+              var video = document.getElementById('webcam-video');
+              video.srcObject = stream;
+              video.style.display = 'block';
+              var ph = document.getElementById('demo-placeholder');
+              if (ph) ph.style.display = 'none';
+              _active  = true;
+              _loading = false;
+              _fpsTs   = [];
+              setBtnLabel('demo_btn_stop');
+              setStatus('detecting');
+              showCaptureBtn(true);
+              showFps(true);
+              _inferLoop = setInterval(runInference, INFER_MS);
+            },
+            /* ── Camera permission denied or device not found ── */
+            function(cameraErr) {
+              _loading = false;
+              hideProgress();
+              setBtnLabel('demo_btn_start');
+              setStatus('error', str('demo_permission_err'));
+              showErrorBox('demo_err_camera');
+              console.warn('[DECAFIA Demo] camera error:', cameraErr);
+            }
+          );
+        },
+        /* ── Model fetch / parse failed ── */
+        function(modelErr) {
+          _loading  = false;
+          _session  = null;        /* allow retry */
+          hideProgress();
+          setBtnLabel('demo_btn_start');
+          setStatus('error', str('demo_err_model_status'));
+          showErrorBox('demo_err_model');
+          console.warn('[DECAFIA Demo] model load error:', modelErr);
+        }
+      );
+    }
+
+    /* ── Stop camera, clear resources ─────────────────── */
+    function stopCamera() {
+      if (_inferLoop) { clearInterval(_inferLoop); _inferLoop = null; }
+      if (_stream) { _stream.getTracks().forEach(function(t) { t.stop(); }); _stream = null; }
+      var video = document.getElementById('webcam-video');
+      if (video) { video.srcObject = null; video.style.display = 'none'; }
+      var ph = document.getElementById('demo-placeholder');
+      if (ph) ph.style.display = '';
+      var overlay = document.getElementById('webcam-overlay');
+      if (overlay) {
+        var ctx = overlay.getContext('2d');
+        if (ctx) ctx.clearRect(0, 0, overlay.width, overlay.height);
+      }
+      showFps(false);
+      showCaptureBtn(false);
+      updateSidebar([]);
+      _lastDets = [];
+      _fpsTs    = [];
+      _active   = false;
+      setBtnLabel('demo_btn_start');
+      setStatus('idle');
+      /* _session kept alive — next start reuses loaded weights */
+    }
+
+    window.decafiaDemo = {
+      toggle:  function() { _active ? stopCamera() : loadAndStart(); },
+      capture: function() { captureFrame(); }
+    };
   })();
   </script>
 

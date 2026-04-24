@@ -1,0 +1,18 @@
+# ──────────────────────────────────────────────────────────────
+# Netlify configuration — DECAFIA landing page
+# ──────────────────────────────────────────────────────────────
+#
+# COOP + COEP headers are mandatory for SharedArrayBuffer, which
+# onnxruntime-web requires to enable WASM multi-threading.
+# Without them ORT falls back to single-threaded WASM (still
+# functional, but ~2–4× slower on inference).
+#
+# Spec: https://developer.mozilla.org/en-US/docs/Web/JavaScript/
+#       Reference/Global_Objects/SharedArrayBuffer#security_requirements
+# ──────────────────────────────────────────────────────────────
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cross-Origin-Opener-Policy  = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"

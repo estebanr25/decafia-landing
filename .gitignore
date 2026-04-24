@@ -44,3 +44,9 @@ yarn-error.log*
 *.bak
 *.tmp
 *.orig
+
+# ── ONNX model weights ────────────────────────────────
+# ~25 MB binary — never commit to git.
+# Download from: https://huggingface.co/estebanr25/decafia
+# Place at:      assets/model/decafia_best.onnx
+assets/model/

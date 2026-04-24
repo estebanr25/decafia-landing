@@ -43,10 +43,74 @@ This repository contains the **project landing page** — a bilingual (ES/EN), a
 | Interactivity | Vanilla JavaScript (IIFE-organized) |
 | Charts | [Chart.js 4](https://www.chartjs.org/) (CDN) |
 | Maps | [Leaflet 1.9](https://leafletjs.com/) (CDN) |
+| ONNX inference | [onnxruntime-web](https://onnxruntime.ai/docs/get-started/with-javascript/web.html) (CDN) |
+| Model weights | [HuggingFace — estebanr25/decafia](https://huggingface.co/estebanr25/decafia) |
 | Fonts | Google Fonts — Playfair Display + Inter |
 | Hosting | Netlify |
 
 No build step. No framework. No npm. Open `index.html` in any browser.
+
+## Model setup
+
+The live demo section runs YOLOv8m ONNX inference entirely in the browser via
+[onnxruntime-web](https://onnxruntime.ai/docs/get-started/with-javascript/web.html).
+The model file (`decafia_best.onnx`, ~25 MB) is **not committed to this repository**.
+
+### Option A — HuggingFace CDN (default, no file needed)
+
+`index.html` fetches the model directly from HuggingFace at runtime:
+
+```
+https://huggingface.co/estebanr25/decafia/resolve/main/decafia_best.onnx
+```
+
+This is the default `MODEL_URL` constant in the demo IIFE. No additional setup
+is required; the model is downloaded on first use and is not cached between page
+loads.
+
+### Option B — self-hosted (faster first load, requires manual step)
+
+If you prefer to serve the model from the same origin:
+
+1. Download `decafia_best.onnx` from the HuggingFace repository:
+   <https://huggingface.co/estebanr25/decafia>
+
+2. Place the file at:
+   ```
+   assets/model/decafia_best.onnx
+   ```
+   (`assets/model/` is already in `.gitignore` — the binary will not be committed.)
+
+3. In `index.html`, change the `MODEL_URL` constant in the demo IIFE to the local path:
+   ```js
+   var MODEL_URL = 'assets/model/decafia_best.onnx';
+   ```
+
+> **Netlify note:** The free tier's 100 MB deploy limit makes committing the model
+> impractical. For production self-hosting, use
+> [Netlify Large Media](https://docs.netlify.com/git/large-media/overview/) (Git LFS)
+> or any external CDN, and update `MODEL_URL` accordingly.
+
+### Required HTTP headers (WASM threads)
+
+`onnxruntime-web` uses `SharedArrayBuffer` to enable multi-threaded WASM, which
+requires the page to be served with these headers:
+
+```
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+```
+
+Both `netlify.toml` and `_headers` in this repo configure these for Netlify.
+For local development with `python -m http.server` or `npx serve`, the headers
+are absent and ORT automatically falls back to **single-threaded WASM** — inference
+still works but runs ~2–4× slower.
+
+> **COEP and cross-origin resources:** when `COEP: require-corp` is active,
+> every cross-origin resource loaded by the page (CDN scripts, the HuggingFace
+> model fetch) must respond with `Cross-Origin-Resource-Policy: cross-origin`.
+> Both jsDelivr (ORT scripts) and the HuggingFace CDN serve this header, so the
+> default configuration works out of the box.
 
 ## Local development
 
