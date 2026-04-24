@@ -5116,10 +5116,10 @@
     var IOU_THRESH   = 0.45;
     var INFER_MS     = 200;
     var PAD_VAL      = 114;
-    var NUM_CLASSES  = 3;
+    var NUM_CLASSES  = 4;   /* roya=0, coco=1, sano=2, minador=3 */
     var ANCHORS      = 8400;
-    var CLASS_NAMES  = ['roya', 'coco', 'minador'];
-    var CLASS_COLORS = ['#FF4444', '#FF8C00', '#44BB44'];
+    var CLASS_NAMES  = ['roya', 'coco', 'sano', 'minador'];
+    var CLASS_COLORS = ['#FF4444', '#FF8C00', '#44AAFF', '#44BB44'];
 
     /* ── Module state ──────────────────────────────────── */
     var _stream    = null;     /* MediaStream                               */
