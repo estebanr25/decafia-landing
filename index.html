@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://decafia.uis.edu.co/" />
 
   <!-- ── Primary meta ── -->
-  <meta name="description" content="DECAFIA detecta Roya, Coco y Minador en hojas de café en menos de 3 segundos por WhatsApp. mAP50 92.4 %. YOLOv8m · Dataset colombiano de campo · Universidad Industrial de Santander." />
+  <meta name="description" content="DECAFIA detecta Roya, Coco y Minador en hojas de café por WhatsApp. mAP50 92.9 %. 98.1% hojas sanas sin falsas alarmas (conf ≥ 0.50). YOLOv8m · Dataset CoffeeLeaf-CO · Universidad Industrial de Santander." />
   <meta name="author" content="Luis Esteban Rosas Ruiz; Andrey Fernando Salom Medina" />
   <meta name="keywords" content="DECAFIA, detección enfermedades café, YOLOv8, roya cafeto, Hemileia vastatrix, Leucoptera coffeella, inteligencia artificial café, UIS, Colombia, Santander" />
 
@@ -16,36 +16,36 @@
   <meta property="og:site_name" content="DECAFIA" />
   <meta property="og:locale" content="es_CO" />
   <meta property="og:title" content="DECAFIA — Detección de Enfermedades del Café con IA · UIS Colombia" />
-  <meta property="og:description" content="Sistema YOLOv8m que detecta Roya, Coco y Minador en hojas de café en menos de 3 segundos desde WhatsApp. mAP50: 92.4 %. Universidad Industrial de Santander, Colombia." />
+  <meta property="og:description" content="Sistema YOLOv8m que detecta Roya, Coco y Minador en hojas de café desde WhatsApp. mAP50: 92.9 %. 98.1% hojas sanas sin falsas alarmas. Dataset CoffeeLeaf-CO. Universidad Industrial de Santander, Colombia." />
   <meta property="og:url" content="https://decaf-ia.netlify.app/" />
   <meta property="og:image" content="https://decaf-ia.netlify.app/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="DECAFIA — Detección de enfermedades del café con IA. 92.4% mAP50. Universidad Industrial de Santander, 2025." />
+  <meta property="og:image:alt" content="DECAFIA — Detección de enfermedades del café con IA. 92.9% mAP50. Universidad Industrial de Santander, 2025." />
 
   <!-- ── Twitter Card ── -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="DECAFIA — Detección de Enfermedades del Café con IA" />
-  <meta name="twitter:description" content="Diagnóstico de enfermedades del café en 3 segundos por WhatsApp. YOLOv8m · mAP50 92.4 % · UIS Colombia." />
+  <meta name="twitter:description" content="Diagnóstico de enfermedades del café por WhatsApp. YOLOv8m · mAP50 92.9 % · 98.1% hojas sanas sin falsas alarmas · UIS Colombia." />
   <meta name="twitter:image" content="https://decaf-ia.netlify.app/assets/og-image.png" />
-  <meta name="twitter:image:alt" content="DECAFIA — Detección de enfermedades del café con IA. 92.4% mAP50. Universidad Industrial de Santander, 2025." />
+  <meta name="twitter:image:alt" content="DECAFIA — Detección de enfermedades del café con IA. 92.9% mAP50. Universidad Industrial de Santander, 2025." />
 
   <!-- ── JSON-LD structured data ── -->
   <script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
-      "@type": "ScholarlyArticle",
-      "name": "DECAFIA: YOLOv8-Based Detection of Coffee Leaf Diseases Using a Field-Collected Dataset from Santander, Colombia",
+      "@type": "Dataset",
+      "name": "CoffeeLeaf-CO",
       "author": [
         {"@type": "Person", "name": "Luis Esteban Rosas Ruiz", "affiliation": {"@type": "Organization", "name": "Universidad Industrial de Santander"}},
-        {"@type": "Person", "name": "Andrey Fernando Salom Medina", "affiliation": {"@type": "Organization", "name": "Universidad Industrial de Santander"}},
-        {"@type": "Person", "name": "Jaime Guillermo Barrero Pérez", "affiliation": {"@type": "Organization", "name": "Universidad Industrial de Santander"}}
+        {"@type": "Person", "name": "Andrey Fernando Salom Medina", "affiliation": {"@type": "Organization", "name": "Universidad Industrial de Santander"}}
       ],
-      "datePublished": "2025",
-      "publisher": {"@type": "Organization", "name": "MDPI Sensors"},
+      "datePublished": "2026",
+      "url": "https://doi.org/10.5281/zenodo.19931903",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "keywords": ["YOLOv8", "coffee leaf disease", "Hemileia vastatrix", "object detection", "Colombia", "Santander"],
-      "description": "A YOLOv8m-based system for detecting three coffee leaf diseases (Roya, Coco, Minador) from field-collected images in Santander, Colombia. mAP50 of 92.4% on a 286-image test set."
+      "description": "CoffeeLeaf-CO: 2,315 field images (1,705 own photos from El Socorro, Santander, Colombia 2022–2023 + 610 from Silva et al., CC BY 4.0) annotated for coffee leaf disease detection. Trained YOLOv8m achieves mAP50 92.9% (test set, leakage-aware grouped split)."
     },
     {
       "@context": "https://schema.org",
@@ -53,7 +53,7 @@
       "name": "DECAFIA Bot",
       "applicationCategory": "Agricultural AI",
       "operatingSystem": "WhatsApp / Android / Web",
-      "description": "WhatsApp chatbot powered by YOLOv8m ONNX for real-time coffee leaf disease diagnosis. Responds in under 3 seconds.",
+      "description": "WhatsApp chatbot for real-time coffee leaf disease diagnosis. Currently runs the previous 4-class model.",
       "offers": {"@type": "Offer", "price": "0", "priceCurrency": "COP"},
       "author": {"@type": "Person", "name": "Luis Esteban Rosas Ruiz"}
     }
@@ -2428,9 +2428,9 @@
         <div class="hero-content">
           <!-- Live status pill -->
           <a href="https://wa.me/573138812134" target="_blank" rel="noopener noreferrer"
-             class="hero-status-pill" aria-label="Bot en producción — abrir WhatsApp">
+             class="hero-status-pill" aria-label="Bot en pruebas — abrir WhatsApp">
             <span class="hero-status-dot" aria-hidden="true"></span>
-            <span data-i18n-html="hero_status">Bot en producción · responde en &lt;3 s</span>
+            <span data-i18n-html="hero_status">Bot en pruebas</span>
           </a>
 
           <h1 id="hero-heading" class="hero-h1">
@@ -2455,44 +2455,42 @@
 
           <!-- Meta-links row -->
           <div class="hero-meta-links" role="list">
-            <a href="#" class="hero-meta-link" role="listitem" data-i18n="hero_meta_paper" aria-label="Leer paper PDF (próximamente)">📄 Leer paper</a>
+            <a href="https://github.com/estebanr25/decafia-research" target="_blank" rel="noopener noreferrer" class="hero-meta-link" role="listitem" data-i18n="hero_meta_gh">🐙 GitHub</a>
             <span class="hero-meta-sep" aria-hidden="true">·</span>
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="hero-meta-link" role="listitem" data-i18n="hero_meta_gh">🐙 GitHub</a>
+            <a href="https://huggingface.co/estebanr25/decafia" target="_blank" rel="noopener noreferrer" class="hero-meta-link" role="listitem" data-i18n="hero_meta_hf">🤗 Hugging Face</a>
             <span class="hero-meta-sep" aria-hidden="true">·</span>
-            <a href="https://huggingface.co/" target="_blank" rel="noopener noreferrer" class="hero-meta-link" role="listitem" data-i18n="hero_meta_hf">🤗 Hugging Face</a>
-            <span class="hero-meta-sep" aria-hidden="true">·</span>
-            <a href="https://zenodo.org/" target="_blank" rel="noopener noreferrer" class="hero-meta-link" role="listitem" data-i18n="hero_meta_data">📊 Dataset (Zenodo)</a>
+            <a href="https://doi.org/10.5281/zenodo.19931903" target="_blank" rel="noopener noreferrer" class="hero-meta-link" role="listitem" data-i18n="hero_meta_data">📊 Dataset (Zenodo)</a>
           </div>
 
           <!-- Stats row with radial progress -->
           <div class="hero-stats" role="list">
             <div class="stat-item" role="listitem">
               <div class="stat-radial" aria-hidden="true">
-                <svg viewBox="0 0 60 60"><circle class="stat-track" cx="30" cy="30" r="24"/><circle class="stat-fill amber" cx="30" cy="30" r="24" data-pct="92.4"/></svg>
-                <span class="stat-number" data-count="92.4" data-suffix="%" data-decimals="1">0%</span>
+                <svg viewBox="0 0 60 60"><circle class="stat-track" cx="30" cy="30" r="24"/><circle class="stat-fill amber" cx="30" cy="30" r="24" data-pct="92.9"/></svg>
+                <span class="stat-number" data-count="92.9" data-suffix="%" data-decimals="1">0%</span>
               </div>
               <span class="stat-label" data-i18n="stat1_label">mAP50 en test</span>
             </div>
             <div class="stat-item" role="listitem">
               <div class="stat-radial" aria-hidden="true">
                 <svg viewBox="0 0 60 60"><circle class="stat-track" cx="30" cy="30" r="24"/><circle class="stat-fill green" cx="30" cy="30" r="24" data-pct="55.7"/></svg>
-                <span class="stat-number" data-count="2786" data-formatted="true">0</span>
+                <span class="stat-number" data-count="2315" data-formatted="true">0</span>
               </div>
               <span class="stat-label" data-i18n="stat2_label">imágenes de campo</span>
             </div>
             <div class="stat-item" role="listitem">
               <div class="stat-radial" aria-hidden="true">
-                <svg viewBox="0 0 60 60"><circle class="stat-track" cx="30" cy="30" r="24"/><circle class="stat-fill amber-light" cx="30" cy="30" r="24" data-pct="76.6"/></svg>
-                <span class="stat-number" data-count="76.6" data-suffix="%" data-decimals="1">0%</span>
+                <svg viewBox="0 0 60 60"><circle class="stat-track" cx="30" cy="30" r="24"/><circle class="stat-fill amber-light" cx="30" cy="30" r="24" data-pct="73.4"/></svg>
+                <span class="stat-number" data-count="73.4" data-suffix="%" data-decimals="1">0%</span>
               </div>
               <span class="stat-label" data-i18n="stat3_label">mAP50-95</span>
             </div>
             <div class="stat-item" role="listitem">
               <div class="stat-radial" aria-hidden="true">
-                <svg viewBox="0 0 60 60"><circle class="stat-track" cx="30" cy="30" r="24"/><circle class="stat-fill green-light" cx="30" cy="30" r="24" data-pct="100"/></svg>
-                <span class="stat-number">&lt;3 s</span>
+                <svg viewBox="0 0 60 60"><circle class="stat-track" cx="30" cy="30" r="24"/><circle class="stat-fill green-light" cx="30" cy="30" r="24" data-pct="98.1"/></svg>
+                <span class="stat-number" data-count="98.1" data-suffix="%" data-decimals="1">0%</span>
               </div>
-              <span class="stat-label" data-i18n="stat4_label">latencia (WhatsApp)</span>
+              <span class="stat-label" data-i18n="stat4_label">hojas sanas sin falsas alarmas (conf ≥ 0.50)</span>
             </div>
           </div>
         </div>
@@ -2539,8 +2537,8 @@
             <p class="problem-desc" data-i18n="prob1_desc">Pérdida de cosecha cuando la roya no se detecta a tiempo.</p>
           </div>
           <div class="problem-card reveal" style="--delay:120ms">
-            <div class="problem-number amber-text" data-count="550000" data-formatted="true">0</div>
-            <p class="problem-desc" data-i18n="prob2_desc">Familias colombianas cuyo sustento depende del café cada temporada.</p>
+            <div class="problem-number amber-text" data-count="557000" data-formatted="true">0</div>
+            <p class="problem-desc" data-i18n="prob2_desc">Familias caficultoras colombianas (Federación Nacional de Cafeteros, 2025).</p>
           </div>
           <div class="problem-card reveal" style="--delay:240ms">
             <div class="problem-number amber-text">72h</div>
@@ -2557,7 +2555,7 @@
       <div class="container">
         <div class="section-header reveal">
           <p class="section-eyebrow" data-i18n="how_eyebrow">El proceso</p>
-          <h2 id="how-heading" class="section-title" data-i18n="how_title">Tres pasos. Tres segundos.</h2>
+          <h2 id="how-heading" class="section-title" data-i18n="how_title">Tres pasos. Un diagnóstico.</h2>
           <p class="section-sub" data-i18n="how_sub">No necesitas instalar nada. Funciona en cualquier celular con WhatsApp.</p>
         </div>
 
@@ -2596,7 +2594,7 @@
               </svg>
             </div>
             <h3 class="step-title" data-i18n="step3_title">Recibe el diagnóstico</h3>
-            <p class="step-desc" data-i18n="step3_desc">En menos de 3 segundos recibes la enfermedad detectada, la confianza del modelo y la recomendación de tratamiento.</p>
+            <p class="step-desc" data-i18n="step3_desc">Recibes la enfermedad detectada, la confianza del modelo y la recomendación de tratamiento.</p>
           </div>
         </div>
 
@@ -2623,7 +2621,7 @@
         <div class="reveal section-header">
           <p class="section-eyebrow" style="color:rgba(193,122,46,0.88)" data-i18n="res_eyebrow">Resultados científicos</p>
           <h2 id="resultados-heading" class="section-title" style="color:var(--cream)" data-i18n="res_title">Métricas de rendimiento validadas.</h2>
-          <p class="section-sub" style="color:rgba(245,240,232,0.72)" data-i18n="res_sub">Evaluación sobre conjunto de prueba independiente · 286 imágenes · YOLOv8m mejor checkpoint (época 98)</p>
+          <p class="section-sub" style="color:rgba(245,240,232,0.72)" data-i18n="res_sub">Evaluación sobre conjunto de prueba independiente · 356 imágenes · YOLOv8m mejor checkpoint (época 98)</p>
         </div>
 
         <!-- Tab navigation -->
@@ -2643,26 +2641,26 @@
             <div class="tab-chart-wrap">
 
               <!-- 5 stat chips -->
-              <p class="overall-test-label" data-i18n="overall_test_label">Métricas en conjunto de prueba (286 imágenes)</p>
+              <p class="overall-test-label" data-i18n="overall_test_label">Métricas en conjunto de prueba (356 imágenes)</p>
               <div class="overall-chips" role="list">
                 <div class="overall-chip" role="listitem">
-                  <span class="oc-value">90.5%</span>
+                  <span class="oc-value">87.6%</span>
                   <span class="oc-label" data-i18n="overall_p">Precisión</span>
                 </div>
                 <div class="overall-chip" role="listitem">
-                  <span class="oc-value">85.8%</span>
+                  <span class="oc-value">87.0%</span>
                   <span class="oc-label" data-i18n="overall_r">Recall</span>
                 </div>
                 <div class="overall-chip" role="listitem">
-                  <span class="oc-value">88.0%</span>
+                  <span class="oc-value">87.3%</span>
                   <span class="oc-label" data-i18n="overall_f1">F1</span>
                 </div>
                 <div class="overall-chip overall-chip--highlight" role="listitem">
-                  <span class="oc-value">92.4%</span>
+                  <span class="oc-value">92.9%</span>
                   <span class="oc-label" data-i18n="overall_map50">mAP50</span>
                 </div>
                 <div class="overall-chip" role="listitem">
-                  <span class="oc-value">76.6%</span>
+                  <span class="oc-value">73.4%</span>
                   <span class="oc-label" data-i18n="overall_map5095">mAP50-95</span>
                 </div>
               </div>
@@ -2673,15 +2671,9 @@
                 <p class="overall-explain-body" data-i18n-html="overall_explain"></p>
               </div>
 
-              <!-- Comparison bar chart -->
-              <p class="overall-explain-h" style="margin-top:1.75rem;" data-i18n="overall_compare_h">Contexto bibliográfico (mAP50)</p>
-              <div class="chart-canvas-box" style="max-width:560px;">
-                <canvas id="chart-overall-compare"
-                        aria-label="Gráfico comparativo de mAP50: DECAFIA 92.4%, Araaf 2024 YOLOv8 73.2%, Araaf 2024 YOLOv5 70.5%"
-                        role="img"></canvas>
-              </div>
-              <p class="chart-note" style="margin-top:0.75rem;" data-i18n="overall_compare_note">
-                * Comparación referencial. Datasets, condiciones geográficas y número de clases distintas; no es comparación directa.
+              <!-- Cross-dataset comparison chart removed: different datasets, geographies and class counts make direct comparison invalid -->
+              <p class="chart-note" style="margin-top:1.75rem;" data-i18n="overall_compare_note">
+                * Comparación con trabajos previos no incluida: los datasets, las condiciones geográficas y el número de clases difieren entre estudios; no constituye comparación directa.
               </p>
 
             </div>
@@ -2693,37 +2685,22 @@
               <div class="chart-canvas-box" style="max-width:640px;margin:0 auto;">
                 <canvas id="chart-perclass" aria-label="Gráfico de barras: AP50 por clase" role="img"></canvas>
               </div>
-              <p class="chart-note" style="margin-top:1.25rem;" data-i18n="pr_note">AP = área bajo la curva. Calculado sobre el conjunto de prueba (286 imágenes).</p>
+              <p class="chart-note" style="margin-top:1.25rem;" data-i18n="pr_note">AP = área bajo la curva. Calculado sobre el conjunto de prueba (356 imágenes).</p>
             </div>
           </div>
 
           <!-- TAB 3: Confusion matrix -->
           <div id="tab-confmat" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-confmat" hidden>
             <div class="tab-chart-wrap">
-              <div class="cm-outer">
-
-                <!-- Axis label: Predicted (top) -->
-                <p class="cm-axis-label cm-axis-top" aria-hidden="true" data-i18n="confmat_pred">Predicho</p>
-
-                <div class="cm-layout">
-                  <!-- Axis label: True class (left, rotated) -->
-                  <p class="cm-axis-label cm-axis-left" aria-hidden="true" data-i18n="confmat_true">Real</p>
-
-                  <!-- The 4×4 grid + headers rendered by JS -->
-                  <div id="cm-grid" role="img" aria-label="Matriz de confusión 4×4 normalizada por fila"></div>
-                </div>
-
-                <!-- Legend strip -->
-                <div class="cm-legend" aria-hidden="true">
-                  <span class="cm-legend-lo">0.00</span>
-                  <div class="cm-legend-bar" id="cm-legend-bar"></div>
-                  <span class="cm-legend-hi">1.00</span>
-                </div>
-
-                <p class="chart-note" style="margin-top:1rem;" data-i18n="confmat_note">
-                  Valores normalizados por fila (recall por clase). Diagonal = detecciones correctas.
-                </p>
+              <div class="chart-canvas-box" style="max-width:640px;margin:0 auto;">
+                <img src="assets/confusion_matrix_normalized.png"
+                     alt="Matriz de confusión normalizada por fila. Roya, Coco, Minador y background. Fuente: decafia_grouped_v1_test confusion_matrix_normalized.png."
+                     style="width:100%;height:auto;border-radius:6px;"
+                     loading="lazy">
               </div>
+              <p class="chart-note" style="margin-top:1rem;" data-i18n="confmat_note">
+                Matriz de confusión normalizada en el conjunto de prueba (356 imágenes). Ultralytics la calcula con confianza 0,25; «background» corresponde a detecciones o lesiones no emparejadas.
+              </p>
             </div>
           </div>
 
@@ -2731,12 +2708,13 @@
           <div id="tab-pr" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-pr" hidden>
             <div class="tab-chart-wrap">
               <div class="chart-canvas-box" style="max-width:640px;margin:0 auto;">
-                <canvas id="chart-pr"
-                        aria-label="Curvas de Precisión-Recall por clase. Roya AP=0.884, Coco AP=0.951, Minador AP=0.946, Todas las clases mAP50=0.927."
-                        role="img"></canvas>
+                <img src="assets/pr_curve.png"
+                     alt="Curvas de Precisión-Recall por clase. Roya AP=0.841, Coco AP=0.962, Minador AP=0.985, Todas las clases mAP50=0.929. Fuente: decafia_grouped_v1_test BoxPR_curve.png."
+                     style="width:100%;height:auto;border-radius:6px;"
+                     loading="lazy">
               </div>
               <p class="chart-note" style="margin-top:1.25rem;" data-i18n="pr_note">
-                AP = área bajo la curva. Calculado sobre el conjunto de prueba (286 imágenes).
+                AP = área bajo la curva. Calculado sobre el conjunto de prueba (356 imágenes).
               </p>
             </div>
           </div>
@@ -2759,7 +2737,7 @@
                 Mejor checkpoint: época 98 de 100 · mAP50 val = 0.929 · Optimizador: AdamW · RTX 5070 Laptop 8 GB
               </p>
               <p class="chart-note" style="margin-top:0.4rem;" data-i18n="train_note">
-                Curvas sintéticas que siguen la trayectoria descrita en el paper. Mejor checkpoint: época 98.
+                Datos reales de entrenamiento (results.csv, decafia_grouped_v1, 100 épocas). Mejor checkpoint: época 98.
               </p>
             </div>
           </div>
@@ -2866,14 +2844,6 @@
           </div>
         </div><!-- /pipe-flow -->
 
-        <!-- ── Kappa callout ── -->
-        <div class="kappa-callout reveal" role="note" aria-label="Cohen kappa 0.91">
-          <span class="kappa-greek" aria-hidden="true">κ</span>
-          <div class="kappa-body">
-            <strong>Cohen's κ = 0.91</strong>
-            <span data-i18n="kappa_sub">Acuerdo inter-anotador casi perfecto (Landis &amp; Koch, 1977)</span>
-          </div>
-        </div>
 
         <!-- ── Bottom grid: hyperparams + dataset charts ── -->
         <div class="method-bottom reveal">
@@ -2906,15 +2876,15 @@
 
             <!-- Stacked bar: image split -->
             <p class="ds-chart-label" data-i18n="ds_images_title">Distribución de imágenes por partición</p>
-            <div class="ds-bar-wrap" role="img" aria-label="Train 1951, Val 549, Test 286">
-              <div class="ds-bar-segment ds-train" style="flex:1951" title="Train 1 951">
-                <span class="ds-bar-label"><span data-i18n="ds_train">Entrenamiento</span> 1 951</span>
+            <div class="ds-bar-wrap" role="img" aria-label="Train 1,577 · Val 382 · Test 356 · Total 2,315 imágenes">
+              <div class="ds-bar-segment ds-train" style="flex:1577" title="Train 1,577">
+                <span class="ds-bar-label"><span data-i18n="ds_train">Entrenamiento</span> 1 577</span>
               </div>
-              <div class="ds-bar-segment ds-val" style="flex:549" title="Val 549">
-                <span class="ds-bar-label"><span data-i18n="ds_val">Validación</span> 549</span>
+              <div class="ds-bar-segment ds-val" style="flex:382" title="Val 382">
+                <span class="ds-bar-label"><span data-i18n="ds_val">Validación</span> 382</span>
               </div>
-              <div class="ds-bar-segment ds-test" style="flex:286" title="Test 286">
-                <span class="ds-bar-label"><span data-i18n="ds_test">Test</span> 286</span>
+              <div class="ds-bar-segment ds-test" style="flex:356" title="Test 356">
+                <span class="ds-bar-label"><span data-i18n="ds_test">Test</span> 356</span>
               </div>
             </div>
 
@@ -2967,7 +2937,7 @@
               <p class="disease-desc" data-i18n="roya_desc">Pústulas polvorosas de color naranja-amarillo en el envés de la hoja. Causa defoliación severa y pérdidas de hasta 30% de cosecha sin manejo oportuno.</p>
               <div class="disease-ap" style="color:#E07820">
                 <div class="disease-ap-dot" style="background:#E07820"></div>
-                AP50: 88.2%
+                AP50: 84.1%
               </div>
             </div>
             <div class="disease-treatment" style="background:linear-gradient(to top,rgba(224,120,32,0.95),rgba(224,120,32,0.7) 60%,transparent)">
@@ -2998,7 +2968,7 @@
               <p class="disease-desc" data-i18n="coco_desc">Daño por adultos de gorgojos que producen escotaduras semicirculares en los márgenes foliares. No confundir con vaquitas benéficas (Coccinellidae).</p>
               <div class="disease-ap" style="color:var(--green-mid)">
                 <div class="disease-ap-dot" style="background:var(--green-mid)"></div>
-                AP50: 94.1%
+                AP50: 96.2%
               </div>
               <p class="disease-tax" data-i18n-html="coco_tax"><strong>Nota taxonómica:</strong> "Coco" designa gorgojos del género <em>Compsus</em> sp. / <em>Epicaerus</em> sp. (Curculionidae), no Coccinellidae.</p>
             </div>
@@ -3027,7 +2997,7 @@
               <p class="disease-desc" data-i18n="minador_desc">Larvas que minan el parénquima foliar dejando galerías serpentinas características. Alta incidencia en épocas secas; afecta principalmente hojas jóvenes.</p>
               <div class="disease-ap" style="color:var(--green-light)">
                 <div class="disease-ap-dot" style="background:var(--green-light)"></div>
-                AP50: 94.9%
+                AP50: 98.5%
               </div>
             </div>
             <div class="disease-treatment" style="background:linear-gradient(to top,rgba(42,157,96,0.95),rgba(42,157,96,0.7) 60%,transparent)">
@@ -3082,12 +3052,8 @@
             <p class="section-sub" style="margin-bottom:2.5rem" data-i18n="map_sub">Dataset recolectado en campo real — una finca en El Socorro, Santander, a 1,500 m.s.n.m. durante 2022–2023.</p>
 
             <div>
-              <div class="map-stat">2,786</div>
-              <div class="map-stat-label" data-i18n="map_stat1">imágenes de campo recolectadas · 12,810 instancias anotadas</div>
-            </div>
-            <div>
-              <div class="map-stat">30,000+</div>
-              <div class="map-stat-label" data-i18n="map_stat2">fincas cafeteras en Santander — mercado potencial a escalar</div>
+              <div class="map-stat">2,315</div>
+              <div class="map-stat-label" data-i18n="map_stat1">imágenes totales (1,705 El Socorro + 610 Silva et al.) · 12,810 instancias anotadas</div>
             </div>
 
             <div class="map-note-box" data-i18n-html="map_note">
@@ -3107,7 +3073,7 @@
         <div class="section-header reveal">
           <span class="section-eyebrow" style="color:rgba(193,122,46,0.9)" data-i18n="tech_eyebrow">Plataforma</span>
           <h2 class="section-title" id="tech-heading" style="color:var(--cream)" data-i18n="tech_title">Tres canales de acceso. Un solo modelo.</h2>
-          <p class="section-sub" style="color:rgba(245,240,232,0.6)" data-i18n="tech_sub">El mismo checkpoint best.pt exportado a ONNX y TFLite sirve tres superficies de despliegue independientes.</p>
+          <p class="section-sub" style="color:rgba(245,240,232,0.6)" data-i18n="tech_sub">El checkpoint best.pt exportado a ONNX (FP32) sirve tres superficies de despliegue; la app Android está en desarrollo.</p>
         </div>
 
         <div class="tech-grid">
@@ -3118,9 +3084,9 @@
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
               </svg>
             </div>
-            <span class="tech-tag tag-live" data-i18n="tag_live">En producción</span>
+            <span class="tech-tag tag-live" data-i18n="tag_live">En pruebas</span>
             <h3 class="tech-card-title" data-i18n="card_wa_title">Bot de WhatsApp</h3>
-            <p class="tech-card-desc" data-i18n="card_wa_desc">Diagnóstico en &lt;3 s sin instalar apps. ONNX opset 12 servido por Flask + Twilio.</p>
+            <p class="tech-card-desc" data-i18n="card_wa_desc">Diagnóstico sin instalar apps. ONNX opset 12 servido por Flask + Twilio. Actualmente corre el modelo anterior de 4 clases.</p>
           </div>
           <!-- Dashboard -->
           <div class="tech-card reveal" style="--delay:100ms">
@@ -3142,9 +3108,9 @@
                 <line x1="12" y1="18" x2="12.01" y2="18"/>
               </svg>
             </div>
-            <span class="tech-tag tag-beta" data-i18n="tag_beta">Beta</span>
+            <span class="tech-tag tag-beta" data-i18n="tag_beta">En desarrollo</span>
             <h3 class="tech-card-title" data-i18n="card_app_title">App Android offline</h3>
-            <p class="tech-card-desc" data-i18n="card_app_desc">Diagnóstico sin internet. TFLite INT8 on-device (&lt;15 MB), GPS + OpenStreetMap. Flutter.</p>
+            <p class="tech-card-desc" data-i18n="card_app_desc">App Android en desarrollo: inferencia sin conexión con ONNX. GPS + OpenStreetMap. Flutter.</p>
           </div>
           <!-- ONNX Model -->
           <div class="tech-card reveal" style="--delay:300ms">
@@ -3162,7 +3128,7 @@
         <!-- Architecture diagram -->
         <div class="reveal" style="--delay:100ms">
           <p class="arch-title" data-i18n="arch_title">Arquitectura del sistema — dos ramas de exportación</p>
-          <div class="arch-diagram" role="img" aria-label="Diagrama de arquitectura: YOLOv8m exportado a ONNX (Flask) y TFLite (Android)">
+          <div class="arch-diagram" role="img" aria-label="Diagrama de arquitectura: YOLOv8m exportado a ONNX (Flask, WhatsApp, Dashboard) y App Android en desarrollo (ONNX offline)">
             <div class="arch-root-node">
               <div class="arch-node highlight">YOLOv8m &nbsp;·&nbsp; best.pt &nbsp;·&nbsp; época 98</div>
               <p class="arch-root-note">Checkpoint único — punto de partida de ambas ramas</p>
@@ -3182,9 +3148,9 @@
               </div>
               <div class="arch-branch-col">
                 <p class="arch-branch-label" data-i18n="arch_device">Rama B — Dispositivo</p>
-                <div class="arch-node">Exportación TFLite INT8</div>
+                <div class="arch-node">Exportación ONNX (FP32)</div>
                 <div class="arch-down-arrow" aria-hidden="true">↓</div>
-                <div class="arch-node">App Android (Beta)</div>
+                <div class="arch-node" style="opacity:0.7">App Android (en desarrollo)</div>
                 <div class="arch-down-arrow" aria-hidden="true">↓</div>
                 <div class="arch-node" style="opacity:0.6" data-i18n="arch_pending">Inferencia local (pendiente)</div>
               </div>
@@ -3391,7 +3357,7 @@
               <span data-i18n="faq1_q">¿Qué tan preciso es realmente?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
-            <div class="faq-body" data-i18n-html="faq1_a">mAP50 de 92.4% en el conjunto de prueba (286 imágenes no vistas).</div>
+            <div class="faq-body" data-i18n-html="faq1_a">mAP50 de 92.9% en el conjunto de prueba (leakage-aware grouped split).</div>
           </li>
           <li class="faq-item">
             <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
@@ -3412,7 +3378,7 @@
               <span data-i18n="faq4_q">¿En qué variedades de café se validó?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
-            <div class="faq-body" data-i18n-html="faq4_a">Coffea arabica L., variedades Colombia y Castillo. Ver limitaciones en el paper.</div>
+            <div class="faq-body" data-i18n-html="faq4_a">Coffea arabica L., variedades Colombia y Castillo.</div>
           </li>
           <li class="faq-item">
             <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
@@ -3426,21 +3392,21 @@
               <span data-i18n="faq6_q">¿Cómo fue anotado el dataset?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
-            <div class="faq-body" data-i18n-html="faq6_a">2,786 imágenes con polígonos usando VIA + SAM. Cohen's κ = 0.91.</div>
+            <div class="faq-body" data-i18n-html="faq6_a">2,315 imágenes anotadas con polígonos usando VIA + SAM, produciendo 12,810 instancias.</div>
           </li>
           <li class="faq-item">
             <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
               <span data-i18n="faq7_q">¿Está disponible el dataset públicamente?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
-            <div class="faq-body" data-i18n-html="faq7_a">Se está preparando para Zenodo bajo CC-BY-4.0 como parte del proceso de revisión.</div>
+            <div class="faq-body" data-i18n-html="faq7_a">El dataset CoffeeLeaf-CO está disponible en Zenodo bajo CC-BY-4.0: <a href="https://doi.org/10.5281/zenodo.19931903" target="_blank" rel="noopener noreferrer" style="color:var(--green-light)">doi.org/10.5281/zenodo.19931903</a>.</div>
           </li>
           <li class="faq-item">
             <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
               <span data-i18n="faq8_q">¿Cómo cito este trabajo?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
-            <div class="faq-body" data-i18n-html="faq8_a">Ver la sección <a href="#citar">Citar esta investigación</a> para el bloque BibTeX.</div>
+            <div class="faq-body" data-i18n-html="faq8_a">Ver la sección <a href="#citar">Citar este trabajo</a> para la referencia del dataset.</div>
           </li>
         </ul>
       </div>
@@ -3452,31 +3418,26 @@
     <section id="citar" class="section" aria-labelledby="cite-heading">
       <div class="container" style="max-width:800px">
         <div class="section-header reveal">
-          <span class="section-eyebrow" data-i18n="cite_eyebrow">Citar esta investigación</span>
-          <h2 class="section-title" id="cite-heading" data-i18n="cite_title">Referencia bibliográfica.</h2>
+          <span class="section-eyebrow" data-i18n="cite_eyebrow">Citar este trabajo</span>
+          <h2 class="section-title" id="cite-heading" data-i18n="cite_title">Referencia del dataset.</h2>
         </div>
         <div class="cite-block reveal">
           <div class="cite-header">
             <span class="cite-lang">BibTeX</span>
             <button class="cite-copy-btn" onclick="decafiaCopyBibtex(this)" data-i18n="cite_copy">Copiar BibTeX</button>
           </div>
-          <pre class="cite-pre" id="bibtex-text">@article{rosas2025decafia,
-  title     = {{DECAFIA}: {YOLOv8}-Based Detection of Coffee Leaf Diseases
-               Using a Field-Collected Dataset from Santander, Colombia},
-  author    = {Rosas Ruiz, Luis Esteban and Salom Medina, Andrey Fernando
-               and Barrero P{\'{e}}rez, Jaime Guillermo},
-  journal   = {Sensors},
-  volume    = {},
-  number    = {},
-  pages     = {},
-  year      = {2025},
-  doi       = {},
-  publisher = {MDPI}
+          <pre class="cite-pre" id="bibtex-text">@dataset{rosas2026coffeeleafco,
+  author    = {Rosas Ruiz, Luis Esteban and Salom Medina, Andrey Fernando},
+  title     = {{CoffeeLeaf-CO}},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.19931903},
+  url       = {https://doi.org/10.5281/zenodo.19931903}
 }</pre>
         </div>
         <div class="cite-apa reveal" style="--delay:200ms">
           <p class="cite-apa-label" data-i18n="cite_apa_label">Formato APA</p>
-          <p>Rosas Ruiz, L. E., Salom Medina, A. F., &amp; Barrero Pérez, J. G. (2025). DECAFIA: YOLOv8-based detection of coffee leaf diseases using a field-collected dataset from Santander, Colombia. <em>Sensors</em>. MDPI.</p>
+          <p>Rosas Ruiz, L. E., &amp; Salom Medina, A. F. (2026). CoffeeLeaf-CO [Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.19931903" target="_blank" rel="noopener noreferrer" style="color:var(--green-light)">https://doi.org/10.5281/zenodo.19931903</a></p>
         </div>
       </div>
     </section>
@@ -3569,7 +3530,7 @@
           <li><a href="#citar" data-i18n="footer_cite">Citar</a></li>
           <li><a href="#agradecimientos" data-i18n="footer_ack">Agradecimientos</a></li>
           <li><a href="#preguntas" data-i18n="nav_faq">FAQ</a></li>
-          <li><a href="https://github.com/estebanr25/decafia" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/estebanr25/decafia-research" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
       </div>
 
@@ -3620,22 +3581,21 @@
       nav_cta:         { es: 'Probar el bot',                  en: 'Try the bot' },
 
       /* ── Hero ── */
-      hero_status:     { es: 'Bot en producción · responde en &lt;3 s', en: 'Bot in production · responds in &lt;3 s' },
+      hero_status:     { es: 'Bot en pruebas', en: 'Bot in testing' },
       hero_h1_a:       { es: 'El café colombiano merece la', en: 'Colombian coffee deserves the' },
       hero_h1_em:      { es: 'mejor tecnología', en: 'best technology' },
       hero_h1_b:       { es: 'del mundo', en: 'in the world' },
-      hero_sub:        { es: 'DECAFIA detecta Roya, Coco y Minador en hojas de café en menos de 3 segundos, directamente desde WhatsApp. Modelo YOLOv8m entrenado con datos reales de campo en Santander, Colombia.',
-                         en: 'DECAFIA detects Roya, Coco and Minador on coffee leaves in under 3 seconds, directly via WhatsApp. YOLOv8m model trained on real field data from Santander, Colombia.' },
+      hero_sub:        { es: 'DECAFIA detecta Roya, Coco y Minador en hojas de café directamente desde WhatsApp. Modelo YOLOv8m entrenado con datos reales de campo en Santander, Colombia. 98.1% hojas sanas sin falsas alarmas (conf ≥ 0.50).',
+                         en: 'DECAFIA detects Roya, Coco and Minador on coffee leaves directly via WhatsApp. YOLOv8m model trained on real field data from Santander, Colombia. 98.1% healthy leaves without false alarms (conf ≥ 0.50).' },
       hero_btn1:       { es: '📲 Probar el bot',       en: '📲 Try the bot' },
       hero_btn2:       { es: 'Ver resultados científicos', en: 'View scientific results' },
-      hero_meta_paper: { es: '📄 Leer paper', en: '📄 Read paper' },
       hero_meta_gh:    { es: '🐙 GitHub', en: '🐙 GitHub' },
       hero_meta_hf:    { es: '🤗 Hugging Face', en: '🤗 Hugging Face' },
       hero_meta_data:  { es: '📊 Dataset (Zenodo)', en: '📊 Dataset (Zenodo)' },
       stat1_label:     { es: 'mAP50 en test', en: 'mAP50 on test set' },
       stat2_label:     { es: 'imágenes de campo', en: 'field images' },
       stat3_label:     { es: 'mAP50-95', en: 'mAP50-95' },
-      stat4_label:     { es: 'latencia (WhatsApp)', en: 'latency (WhatsApp)' },
+      stat4_label:     { es: 'hojas sanas sin falsas alarmas (conf ≥ 0.50)', en: 'healthy leaves without false alarms (conf ≥ 0.50)' },
 
       /* ── Problem ── */
       prob_eyebrow:    { es: 'El problema', en: 'The problem' },
@@ -3643,21 +3603,21 @@
       prob_sub:        { es: 'Para cuando los síntomas son visibles a simple vista, ya es demasiado tarde.', en: 'By the time symptoms are visible to the naked eye, it\'s already too late.' },
       prob1_val:       { es: '30%', en: '30%' },
       prob1_desc:      { es: 'Pérdida de cosecha cuando la roya no se detecta a tiempo.', en: 'Crop loss when coffee rust is not detected in time.' },
-      prob2_val:       { es: '550 mil', en: '550K' },
-      prob2_desc:      { es: 'Familias colombianas cuyo sustento depende del café cada temporada.', en: 'Colombian families whose livelihoods depend on coffee each season.' },
+      prob2_val:       { es: '557 mil', en: '557K' },
+      prob2_desc:      { es: 'Familias caficultoras colombianas (Federación Nacional de Cafeteros, 2025).', en: 'Colombian coffee-growing families (Federación Nacional de Cafeteros, 2025).' },
       prob3_val:       { es: '72h', en: '72h' },
       prob3_desc:      { es: 'Tiempo promedio para obtener un diagnóstico experto presencial en campo.', en: 'Average time to get an expert on-site diagnosis in the field.' },
 
       /* ── How it works ── */
       how_eyebrow:     { es: 'El proceso', en: 'The process' },
-      how_title:       { es: 'Tres pasos. Tres segundos.', en: 'Three steps. Three seconds.' },
+      how_title:       { es: 'Tres pasos. Un diagnóstico.', en: 'Three steps. One diagnosis.' },
       how_sub:         { es: 'No necesitas instalar nada. Funciona en cualquier celular con WhatsApp.', en: 'No installation needed. Works on any phone with WhatsApp.' },
       step1_title:     { es: 'Toma la foto', en: 'Take the photo' },
       step1_desc:      { es: 'Enfoca la hoja afectada con la cámara de tu celular. Buena luz natural, la hoja que ocupe la mayor parte del encuadre.', en: 'Focus on the affected leaf with your phone camera. Good natural light, leaf filling most of the frame.' },
       step2_title:     { es: 'Envíala por WhatsApp', en: 'Send it via WhatsApp' },
       step2_desc:      { es: 'Manda la foto al número de DECAFIA. Sin registro, sin contraseña. Solo el número y la foto.', en: 'Send the photo to DECAFIA\'s number. No registration, no password. Just the number and the photo.' },
       step3_title:     { es: 'Recibe el diagnóstico', en: 'Receive the diagnosis' },
-      step3_desc:      { es: 'En menos de 3 segundos recibes la enfermedad detectada, la confianza del modelo y la recomendación de tratamiento.', en: 'In under 3 seconds you receive the detected disease, model confidence, and treatment recommendation.' },
+      step3_desc:      { es: 'Recibes la enfermedad detectada, la confianza del modelo y la recomendación de tratamiento.', en: 'You receive the detected disease, model confidence, and treatment recommendation.' },
       how_cta_title:   { es: 'Envía una foto de tu hoja de café y recibe el diagnóstico en segundos', en: 'Send a photo of your coffee leaf and receive the diagnosis in seconds' },
       how_cta_sub:     { es: 'Bot activo · El Socorro, Santander', en: 'Bot active · El Socorro, Santander' },
       how_open_wa:     { es: 'Probar el bot en WhatsApp', en: 'Try the bot on WhatsApp' },
@@ -3665,31 +3625,31 @@
       /* ── Results ── */
       res_eyebrow:     { es: 'Resultados científicos', en: 'Scientific results' },
       res_title:       { es: 'Métricas de rendimiento validadas.', en: 'Validated performance metrics.' },
-      res_sub:         { es: 'Evaluación sobre conjunto de prueba independiente · 286 imágenes · YOLOv8m mejor checkpoint (época 98)', en: 'Evaluation on independent test set · 286 images · YOLOv8m best checkpoint (epoch 98)' },
+      res_sub:         { es: 'Evaluación sobre conjunto de prueba independiente · 356 imágenes · YOLOv8m mejor checkpoint (época 98)', en: 'Evaluation on independent test set · 356 images · YOLOv8m best checkpoint (epoch 98)' },
       tab_overall:     { es: 'Métricas globales', en: 'Overall metrics' },
       tab_perclass:    { es: 'AP por clase', en: 'Per-class AP' },
       tab_confmat:     { es: 'Matriz de confusión', en: 'Confusion matrix' },
       tab_pr:          { es: 'Curvas PR', en: 'PR curves' },
       tab_train:       { es: 'Entrenamiento', en: 'Training' },
       how_to_read:     { es: '¿Cómo leer estas métricas?', en: 'How to read these metrics?' },
-      how_to_read_body:{ es: '<strong>mAP50</strong> es el área bajo la curva Precisión–Recall con umbral de IoU ≥ 0.50; es el estándar COCO para "detección correcta". <strong>mAP50-95</strong> promedia ese cálculo desde IoU 0.50 hasta 0.95 en pasos de 0.05, exigiendo localizaciones mucho más exactas — siempre es menor. <strong>AP por clase</strong> mide la precisión para cada enfermedad individualmente. <strong>Nota:</strong> la comparación con trabajos externos (ej. Araaf et al. 2024) es referencial — datasets, condiciones geográficas y número de clases son distintas.',
-                         en: '<strong>mAP50</strong> is the area under the Precision–Recall curve at IoU ≥ 0.50; it is the COCO standard for "correct detection." <strong>mAP50-95</strong> averages that from IoU 0.50 to 0.95 in 0.05 steps, demanding much stricter localization — always lower. <strong>Per-class AP</strong> measures precision for each disease individually. <strong>Note:</strong> comparison with external works (e.g. Araaf et al. 2024) is for context only — datasets, geographic conditions and number of classes differ.' },
+      how_to_read_body:{ es: '<strong>mAP50</strong> es el área bajo la curva Precisión–Recall con umbral de IoU ≥ 0.50; es el estándar COCO para "detección correcta". <strong>mAP50-95</strong> promedia ese cálculo desde IoU 0.50 hasta 0.95 en pasos de 0.05, exigiendo localizaciones mucho más exactas — siempre es menor. <strong>AP por clase</strong> mide la precisión para cada enfermedad individualmente.',
+                         en: '<strong>mAP50</strong> is the area under the Precision–Recall curve at IoU ≥ 0.50; it is the COCO standard for "correct detection." <strong>mAP50-95</strong> averages that from IoU 0.50 to 0.95 in 0.05 steps, demanding much stricter localization — always lower. <strong>Per-class AP</strong> measures precision for each disease individually.' },
       confmat_pred:    { es: 'Predicho', en: 'Predicted' },
       confmat_true:    { es: 'Real', en: 'True' },
-      confmat_note:    { es: 'Valores normalizados por fila (recall por clase). Diagonal = detecciones correctas.', en: 'Row-normalized values (per-class recall). Diagonal = correct detections.' },
-      pr_note:         { es: 'AP = área bajo la curva. Calculado sobre el conjunto de prueba (286 imágenes).', en: 'AP = area under the curve. Computed on the test set (286 images).' },
+      confmat_note:    { es: 'Matriz de confusión normalizada en el conjunto de prueba (356 imágenes). Ultralytics la calcula con confianza 0,25; «background» corresponde a detecciones o lesiones no emparejadas.', en: 'Normalised confusion matrix on the test set (356 images). Ultralytics computes it at confidence 0.25; "background" corresponds to unmatched detections or lesions.' },
+      pr_note:         { es: 'AP = área bajo la curva. Calculado sobre el conjunto de prueba (356 imágenes).', en: 'AP = area under the curve. Computed on the test set (356 images).' },
       train_epoch:     { es: 'Época', en: 'Epoch' },
-      train_note:      { es: 'Curvas sintéticas que siguen la trayectoria descrita en el paper. Mejor checkpoint: época 98.', en: 'Synthetic curves following the trajectory described in the paper. Best checkpoint: epoch 98.' },
+      train_note:      { es: 'Datos reales de entrenamiento (results.csv, decafia_grouped_v1, 100 épocas). Mejor checkpoint: época 98.', en: 'Real training data (results.csv, decafia_grouped_v1, 100 epochs). Best checkpoint: epoch 98.' },
 
       /* ── Overall metrics tab ── */
-      overall_test_label:  { es: 'Métricas en conjunto de prueba (286 imágenes)', en: 'Test-set metrics (286 images)' },
+      overall_test_label:  { es: 'Métricas en conjunto de prueba (356 imágenes)', en: 'Test-set metrics (356 images)' },
       overall_explain_h:   { es: 'La diferencia entre mAP50 y mAP50-95', en: 'The gap between mAP50 and mAP50-95' },
       overall_explain:     {
-        es: '<strong>mAP50 (92.4 %)</strong> exige que la caja detectada se solape al menos 50 % con la caja real — es el estándar habitual para "¿detectó la enfermedad?". <strong>mAP50-95 (76.6 %)</strong> promedia ese cálculo desde IoU 0.50 hasta 0.95 en pasos de 0.05: penaliza fuertemente las cajas ligeramente desplazadas. Para diagnóstico agrícola con WhatsApp — donde el objetivo es identificar la enfermedad, no medir la lesión con precisión milimétrica — mAP50 es la métrica relevante.',
-        en: '<strong>mAP50 (92.4 %)</strong> requires the detected box to overlap the ground truth by at least 50 % — the standard threshold for "did it detect the disease?". <strong>mAP50-95 (76.6 %)</strong> averages that calculation from IoU 0.50 to 0.95 in 0.05 steps: it heavily penalises slightly mis-positioned boxes. For agricultural WhatsApp diagnosis — where the goal is to identify the disease, not measure the lesion to the millimetre — mAP50 is the relevant metric.'
+        es: '<strong>mAP50 (92.9 %)</strong> exige que la caja detectada se solape al menos 50 % con la caja real — es el estándar habitual para "¿detectó la enfermedad?". <strong>mAP50-95 (73.4 %)</strong> promedia ese cálculo desde IoU 0.50 hasta 0.95 en pasos de 0.05: penaliza fuertemente las cajas ligeramente desplazadas. Para diagnóstico agrícola con WhatsApp — donde el objetivo es identificar la enfermedad, no medir la lesión con precisión milimétrica — mAP50 es la métrica relevante.',
+        en: '<strong>mAP50 (92.9 %)</strong> requires the detected box to overlap the ground truth by at least 50 % — the standard threshold for "did it detect the disease?". <strong>mAP50-95 (73.4 %)</strong> averages that calculation from IoU 0.50 to 0.95 in 0.05 steps: it heavily penalises slightly mis-positioned boxes. For agricultural WhatsApp diagnosis — where the goal is to identify the disease, not measure the lesion to the millimetre — mAP50 is the relevant metric.'
       },
       overall_compare_h:   { es: 'Contexto bibliográfico (mAP50)', en: 'Bibliographic context (mAP50)' },
-      overall_compare_note:{ es: '* Comparación referencial. Datasets, condiciones geográficas y número de clases distintas; no es comparación directa.', en: '* Referential comparison. Datasets, geographic conditions and number of classes differ; not a direct comparison.' },
+      overall_compare_note:{ es: '* Comparación con trabajos previos no incluida: los datasets, las condiciones geográficas y el número de clases difieren entre estudios; no constituye comparación directa.', en: '* Cross-study comparison not included: datasets, geographic conditions and number of classes differ; not a direct comparison.' },
       overall_p:           { es: 'Precisión', en: 'Precision' },
       overall_r:           { es: 'Recall', en: 'Recall' },
       overall_f1:          { es: 'F1', en: 'F1' },
@@ -3705,24 +3665,21 @@
       meth_sub:        { es: 'Desde la captura en finca hasta el bot de WhatsApp — cada paso documentado y reproducible.', en: 'From farm capture to WhatsApp bot — every step documented and reproducible.' },
       meth_pipe_label: { es: 'Pipeline de datos y modelado', en: 'Data & modelling pipeline' },
       meth_hp_label:   { es: 'Hiperparámetros de entrenamiento', en: 'Training hyperparameters' },
-      meth_kappa:      { es: 'Acuerdo entre anotadores', en: 'Inter-annotator agreement' },
-      meth_kappa_body: { es: 'Cohen\'s κ = <strong>0.91</strong> sobre 200 imágenes (7.2%) re-anotadas de forma independiente — acuerdo <em>casi perfecto</em> según Landis &amp; Koch (1977).', en: 'Cohen\'s κ = <strong>0.91</strong> on 200 independently re-annotated images (7.2%) — <em>almost perfect</em> agreement per Landis &amp; Koch (1977).' },
       meth_ds_label:   { es: 'Composición del dataset', en: 'Dataset composition' },
-      meth_ds_note:    { es: '2,786 imágenes · 12,810 instancias poligonales · campo real · El Socorro, Santander · 2022–2023', en: '2,786 images · 12,810 polygon instances · real field · El Socorro, Santander · 2022–2023' },
+      meth_ds_note:    { es: '2,315 imágenes (1,705 El Socorro 2022–2023 + 610 Silva et al., CC BY 4.0) · 12,810 instancias poligonales', en: '2,315 images (1,705 El Socorro 2022–2023 + 610 Silva et al., CC BY 4.0) · 12,810 polygon instances' },
 
       /* ── Methodology section header ── */
       method_eyebrow:  { es: 'Metodología',                en: 'Methodology' },
       method_title:    { es: 'De la hoja al diagnóstico',  en: 'From leaf to diagnosis' },
       method_sub:      { es: 'Pipeline completo: recolección de campo, anotación semisupervisada, entrenamiento YOLOv8m y despliegue multi-plataforma.',
                          en: 'Full pipeline: field collection, semi-supervised annotation, YOLOv8m training, and multi-platform deployment.' },
-      kappa_sub:       { es: 'Acuerdo inter-anotador casi perfecto (Landis &amp; Koch, 1977)', en: 'Almost perfect inter-annotator agreement (Landis &amp; Koch, 1977)' },
       ds_composition_title: { es: 'Composición del dataset', en: 'Dataset composition' },
 
       /* ── Methodology pipeline steps ── */
       pipe1_title: { es: 'Captura en campo',          en: 'Field capture' },
       pipe1_sub:   { es: '640×480 px · JPEG · luz natural', en: '640×480 px · JPEG · natural light' },
       pipe2_title: { es: 'Anotación VIA + SAM',        en: 'Annotation VIA + SAM' },
-      pipe2_sub:   { es: '2,786 imágenes · polígonos', en: '2,786 images · polygons' },
+      pipe2_sub:   { es: '2,315 imágenes · polígonos', en: '2,315 images · polygons' },
       pipe3_title: { es: '12,810 instancias',           en: '12,810 instances' },
       pipe3_sub:   { es: '3 clases · polígonos segmentados', en: '3 classes · segmented polygons' },
       pipe4_title: { es: 'Fine-tuning YOLOv8m',        en: 'YOLOv8m fine-tuning' },
@@ -3783,28 +3740,28 @@
       /* ── Map ── */
       map_eyebrow:     { es: 'Área de estudio', en: 'Study area' },
       map_title:       { es: 'Desde el corazón cafetero de Santander', en: 'From the coffee heart of Santander' },
-      map_sub:         { es: 'Dataset recolectado en campo real — una finca en El Socorro, Santander, a 1,500 m.s.n.m. durante 2022–2023.', en: 'Dataset collected in real field conditions — a farm in El Socorro, Santander, at 1,500 m.a.s.l. during 2022–2023.' },
-      map_stat1:       { es: 'imágenes de campo recolectadas · 12,810 instancias anotadas', en: 'field images collected · 12,810 annotated instances' },
-      map_stat2:       { es: 'fincas cafeteras en Santander — mercado potencial a escalar', en: 'coffee farms in Santander — potential market to scale' },
+      map_sub:         { es: 'Fotos propias recolectadas en una finca en El Socorro, Santander (2022–2023). Las imágenes de minador de la hoja provienen de Silva et al. (Brasil), CC BY 4.0.', en: 'Own photos collected on a farm in El Socorro, Santander (2022–2023). Leaf miner images come from Silva et al. (Brazil), CC BY 4.0.' },
+      map_stat1:       { es: 'imágenes totales (1,705 El Socorro + 610 Silva et al.) · 12,810 instancias anotadas', en: 'total images (1,705 El Socorro + 610 Silva et al.) · 12,810 annotated instances' },
+      /* map_stat2 removed — "30,000+ fincas" had no verified source */
       map_note:        { es: '<strong>Estado actual:</strong> prueba de concepto validada en una finca. El equipo aspira a escalar el sistema, en colaboración con el <strong>Comité de Cafeteros de Santander</strong>, a un ensayo de campo multi-municipio.', en: '<strong>Current status:</strong> proof of concept validated on one farm. The team aims to scale the system, in collaboration with the <strong>Santander Coffee Growers Committee</strong>, to a multi-municipality field trial.' },
       alt_band_label:  { es: 'Cinturón cafetero andino (1,200–2,000 m.s.n.m.)', en: 'Andean coffee belt (1,200–2,000 m.a.s.l.)' },
 
       /* ── Technology ── */
       tech_eyebrow:    { es: 'Plataforma', en: 'Platform' },
       tech_title:      { es: 'Tres canales de acceso. Un solo modelo.', en: 'Three access channels. One model.' },
-      tech_sub:        { es: 'El mismo checkpoint best.pt exportado a ONNX y TFLite sirve tres superficies de despliegue independientes.', en: 'The same best.pt checkpoint exported to ONNX and TFLite serves three independent deployment surfaces.' },
+      tech_sub:        { es: 'El checkpoint best.pt exportado a ONNX (FP32) sirve tres superficies de despliegue; la app Android está en desarrollo.', en: 'The best.pt checkpoint exported to ONNX (FP32) serves three deployment surfaces; the Android app is in development.' },
       tech_oss_label:  { es: 'Código abierto', en: 'Open source' },
       card_wa_title:   { es: 'Bot de WhatsApp', en: 'WhatsApp Bot' },
-      card_wa_desc:    { es: 'Diagnóstico en &lt;3 s sin instalar apps. ONNX opset 12 servido por Flask + Twilio.', en: 'Diagnosis in &lt;3 s without installing apps. ONNX opset 12 served by Flask + Twilio.' },
+      card_wa_desc:    { es: 'Diagnóstico sin instalar apps. ONNX opset 12 servido por Flask + Twilio. Actualmente corre el modelo anterior de 4 clases.', en: 'Diagnosis without installing apps. ONNX opset 12 served by Flask + Twilio. Currently runs the previous 4-class model.' },
       card_dash_title: { es: 'Dashboard web', en: 'Web dashboard' },
       card_dash_desc:  { es: 'Mapa de alertas y estadísticas históricas. Flask + SQLite. Prototipo para cooperativas.', en: 'Alert map and historical statistics. Flask + SQLite. Prototype for cooperatives.' },
       card_app_title:  { es: 'App Android offline', en: 'Offline Android App' },
-      card_app_desc:   { es: 'Diagnóstico sin internet. TFLite INT8 on-device (&lt;15 MB), GPS + OpenStreetMap. Flutter.', en: 'Diagnosis without internet. TFLite INT8 on-device (&lt;15 MB), GPS + OpenStreetMap. Flutter.' },
+      card_app_desc:   { es: 'App Android en desarrollo: inferencia sin conexión con ONNX. GPS + OpenStreetMap. Flutter.', en: 'Android app in development: offline inference with ONNX. GPS + OpenStreetMap. Flutter.' },
       card_onnx_title: { es: 'Modelo ONNX', en: 'ONNX Model' },
       card_onnx_desc:  { es: 'Integración directa para investigadores. ONNX opset 12 (99 MB FP32) del checkpoint best.pt.', en: 'Direct integration for researchers. ONNX opset 12 (99 MB FP32) from best.pt checkpoint.' },
-      tag_live:        { es: 'En producción', en: 'In production' },
+      tag_live:        { es: 'En pruebas', en: 'In testing' },
       tag_proto:       { es: 'Prototipo',     en: 'Prototype' },
-      tag_beta:        { es: 'Beta',          en: 'Beta' },
+      tag_beta:        { es: 'En desarrollo',  en: 'In development' },
       tag_avail:       { es: 'Disponible',    en: 'Available' },
       arch_title:      { es: 'Arquitectura del sistema — dos ramas de exportación', en: 'System architecture — two export branches' },
       arch_server:     { es: 'Rama A — Servidor', en: 'Branch A — Server' },
@@ -3828,7 +3785,7 @@
       /* ── Roadmap ── */
       road_eyebrow:    { es: 'Hoja de ruta', en: 'Roadmap' },
       road_title:      { es: 'Del prototipo a escala regional.', en: 'From prototype to regional scale.' },
-      road_sub:        { es: 'Limitaciones y trabajo futuro documentados en el paper. Cronograma tentativo sujeto a financiamiento y colaboraciones externas.', en: 'Limitations and future work documented in the paper. Tentative schedule subject to funding and external collaborations.' },
+      road_sub:        { es: 'Cronograma tentativo sujeto a financiamiento y colaboraciones externas.', en: 'Tentative schedule subject to funding and external collaborations.' },
       road1_title:     { es: 'Prueba de concepto', en: 'Proof of concept' },
       road1_desc:      { es: 'Validación en una finca en El Socorro, Santander. Bot de WhatsApp activo.', en: 'Validation on one farm in El Socorro, Santander. WhatsApp bot active.' },
       road2_title:     { es: 'WhatsApp Business verificado', en: 'Verified WhatsApp Business' },
@@ -3849,25 +3806,25 @@
       faq_eyebrow:     { es: 'Preguntas frecuentes', en: 'Frequently asked questions' },
       faq_title:       { es: 'Lo que caficultores, agrónomos y revisores preguntan.', en: 'What farmers, agronomists and reviewers ask.' },
       faq1_q:          { es: '¿Qué tan preciso es realmente?', en: 'How accurate is it really?' },
-      faq1_a:          { es: 'El modelo logra mAP50 de 92.4% y mAP50-95 de 76.6% en el conjunto de prueba (286 imágenes no vistas). mAP50 significa que el modelo detecta correctamente la enfermedad y su ubicación en la hoja con al menos 50% de superposición correcta. mAP50-95 exige hasta 95% de superposición — siempre es menor. Por clase: Roya 88.2%, Coco 94.1%, Minador 94.9%. Precisión 90.5%, Recall 85.8%. Estos resultados son para datos recolectados en la misma región geográfica; el rendimiento en otras condiciones puede variar.', en: 'The model achieves mAP50 of 92.4% and mAP50-95 of 76.6% on the test set (286 unseen images). mAP50 means the model correctly detects the disease and its location on the leaf with at least 50% overlap. mAP50-95 requires up to 95% overlap — always lower. Per class: Roya 88.2%, Coco 94.1%, Minador 94.9%. Precision 90.5%, Recall 85.8%. These results are for data collected in the same geographic region; performance under other conditions may vary.' },
+      faq1_a:          { es: 'El modelo logra mAP50 de 92.9% y mAP50-95 de 73.4% en el conjunto de prueba (leakage-aware grouped split). Por clase: Roya 84.1%, Coco 96.2%, Minador 98.5%. Precisión 87.6%, Recall 87.0%, F1 87.3%. Adicionalmente, 98.1% de las hojas sanas no generan falsas alarmas (conf ≥ 0.50). Estos resultados son para datos recolectados en la misma región geográfica; el rendimiento en otras condiciones puede variar.', en: 'The model achieves mAP50 of 92.9% and mAP50-95 of 73.4% on the test set (leakage-aware grouped split). Per class: Roya 84.1%, Coco 96.2%, Minador 98.5%. Precision 87.6%, Recall 87.0%, F1 87.3%. Additionally, 98.1% of healthy leaves do not trigger false alarms (conf ≥ 0.50). These results are for data collected in the same geographic region; performance under other conditions may vary.' },
       faq2_q:          { es: '¿Funciona sin internet?', en: 'Does it work offline?' },
-      faq2_a:          { es: 'El bot de WhatsApp y el dashboard web requieren conexión. La App Android (actualmente en beta) usa TFLite INT8 on-device y funciona completamente sin internet, con GPS integrado para georreferenciación. En zonas rurales sin señal, la app es la opción recomendada.', en: 'The WhatsApp bot and web dashboard require a connection. The Android App (currently in beta) uses on-device TFLite INT8 and works completely offline, with integrated GPS for georeferencing. In rural areas without signal, the app is the recommended option.' },
+      faq2_a:          { es: 'El bot de WhatsApp y el dashboard web requieren conexión. La App Android (actualmente en desarrollo) usará ONNX on-device y funcionará sin internet, con GPS integrado para georreferenciación. En zonas rurales sin señal, la app será la opción recomendada una vez esté disponible.', en: 'The WhatsApp bot and web dashboard require a connection. The Android App (currently in development) will use on-device ONNX and work completely offline, with integrated GPS for georeferencing. In rural areas without signal, the app will be the recommended option once available.' },
       faq3_q:          { es: '¿Por qué solo 3 enfermedades?', en: 'Why only 3 diseases?' },
       faq3_a:          { es: 'El dataset fue recolectado en una única finca en El Socorro, Santander durante 2022–2023, donde estas tres plagas son las de mayor incidencia económica según Cenicafé. Expandir a broca (Hypothenemus hampei) y otras patologías requiere datos de campo adicionales — está en la hoja de ruta para la siguiente fase del proyecto.', en: 'The dataset was collected on a single farm in El Socorro, Santander during 2022–2023, where these three pests have the highest economic incidence according to Cenicafé. Expanding to coffee berry borer (Hypothenemus hampei) and other pathologies requires additional field data — it\'s on the roadmap for the next project phase.' },
       faq4_q:          { es: '¿En qué variedades de café se validó?', en: 'Which coffee varieties was it validated on?' },
-      faq4_a:          { es: 'El dataset fue recolectado en plantaciones predominantemente de <em>Coffea arabica</em> L. (variedades Colombia y Castillo) en una finca en El Socorro, Santander. No se realizó validación cruzada en variedades de robusta ni en otras regiones geográficas. La transferibilidad a otras variedades o regiones es una limitación documentada en el paper.', en: 'The dataset was collected in predominantly <em>Coffea arabica</em> L. plantations (Colombia and Castillo varieties) on a farm in El Socorro, Santander. No cross-validation was performed on robusta varieties or other geographic regions. Transferability to other varieties or regions is a documented limitation in the paper.' },
+      faq4_a:          { es: 'El dataset fue recolectado en plantaciones predominantemente de <em>Coffea arabica</em> L. (variedades Colombia y Castillo) en una finca en El Socorro, Santander. No se realizó validación cruzada en variedades de robusta ni en otras regiones geográficas. La transferibilidad a otras variedades o regiones es una limitación conocida.', en: 'The dataset was collected in predominantly <em>Coffea arabica</em> L. plantations (Colombia and Castillo varieties) on a farm in El Socorro, Santander. No cross-validation was performed on robusta varieties or other geographic regions. Transferability to other varieties or regions is a known limitation.' },
       faq5_q:          { es: '¿Cómo puede acceder mi cooperativa?', en: 'How can my cooperative get access?' },
       faq5_a:          { es: 'Escríbenos a rosas.esteban.10@gmail.com con el asunto "DECAFIA — Demo cooperativa". Ofrecemos demostraciones técnicas del modelo, la API y el dashboard. El sistema es actualmente un prototipo de investigación; la integración a escala comercial requiere colaboración formal.', en: 'Email us at rosas.esteban.10@gmail.com with subject "DECAFIA — Cooperative demo". We offer technical demonstrations of the model, API and dashboard. The system is currently a research prototype; commercial-scale integration requires formal collaboration.' },
       faq6_q:          { es: '¿Cómo fue anotado el dataset?', en: 'How was the dataset annotated?' },
-      faq6_a:          { es: '2,786 imágenes fueron anotadas con polígonos (no bounding boxes) usando VIA (VGG Image Annotator) asistido por SAM (Segment Anything Model), produciendo 12,810 instancias. El acuerdo entre anotadores se midió con Cohen\'s κ = 0.91 sobre 200 imágenes re-anotadas de forma independiente, correspondiente a acuerdo "casi perfecto" según Landis &amp; Koch (1977).', en: '2,786 images were annotated with polygons (not bounding boxes) using VIA (VGG Image Annotator) assisted by SAM (Segment Anything Model), producing 12,810 instances. Inter-annotator agreement was measured with Cohen\'s κ = 0.91 on 200 independently re-annotated images, corresponding to "almost perfect" agreement per Landis &amp; Koch (1977).' },
+      faq6_a:          { es: '2,315 imágenes fueron anotadas con polígonos (no bounding boxes) usando VIA (VGG Image Annotator) asistido por SAM (Segment Anything Model), produciendo 12,810 instancias. El dataset incluye 1,705 fotos propias de El Socorro, Santander (2022–2023) y 610 imágenes de minador de Silva et al. (Brasil), bajo licencia CC BY 4.0.', en: '2,315 images were annotated with polygons (not bounding boxes) using VIA (VGG Image Annotator) assisted by SAM (Segment Anything Model), producing 12,810 instances. The dataset includes 1,705 own field photos from El Socorro, Santander (2022–2023) and 610 leaf miner images from Silva et al. (Brazil), CC BY 4.0.' },
       faq7_q:          { es: '¿Está disponible el dataset públicamente?', en: 'Is the dataset publicly available?' },
-      faq7_a:          { es: 'El dataset está siendo preparado para su publicación en Zenodo bajo licencia CC-BY-4.0 como parte del proceso de revisión en Sensors (MDPI). Escríbenos si necesitas acceso anticipado para revisión académica.', en: 'The dataset is being prepared for publication on Zenodo under a CC-BY-4.0 license as part of the Sensors (MDPI) review process. Contact us if you need early access for academic review.' },
+      faq7_a:          { es: 'El dataset CoffeeLeaf-CO está disponible en Zenodo bajo licencia CC-BY-4.0: <a href="https://doi.org/10.5281/zenodo.19931903" target="_blank" rel="noopener noreferrer" style="color:var(--green-light)">doi.org/10.5281/zenodo.19931903</a>.', en: 'The CoffeeLeaf-CO dataset is available on Zenodo under a CC-BY-4.0 license: <a href="https://doi.org/10.5281/zenodo.19931903" target="_blank" rel="noopener noreferrer" style="color:var(--green-light)">doi.org/10.5281/zenodo.19931903</a>.' },
       faq8_q:          { es: '¿Cómo cito este trabajo?', en: 'How do I cite this work?' },
-      faq8_a:          { es: 'Ver la sección <a href="#citar" style="color:var(--green-light)">Citar esta investigación</a> para el bloque BibTeX y la referencia APA completa.', en: 'See the <a href="#citar" style="color:var(--green-light)">Cite this work</a> section for the BibTeX block and full APA reference.' },
+      faq8_a:          { es: 'Ver la sección <a href="#citar" style="color:var(--green-light)">Citar este trabajo</a> para la referencia BibTeX y APA del dataset.', en: 'See the <a href="#citar" style="color:var(--green-light)">Cite this work</a> section for the dataset BibTeX and APA reference.' },
 
       /* ── Cite ── */
-      cite_eyebrow:    { es: 'Citar esta investigación', en: 'Cite this work' },
-      cite_title:      { es: 'Referencia bibliográfica.', en: 'Bibliographic reference.' },
+      cite_eyebrow:    { es: 'Citar este trabajo', en: 'Cite this work' },
+      cite_title:      { es: 'Referencia del dataset.', en: 'Dataset reference.' },
       cite_copy:       { es: 'Copiar BibTeX', en: 'Copy BibTeX' },
       cite_copied:     { es: '¡Copiado!', en: 'Copied!' },
       cite_apa_label:  { es: 'Formato APA', en: 'APA format' },
@@ -4192,7 +4149,7 @@
         labels: [labelRoya, labelCoco, labelMinador, labelMAP50],
         datasets: [{
           label: lang === 'es' ? 'AP50 (%)' : 'AP50 (%)',
-          data: [88.2, 94.1, 94.9, 92.4],
+          data: [84.1, 96.2, 98.5, 92.9],
           backgroundColor: [
             'rgba(193,122,46,0.80)',   /* amber — Roya */
             'rgba(29,122,79,0.80)',    /* green-mid — Coco */
@@ -4245,18 +4202,18 @@
         }
       });
 
-      /* Reference line at mAP50 = 92.4 via annotation-free approach:
+      /* Reference line at mAP50 = 92.9 via annotation-free approach:
          draw a vertical dashed line using the afterDraw plugin */
       CHART_INSTANCES['tab-perclass'].options.plugins.afterDraw = undefined;
 
-      /* Draw the 92.4% reference tick label manually */
+      /* Draw the 92.9% reference tick label manually */
       var refPlugin = {
         id: 'refLine',
         afterDraw: function(chart) {
           var ctx2 = chart.ctx;
           var xScale = chart.scales.x;
           var yAxis  = chart.scales.y;
-          var x = xScale.getPixelForValue(92.4);
+          var x = xScale.getPixelForValue(92.9);
           ctx2.save();
           ctx2.strokeStyle = amberLight;
           ctx2.lineWidth = 1.5;
@@ -4280,168 +4237,21 @@
     /* ============================================================
        CONFUSION MATRIX  (Tab 3 — pure DOM, no Chart.js)
     ============================================================ */
-    CHART_INITS['tab-confmat'] = function() {
-      var grid = document.getElementById('cm-grid');
-      var legendBar = document.getElementById('cm-legend-bar');
-      if (!grid) return;
-
-      var lang = localStorage.getItem('decafia-lang') || 'es';
-      var dark = window.DECAFIA_CHART.isDark();
-
-      /* ── Matrix values: row = true class, col = predicted class ──
-         Classes: [Roya, Coco, Minador, BG]
-         Source: paper Figure 1, row-normalised.
-         BG row (last): false positives — proportion of background/negative
-         images predicted as each disease class.                         */
-      var CM = [
-        [0.88, 0.00, 0.00, 0.12],   /* True Roya    */
-        [0.00, 0.93, 0.00, 0.06],   /* True Coco    */
-        [0.00, 0.00, 0.91, 0.08],   /* True Minador */
-        [0.54, 0.33, 0.13, 0.00]    /* True BG      */
-      ];
-
-      var LABELS_ES = ['Roya', 'Coco', 'Minador', 'BG'];
-      var LABELS_EN = ['Roya', 'Coco', 'Minador', 'BG'];
-      var labels = lang === 'en' ? LABELS_EN : LABELS_ES;
-
-      /* ── Colour interpolation ──
-         Light mode: near-white (#eef6f1) → green-deep (#0F4C2A)
-         Dark  mode: dark-card  (#131a14) → green-light (#2A9D60)  */
-      function hexRgb(h) {
-        return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
-      }
-      var colorLo = dark ? hexRgb('#131a14') : hexRgb('#eef6f1');
-      var colorHi = dark ? hexRgb('#2A9D60') : hexRgb('#0F4C2A');
-      /* Lighter mid-point to make near-zero values distinguishable */
-      var colorMid = dark ? hexRgb('#1d3527') : hexRgb('#b8dac8');
-
-      function cellColor(v) {
-        /* Two-stop ramp: 0→mid at 0.3, mid→hi at 0.3→1 */
-        var lo, hi, t;
-        if (v <= 0.3) { lo = colorLo; hi = colorMid; t = v / 0.3; }
-        else          { lo = colorMid; hi = colorHi; t = (v - 0.3) / 0.7; }
-        var r = Math.round(lo[0] + (hi[0]-lo[0])*t);
-        var g = Math.round(lo[1] + (hi[1]-lo[1])*t);
-        var b = Math.round(lo[2] + (hi[2]-lo[2])*t);
-        return { bg: 'rgb('+r+','+g+','+b+')', lum: 0.2126*r/255 + 0.7152*g/255 + 0.0722*b/255 };
-      }
-
-      /* ── Build the 5×5 grid (top-left corner + 4 col headers + 4 row headers + 16 data cells) ── */
-      var html = '';
-
-      /* Row 0: corner + column headers */
-      html += '<div class="cm-cell cm-cell-corner"></div>';
-      labels.forEach(function(l) {
-        html += '<div class="cm-cell cm-cell-header" aria-hidden="true">' + l + '</div>';
-      });
-
-      /* Rows 1–4: row header + data cells */
-      CM.forEach(function(row, ri) {
-        html += '<div class="cm-cell cm-cell-header" aria-hidden="true">' + labels[ri] + '</div>';
-        row.forEach(function(val, ci) {
-          var c = cellColor(val);
-          var textColor = c.lum > 0.35 ? 'rgba(15,30,20,0.88)' : 'rgba(245,240,232,0.92)';
-          var isDiag = ri === ci;
-          var fontW = isDiag ? '700' : '500';
-          var display = val === 0 ? '—' : val.toFixed(2);
-          var ariaLabel = labels[ri] + ' → ' + labels[ci] + ': ' + (val === 0 ? '0' : val.toFixed(2));
-          html += '<div class="cm-cell cm-cell-data" '
-            + 'style="background:' + c.bg + ';color:' + textColor + ';font-weight:' + fontW + ';'
-            + (isDiag ? 'outline:2px solid rgba(245,240,232,0.35);outline-offset:-2px;' : '') + '"'
-            + ' title="' + ariaLabel + '" aria-label="' + ariaLabel + '">'
-            + display
-            + '</div>';
-        });
-      });
-
-      grid.innerHTML = html;
-
-      /* Register sentinel so refreshAll() re-runs this on theme / lang change */
-      CHART_INSTANCES['tab-confmat'] = { destroy: function() { /* DOM-based, no destroy needed */ } };
-
-      /* ── Colour legend gradient ── */
-      if (legendBar) {
-        var stops = [];
-        for (var i = 0; i <= 8; i++) {
-          var c = cellColor(i/8);
-          stops.push(c.bg);
-        }
-        legendBar.style.background = 'linear-gradient(to right, ' + stops.join(', ') + ')';
-      }
-    };
-
-    /* Wire confmat into theme-change refresh (non-Chart.js tabs use same registry) */
-    /* Already handled by themeObserver → refreshAll() which calls CHART_INITS[id]() */
+    /* ============================================================
+       CONFUSION MATRIX (Tab 3) — replaced with static <img>
+       Source: decafia_grouped_v1_test/confusion_matrix_normalized.png
+       CHART_INITS['tab-confmat'] intentionally omitted.
+    ============================================================ */
 
     /* ============================================================
-       OVERALL METRICS — comparison bar chart  (Tab 1)
+       OVERALL METRICS — Tab 1 (comparison bar chart removed; cross-dataset comparison invalid)
     ============================================================ */
     CHART_INITS['tab-overall'] = function() {
-      var canvas = document.getElementById('chart-overall-compare');
-      if (!canvas || !window.Chart) return;
-
       /* Fill i18n explanation paragraph */
       var lang = localStorage.getItem('decafia-lang') || 'es';
       var S = window.DECAFIA_STRINGS;
       var explainEl = document.querySelector('#tab-overall .overall-explain-body');
       if (explainEl && S.overall_explain) explainEl.innerHTML = S.overall_explain[lang] || S.overall_explain.es;
-
-      var dark    = window.DECAFIA_CHART.isDark();
-      var noAnim  = window.DECAFIA_CHART.reduced;
-      var textColor  = dark ? 'rgba(232,237,230,0.70)' : 'rgba(26,26,24,0.65)';
-      var gridColor  = dark ? 'rgba(255,255,255,0.07)'  : 'rgba(15,30,20,0.08)';
-      var tooltipBg  = dark ? '#1a2418' : '#0F4C2A';
-
-      var labelDecafia   = 'DECAFIA — YOLOv8m (3 clases, Colombia)';
-      var labelAraafV8   = lang === 'es' ? 'Araaf et al. 2024 — YOLOv8 (1 clase, Indonesia)' : 'Araaf et al. 2024 — YOLOv8 (1 class, Indonesia)';
-      var labelAraafV5   = lang === 'es' ? 'Araaf et al. 2024 — YOLOv5 (1 clase, Indonesia)' : 'Araaf et al. 2024 — YOLOv5 (1 class, Indonesia)';
-
-      CHART_INSTANCES['tab-overall'] = new window.Chart(canvas, {
-        type: 'bar',
-        data: {
-          labels: [labelDecafia, labelAraafV8, labelAraafV5],
-          datasets: [{
-            label: 'mAP50 (%)',
-            data: [92.4, 73.2, 70.5],
-            backgroundColor: ['rgba(193,122,46,0.80)', 'rgba(245,240,232,0.18)', 'rgba(245,240,232,0.12)'],
-            borderColor:     ['#C17A2E',               'rgba(245,240,232,0.35)', 'rgba(245,240,232,0.25)'],
-            borderWidth: 1.5,
-            borderRadius: 5,
-            borderSkipped: false
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          animation: { duration: noAnim ? 0 : 600 },
-          responsive: true,
-          maintainAspectRatio: true,
-          aspectRatio: 2.5,
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              backgroundColor: tooltipBg,
-              titleColor: '#fff',
-              bodyColor: 'rgba(245,240,232,0.82)',
-              padding: 10,
-              cornerRadius: 8,
-              callbacks: { label: function(ctx) { return ' mAP50: ' + ctx.parsed.x.toFixed(1) + '%'; } }
-            }
-          },
-          scales: {
-            x: {
-              min: 60, max: 100,
-              ticks: { color: textColor, callback: function(v){ return v+'%'; }, font: { size: 10 } },
-              grid:  { color: gridColor },
-              border: { color: 'transparent' }
-            },
-            y: {
-              ticks: { color: textColor, font: { size: 10 }, maxRotation: 0 },
-              grid:  { display: false },
-              border: { color: 'transparent' }
-            }
-          }
-        }
-      });
     };
 
     /* ============================================================
@@ -4455,26 +4265,26 @@
       var tickColor = dark ? 'rgba(232,237,230,0.45)' : 'rgba(26,26,24,0.50)';
       var epochs = Array.from({length:100}, function(_,i){ return i+1; });
 
-      /* Deterministic curve generation — same formula as original spec */
-      function tc(start, end, s1, s2) {
-        return epochs.map(function(_, i) {
-          var t = i / 99;
-          var v = start + (end - start) * (1 - Math.exp(-4 * t));
-          var noise = (Math.sin(i * s1) * 0.5 + Math.cos(i * s2) * 0.3) * 0.008;
-          return Math.round(Math.max(0, v + noise) * 1000) / 1000;
-        });
-      }
+      /* Real training data — source: 02_training/runs/decafia_grouped_v1/results.csv (100 epochs) */
+      var d_ct0=[1.756,1.687,1.648,1.624,1.565,1.569,1.559,1.501,1.516,1.502,1.469,1.442,1.449,1.421,1.415,1.405,1.393,1.380,1.389,1.411,1.390,1.362,1.375,1.351,1.391,1.380,1.370,1.345,1.401,1.345,1.339,1.328,1.341,1.320,1.322,1.338,1.332,1.332,1.299,1.300,1.284,1.339,1.289,1.292,1.228,1.226,1.235,1.245,1.200,1.194,1.209,1.215,1.183,1.175,1.164,1.183,1.186,1.128,1.165,1.127,1.142,1.113,1.127,1.116,1.111,1.159,1.157,1.111,1.118,1.126,1.104,1.113,1.114,1.096,1.095,1.080,1.083,1.093,1.062,1.071,1.092,1.072,1.060,1.054,1.047,1.060,1.044,1.039,1.058,1.039,0.948,0.917,0.924,0.913,0.910,0.911,0.901,0.867,0.884,0.887];
+      var d_ct1=[2.170,1.787,1.663,1.580,1.480,1.400,1.462,1.321,1.356,1.330,1.287,1.203,1.229,1.192,1.158,1.153,1.102,1.066,1.094,1.120,1.035,1.051,1.054,1.031,1.065,0.998,1.025,1.003,1.021,0.988,0.952,0.964,0.985,0.945,0.938,0.966,0.924,0.946,0.933,0.914,0.902,0.931,0.907,0.909,0.880,0.873,0.868,0.895,0.850,0.825,0.856,0.842,0.822,0.805,0.792,0.802,0.812,0.771,0.787,0.766,0.785,0.755,0.761,0.756,0.746,0.770,0.775,0.745,0.739,0.739,0.727,0.741,0.734,0.730,0.711,0.696,0.697,0.693,0.688,0.694,0.702,0.681,0.677,0.658,0.669,0.697,0.658,0.656,0.677,0.651,0.585,0.545,0.541,0.523,0.518,0.520,0.513,0.493,0.499,0.493];
+      var d_ct2=[1.486,1.417,1.397,1.369,1.325,1.317,1.332,1.286,1.298,1.295,1.286,1.259,1.269,1.249,1.249,1.250,1.236,1.217,1.233,1.229,1.224,1.227,1.219,1.219,1.230,1.217,1.214,1.221,1.230,1.204,1.211,1.190,1.202,1.198,1.205,1.206,1.186,1.205,1.195,1.179,1.179,1.203,1.183,1.195,1.153,1.156,1.167,1.156,1.142,1.133,1.143,1.139,1.141,1.131,1.117,1.129,1.134,1.119,1.127,1.098,1.119,1.105,1.104,1.112,1.104,1.124,1.135,1.104,1.098,1.089,1.105,1.102,1.096,1.087,1.080,1.088,1.074,1.077,1.070,1.078,1.092,1.086,1.079,1.067,1.079,1.086,1.058,1.065,1.077,1.068,1.030,1.025,1.024,1.025,1.019,1.020,1.022,1.002,1.005,1.008];
+      var d_ct3=[2.608,2.287,2.322,1.427,1.470,1.558,1.576,1.660,1.537,1.433,1.557,1.555,1.712,1.477,1.451,1.739,1.723,1.494,1.435,1.397,1.424,1.551,1.688,1.614,1.545,1.798,1.429,1.278,1.342,1.571,1.472,1.383,1.580,1.430,1.672,1.595,1.332,1.506,1.607,1.457,1.385,1.776,1.290,1.264,1.136,1.135,1.454,1.089,1.126,1.040,1.015,1.042,0.983,0.988,1.046,0.964,0.941,0.992,0.962,0.925,0.943,0.922,0.949,0.969,0.921,0.922,0.943,0.900,0.954,0.907,0.898,0.893,0.881,0.891,0.864,0.887,0.881,0.860,0.895,0.858,0.841,0.855,0.858,0.857,0.838,0.862,0.845,0.843,0.834,0.847,0.847,0.834,0.826,0.837,0.833,0.813,0.811,0.829,0.807,0.812];
+      var d_ct4=[56.366,31.107,5.458,2.254,1.379,1.874,1.827,1.622,1.617,1.477,1.390,1.411,1.220,1.196,1.038,1.252,1.150,1.007,1.283,0.977,0.963,1.082,1.025,1.032,1.078,1.046,0.994,1.031,1.055,0.967,0.898,0.999,0.955,0.916,0.944,1.145,0.905,0.925,0.907,0.871,0.905,1.416,0.903,0.984,0.851,0.795,0.916,0.856,0.782,0.744,0.765,0.741,0.781,0.757,0.740,0.751,0.723,0.707,0.740,0.683,0.714,0.690,0.733,0.708,0.667,0.704,0.681,0.675,0.714,0.664,0.655,0.639,0.677,0.644,0.637,0.627,0.655,0.618,0.633,0.614,0.617,0.595,0.600,0.608,0.610,0.593,0.581,0.585,0.594,0.577,0.605,0.593,0.580,0.573,0.582,0.567,0.559,0.560,0.571,0.562];
+      var d_ct5=[2.901,2.151,1.917,1.352,1.351,1.379,1.357,1.476,1.389,1.306,1.354,1.344,1.417,1.277,1.273,1.415,1.428,1.286,1.291,1.272,1.251,1.320,1.371,1.329,1.315,1.458,1.278,1.231,1.247,1.314,1.267,1.247,1.313,1.278,1.335,1.355,1.226,1.310,1.340,1.276,1.242,1.414,1.193,1.235,1.149,1.137,1.288,1.131,1.134,1.112,1.094,1.092,1.083,1.090,1.112,1.086,1.060,1.077,1.079,1.052,1.055,1.055,1.067,1.068,1.048,1.051,1.064,1.040,1.060,1.040,1.041,1.051,1.037,1.029,1.026,1.032,1.031,1.023,1.024,1.026,1.014,1.024,1.028,1.025,1.009,1.021,1.017,1.022,1.025,1.025,1.017,1.015,1.010,1.010,1.017,1.004,1.009,1.011,1.007,1.007];
+      var d_ct6=[0.007,0.098,0.104,0.695,0.730,0.683,0.698,0.768,0.677,0.720,0.794,0.778,0.805,0.836,0.842,0.807,0.824,0.858,0.803,0.850,0.842,0.831,0.851,0.858,0.843,0.874,0.844,0.838,0.840,0.861,0.877,0.846,0.878,0.890,0.867,0.833,0.875,0.879,0.888,0.880,0.875,0.802,0.872,0.851,0.875,0.891,0.866,0.875,0.895,0.891,0.891,0.893,0.898,0.896,0.908,0.893,0.909,0.913,0.901,0.908,0.900,0.906,0.907,0.904,0.915,0.903,0.903,0.908,0.907,0.909,0.913,0.914,0.914,0.915,0.918,0.920,0.910,0.920,0.910,0.918,0.921,0.926,0.922,0.917,0.921,0.923,0.924,0.924,0.921,0.923,0.918,0.922,0.921,0.923,0.917,0.926,0.924,0.925,0.921,0.923];
+      var d_ct7=[0.003,0.034,0.052,0.410,0.440,0.382,0.390,0.407,0.376,0.437,0.450,0.439,0.419,0.492,0.498,0.419,0.412,0.497,0.480,0.521,0.505,0.464,0.453,0.456,0.496,0.433,0.521,0.539,0.527,0.482,0.518,0.508,0.502,0.540,0.460,0.472,0.561,0.529,0.497,0.536,0.546,0.417,0.568,0.569,0.601,0.608,0.508,0.612,0.613,0.649,0.642,0.641,0.658,0.663,0.649,0.662,0.674,0.671,0.671,0.683,0.678,0.686,0.688,0.677,0.688,0.681,0.673,0.694,0.680,0.687,0.699,0.700,0.702,0.698,0.707,0.702,0.684,0.710,0.697,0.706,0.711,0.720,0.716,0.717,0.715,0.712,0.719,0.716,0.722,0.714,0.709,0.713,0.723,0.720,0.716,0.730,0.731,0.726,0.725,0.726];
 
       /* Config for each of the 8 mini charts */
       var CONFIGS = [
-        { id:'ct0', color:'#C17A2E', data: tc(2.40, 0.44, 7.3, 3.7) },
-        { id:'ct1', color:'#C17A2E', data: tc(1.75, 0.36, 6.1, 4.2) },
-        { id:'ct2', color:'#C17A2E', data: tc(1.38, 0.87, 8.5, 2.9) },
-        { id:'ct3', color:'#1D7A4F', data: tc(2.60, 0.52, 5.7, 6.3) },
-        { id:'ct4', color:'#1D7A4F', data: tc(1.90, 0.45, 7.1, 3.1) },
-        { id:'ct5', color:'#1D7A4F', data: tc(1.45, 0.92, 9.2, 2.4) },
-        { id:'ct6', color:'#2A9D60', data: tc(0.04, 0.929, 6.8, 4.5) },
-        { id:'ct7', color:'#D4943F', data: tc(0.02, 0.766, 7.9, 3.8) }
+        { id:'ct0', color:'#C17A2E', data: d_ct0 },
+        { id:'ct1', color:'#C17A2E', data: d_ct1 },
+        { id:'ct2', color:'#C17A2E', data: d_ct2 },
+        { id:'ct3', color:'#1D7A4F', data: d_ct3 },
+        { id:'ct4', color:'#1D7A4F', data: d_ct4 },
+        { id:'ct5', color:'#1D7A4F', data: d_ct5 },
+        { id:'ct6', color:'#2A9D60', data: d_ct6 },
+        { id:'ct7', color:'#D4943F', data: d_ct7 }
       ];
 
       /* Shared mini-chart options factory */
@@ -4533,191 +4343,10 @@
     };
 
     /* ============================================================
-       PR CURVES  (Tab 4)
+       PR CURVES  (Tab 4) — replaced with static <img> (assets/pr_curve.png)
+       Source: decafia_grouped_v1_test/BoxPR_curve.png
+       CHART_INITS['tab-pr'] intentionally omitted — no Chart.js needed.
     ============================================================ */
-    CHART_INITS['tab-pr'] = function() {
-      var canvas = document.getElementById('chart-pr');
-      if (!canvas || !window.Chart) return;
-
-      var lang  = localStorage.getItem('decafia-lang') || 'es';
-      var dark  = window.DECAFIA_CHART.isDark();
-      var noAnim = window.DECAFIA_CHART.reduced;
-
-      /* ── Theme-aware colours ── */
-      var textColor  = dark ? 'rgba(232,237,230,0.70)' : 'rgba(26,26,24,0.65)';
-      var gridColor  = dark ? 'rgba(255,255,255,0.07)'  : 'rgba(15,30,20,0.08)';
-      var tooltipBg  = dark ? '#1a2418' : '#0F4C2A';
-      var colRoya    = '#C17A2E';
-      var colCoco    = '#1D7A4F';
-      var colMinador = '#2A9D60';
-      var colAll     = dark ? 'rgba(245,240,232,0.92)' : 'rgba(15,76,42,0.95)';
-
-      /* ── Axis labels (i18n) ── */
-      var yLabel = lang === 'es' ? 'Precisión' : 'Precision';
-      var xLabel = 'Recall';
-
-      /* ── Curve generation ──────────────────────────────────────
-         Each curve uses a closed-form polynomial whose definite
-         integral on [0,1] equals the target AP exactly.
-
-         Roya    (AP 0.884): P(r) = 1 − 0.348·r²   ∫=1−0.116=0.884
-         Coco    (AP 0.951): P(r) = 1 − 0.196·r³   ∫=1−0.049=0.951
-         Minador (AP 0.946): P(r) = 1 − 0.216·r³   ∫=1−0.054=0.946
-         All     (AP 0.927): mean of the three above ∫=0.927
-
-         Deterministic jitter: sin(r·π·k + φ)·0.004
-         reproduces the step-function "staircase" look of real PR
-         curves without any random state.
-      ──────────────────────────────────────────────────────────── */
-      function makeCurve(formulaFn, jitterFreq, jitterPhase) {
-        var pts = [];
-        for (var i = 0; i <= 100; i++) {
-          var r = i / 100;
-          var base = formulaFn(r);
-          var jitter = Math.sin(r * Math.PI * jitterFreq + jitterPhase) * 0.004;
-          pts.push({ x: r, y: Math.min(1, Math.max(0, parseFloat((base + jitter).toFixed(4)))) });
-        }
-        return pts;
-      }
-
-      var ptsRoya    = makeCurve(function(r){ return 1 - 0.348*r*r; },            11, 0.0);
-      var ptsCoco    = makeCurve(function(r){ return 1 - 0.196*r*r*r; },          13, 1.1);
-      var ptsMinador = makeCurve(function(r){ return 1 - 0.216*r*r*r; },           9, 2.3);
-      var ptsAll     = makeCurve(function(r){
-        var p = (1-0.348*r*r) + (1-0.196*r*r*r) + (1-0.216*r*r*r);
-        return p / 3;   /* mean — AUC = (0.884+0.951+0.946)/3 = 0.9270 */
-      }, 7, 3.5);
-
-      /* ── Legend labels ── */
-      var lRoya    = 'Roya — AP 0.884';
-      var lCoco    = 'Coco — AP 0.951';
-      var lMinador = 'Minador — AP 0.946';
-      var lAll     = lang === 'es' ? 'Todas las clases — mAP50 0.927' : 'All classes — mAP50 0.927';
-
-      CHART_INSTANCES['tab-pr'] = new window.Chart(canvas, {
-        type: 'line',
-        data: {
-          datasets: [
-            /* Per-class thin lines first (lower z-order) */
-            {
-              label: lRoya,
-              data: ptsRoya,
-              borderColor: colRoya,
-              borderWidth: 1.5,
-              pointRadius: 0,
-              tension: 0.35,
-              fill: false
-            },
-            {
-              label: lCoco,
-              data: ptsCoco,
-              borderColor: colCoco,
-              borderWidth: 1.5,
-              pointRadius: 0,
-              tension: 0.35,
-              fill: false
-            },
-            {
-              label: lMinador,
-              data: ptsMinador,
-              borderColor: colMinador,
-              borderWidth: 1.5,
-              pointRadius: 0,
-              tension: 0.35,
-              fill: false
-            },
-            /* "All classes" — thick bold line on top */
-            {
-              label: lAll,
-              data: ptsAll,
-              borderColor: colAll,
-              borderWidth: 3,
-              pointRadius: 0,
-              tension: 0.35,
-              fill: false,
-              borderDash: []
-            }
-          ]
-        },
-        options: {
-          animation: { duration: noAnim ? 0 : 600 },
-          responsive: true,
-          maintainAspectRatio: true,
-          aspectRatio: 1.6,
-          parsing: false,   /* data is already {x,y} objects */
-          plugins: {
-            legend: {
-              display: true,
-              position: 'bottom',   /* mimics paper Figure 2 lower placement */
-              align: 'center',
-              labels: {
-                color: textColor,
-                font: { size: 11 },
-                boxWidth: 24,
-                boxHeight: 2,
-                padding: 12,
-                usePointStyle: false
-              }
-            },
-            tooltip: {
-              mode: 'nearest',
-              intersect: false,
-              backgroundColor: tooltipBg,
-              titleColor: '#fff',
-              bodyColor: 'rgba(245,240,232,0.82)',
-              padding: 10,
-              cornerRadius: 8,
-              callbacks: {
-                title: function(items) {
-                  return xLabel + ': ' + items[0].parsed.x.toFixed(2);
-                },
-                label: function(ctx) {
-                  return ' ' + ctx.dataset.label.split('—')[0].trim()
-                    + ': ' + ctx.parsed.y.toFixed(3);
-                }
-              }
-            }
-          },
-          scales: {
-            x: {
-              type: 'linear',
-              min: 0, max: 1,
-              title: {
-                display: true,
-                text: xLabel,
-                color: textColor,
-                font: { size: 11, weight: '600' }
-              },
-              ticks: {
-                color: textColor,
-                font: { size: 10 },
-                stepSize: 0.2,
-                callback: function(v) { return v.toFixed(1); }
-              },
-              grid: { color: gridColor },
-              border: { color: 'transparent' }
-            },
-            y: {
-              min: 0, max: 1,
-              title: {
-                display: true,
-                text: yLabel,
-                color: textColor,
-                font: { size: 11, weight: '600' }
-              },
-              ticks: {
-                color: textColor,
-                font: { size: 10 },
-                stepSize: 0.2,
-                callback: function(v) { return v.toFixed(1); }
-              },
-              grid: { color: gridColor },
-              border: { color: 'transparent' }
-            }
-          }
-        }
-      });
-    };
 
   })();
 
@@ -5032,7 +4661,7 @@
       mapEl._mapInit = true;
 
       var map = L.map(mapEl, {
-        center: [6.4667, -73.3167],
+        center: [6.44, -73.22],
         zoom: 9,
         zoomControl: true,
         scrollWheelZoom: false
@@ -5054,12 +4683,12 @@
         popupAnchor: [0, -18]
       });
 
-      L.marker([6.4667, -73.3167], { icon: pulsingIcon })
+      L.marker([6.44, -73.22], { icon: pulsingIcon })
         .addTo(map)
         .bindPopup(
           '<b style="font-family:serif;font-size:14px">El Socorro, Santander</b><br>' +
           '<span style="font-size:12px;color:#555">Sitio de recolección del dataset DECAFIA<br>' +
-          '2,786 imágenes &nbsp;·&nbsp; 2022–2023</span>'
+          '2,315 imágenes &nbsp;·&nbsp; El Socorro 2022–2023 + Silva et al.</span>'
         )
         .openPopup();
 

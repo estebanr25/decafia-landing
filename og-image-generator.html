@@ -199,9 +199,9 @@ function render() {
 
   /* stats row */
   const stats = [
-    { val: '2,786',  lbl: 'imágenes' },
-    { val: '12,810', lbl: 'instancias' },
-    { val: '< 3 s',  lbl: 'latencia' },
+    { val: '2,315',   lbl: 'imágenes' },
+    { val: '12,810',  lbl: 'instancias' },
+    { val: '98.1%',   lbl: 'sanas sin FP' },
   ];
   let sx = lx;
   stats.forEach((s, i) => {
@@ -229,7 +229,7 @@ function render() {
   ctx.fill();
   ctx.font = '600 13px Inter, Arial, sans-serif';
   ctx.fillStyle = 'rgba(37,211,102,0.9)';
-  ctx.fillText('Bot en producción · +57 313 881 2134', lx + 30, 487 + 21);
+  ctx.fillText('Bot en pruebas · +57 313 881 2134', lx + 30, 487 + 21);
 
   /* ── RIGHT COLUMN — big metric ─────────────────── */
   const rx = 950; /* center x */
@@ -238,12 +238,12 @@ function render() {
   ctx.font = '600 13px Inter, Arial, sans-serif';
   ctx.fillStyle = C.creamMid;
   ctx.textAlign = 'center';
-  ctx.fillText('TEST SET · 286 IMÁGENES · YOLOV8m', rx, 168);
+  ctx.fillText('TEST SET · LEAKAGE-AWARE GROUPED SPLIT · YOLOV8m', rx, 168);
 
-  /* 92.4% */
+  /* 92.9% */
   ctx.font = 'bold 148px "Playfair Display", Georgia, serif';
   ctx.fillStyle = C.amber;
-  ctx.fillText('92.4%', rx, 310);
+  ctx.fillText('92.9%', rx, 310);
 
   /* "mAP50" label */
   ctx.font = '700 22px Inter, Arial, sans-serif';
@@ -252,10 +252,10 @@ function render() {
 
   /* secondary metrics grid */
   const metrics = [
-    { v: '90.5%', l: 'Precisión' },
-    { v: '85.8%', l: 'Recall' },
-    { v: '88.0%', l: 'F1' },
-    { v: '76.6%', l: 'mAP50-95' },
+    { v: '87.6%', l: 'Precisión' },
+    { v: '87.0%', l: 'Recall' },
+    { v: '87.3%', l: 'F1' },
+    { v: '73.4%', l: 'mAP50-95' },
   ];
   const mColW = 110;
   const mStartX = rx - (metrics.length * mColW) / 2 + mColW / 2;
@@ -271,9 +271,9 @@ function render() {
 
   /* per-class AP50 mini bars */
   const bars = [
-    { lbl: 'Roya',    v: 88.2, color: C.roya    },
-    { lbl: 'Coco',    v: 94.1, color: C.coco    },
-    { lbl: 'Minador', v: 94.9, color: C.minador },
+    { lbl: 'Roya',    v: 84.1, color: C.roya    },
+    { lbl: 'Coco',    v: 96.2, color: C.coco    },
+    { lbl: 'Minador', v: 98.5, color: C.minador },
   ];
   const barW = 200, barH = 7, barX = rx - barW / 2, barY0 = 460;
   bars.forEach((b, i) => {
@@ -319,7 +319,7 @@ function render() {
   ctx.stroke();
   ctx.font = '600 11px Inter, Arial, sans-serif';
   ctx.fillStyle = C.amber;
-  ctx.fillText('Submitted to Sensors (MDPI) · Paper preprint available on request', W / 2, H - 21);
+  ctx.fillText('Dataset: CoffeeLeaf-CO · doi.org/10.5281/zenodo.19931903', W / 2, H - 21);
 
   ctx.textAlign = 'left';
 }
