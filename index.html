@@ -2533,16 +2533,8 @@
         </div>
         <div class="problem-cards">
           <div class="problem-card reveal" style="--delay:0ms">
-            <div class="problem-number amber-text" data-count="30" data-suffix="%" data-decimals="0">0%</div>
-            <p class="problem-desc" data-i18n="prob1_desc">Pérdida de cosecha cuando la roya no se detecta a tiempo.</p>
-          </div>
-          <div class="problem-card reveal" style="--delay:120ms">
             <div class="problem-number amber-text" data-count="557000" data-formatted="true">0</div>
             <p class="problem-desc" data-i18n="prob2_desc">Familias caficultoras colombianas (Federación Nacional de Cafeteros, 2025).</p>
-          </div>
-          <div class="problem-card reveal" style="--delay:240ms">
-            <div class="problem-number amber-text">72h</div>
-            <p class="problem-desc" data-i18n="prob3_desc">Tiempo promedio para obtener un diagnóstico experto presencial en campo.</p>
           </div>
         </div>
       </div>
@@ -2621,7 +2613,7 @@
         <div class="reveal section-header">
           <p class="section-eyebrow" style="color:rgba(193,122,46,0.88)" data-i18n="res_eyebrow">Resultados científicos</p>
           <h2 id="resultados-heading" class="section-title" style="color:var(--cream)" data-i18n="res_title">Métricas de rendimiento validadas.</h2>
-          <p class="section-sub" style="color:rgba(245,240,232,0.72)" data-i18n="res_sub">Evaluación sobre conjunto de prueba independiente · 356 imágenes · YOLOv8m mejor checkpoint (época 98)</p>
+          <p class="section-sub" style="color:rgba(245,240,232,0.72)" data-i18n="res_sub">Evaluación sobre conjunto de prueba independiente · 356 imágenes · YOLOv8m mejor checkpoint (época 97)</p>
         </div>
 
         <!-- Tab navigation -->
@@ -2734,10 +2726,10 @@
                 <div class="train-mini"><p class="train-mini-label">metrics/mAP50-95</p><canvas id="ct7" role="img" aria-label="metrics/mAP50-95 vs epoch"></canvas></div>
               </div>
               <p class="chart-note" style="margin-top:1.25rem;" data-i18n="train_peak_note">
-                Mejor checkpoint: época 98 de 100 · mAP50 val = 0.929 · Optimizador: AdamW · RTX 5070 Laptop 8 GB
+                Mejor checkpoint: época 97 de 100 · fitness = 0.7507 · Optimizador: AdamW · RTX 5070 Laptop 8 GB
               </p>
               <p class="chart-note" style="margin-top:0.4rem;" data-i18n="train_note">
-                Datos reales de entrenamiento (results.csv, decafia_grouped_v1, 100 épocas). Mejor checkpoint: época 98.
+                Datos reales de entrenamiento (results.csv, decafia_grouped_v1, 100 épocas). Mejor checkpoint: época 97.
               </p>
             </div>
           </div>
@@ -2865,7 +2857,7 @@
                 <tr><th data-i18n="hp_gpu">GPU</th><td>RTX 5070 Laptop 8 GB</td></tr>
                 <tr><th data-i18n="hp_cuda">CUDA</th><td>12.8</td></tr>
                 <tr><th data-i18n="hp_patience">Early stopping</th><td>patience 50</td></tr>
-                <tr><th data-i18n="hp_epoch">Mejor época</th><td>98 / 100</td></tr>
+                <tr><th data-i18n="hp_epoch">Mejor época</th><td>97 / 100</td></tr>
               </tbody>
             </table>
           </div><!-- /hp-card -->
@@ -3053,7 +3045,7 @@
 
             <div>
               <div class="map-stat">2,315</div>
-              <div class="map-stat-label" data-i18n="map_stat1">imágenes totales (1,705 El Socorro + 610 Silva et al.) · 12,810 instancias anotadas</div>
+              <div class="map-stat-label" data-i18n="map_stat1">imágenes totales (1,705 El Socorro + 610 Silva et al.) · 12,794 instancias anotadas</div>
             </div>
 
             <div class="map-note-box" data-i18n-html="map_note">
@@ -3130,7 +3122,7 @@
           <p class="arch-title" data-i18n="arch_title">Arquitectura del sistema — dos ramas de exportación</p>
           <div class="arch-diagram" role="img" aria-label="Diagrama de arquitectura: YOLOv8m exportado a ONNX (Flask, WhatsApp, Dashboard) y App Android en desarrollo (ONNX offline)">
             <div class="arch-root-node">
-              <div class="arch-node highlight">YOLOv8m &nbsp;·&nbsp; best.pt &nbsp;·&nbsp; época 98</div>
+              <div class="arch-node highlight">YOLOv8m &nbsp;·&nbsp; best.pt &nbsp;·&nbsp; época 97</div>
               <p class="arch-root-note">Checkpoint único — punto de partida de ambas ramas</p>
             </div>
             <div class="arch-stem" aria-hidden="true"></div>
@@ -3371,14 +3363,14 @@
               <span data-i18n="faq3_q">¿Por qué solo 3 enfermedades?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
-            <div class="faq-body" data-i18n-html="faq3_a">El dataset fue recolectado en una única finca donde estas tres plagas son las de mayor incidencia.</div>
+            <div class="faq-body" data-i18n-html="faq3_a">Roya y coco de El Socorro, Santander; minador de Silva et al. (Brasil).</div>
           </li>
           <li class="faq-item">
             <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
               <span data-i18n="faq4_q">¿En qué variedades de café se validó?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
-            <div class="faq-body" data-i18n-html="faq4_a">Coffea arabica L., variedades Colombia y Castillo.</div>
+            <div class="faq-body" data-i18n-html="faq4_a">Coffea arabica L., principalmente variedad Colombia con algunas plantas de Cenicafé 1.</div>
           </li>
           <li class="faq-item">
             <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
@@ -3392,7 +3384,7 @@
               <span data-i18n="faq6_q">¿Cómo fue anotado el dataset?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
-            <div class="faq-body" data-i18n-html="faq6_a">2,315 imágenes anotadas con polígonos usando VIA + SAM, produciendo 12,810 instancias.</div>
+            <div class="faq-body" data-i18n-html="faq6_a">Lesiones anotadas con polígonos usando VIA + SAM, con supervisión agronómica. 2.315 imágenes · 12.794 anotaciones.</div>
           </li>
           <li class="faq-item">
             <button class="faq-btn" aria-expanded="false" onclick="decafiaToggleFaq(this)">
@@ -3601,12 +3593,11 @@
       prob_eyebrow:    { es: 'El problema', en: 'The problem' },
       prob_title:      { es: '"La roya destruye silenciosamente"', en: '"Coffee rust destroys silently"' },
       prob_sub:        { es: 'Para cuando los síntomas son visibles a simple vista, ya es demasiado tarde.', en: 'By the time symptoms are visible to the naked eye, it\'s already too late.' },
-      prob1_val:       { es: '30%', en: '30%' },
-      prob1_desc:      { es: 'Pérdida de cosecha cuando la roya no se detecta a tiempo.', en: 'Crop loss when coffee rust is not detected in time.' },
+      /* prob1_val / prob1_desc removed — "30% crop loss" card had no verified source */
       prob2_val:       { es: '557 mil', en: '557K' },
       prob2_desc:      { es: 'Familias caficultoras colombianas (Federación Nacional de Cafeteros, 2025).', en: 'Colombian coffee-growing families (Federación Nacional de Cafeteros, 2025).' },
       prob3_val:       { es: '72h', en: '72h' },
-      prob3_desc:      { es: 'Tiempo promedio para obtener un diagnóstico experto presencial en campo.', en: 'Average time to get an expert on-site diagnosis in the field.' },
+      /* prob3_desc removed — "72h expert diagnosis" had no verified source */
 
       /* ── How it works ── */
       how_eyebrow:     { es: 'El proceso', en: 'The process' },
@@ -3625,7 +3616,7 @@
       /* ── Results ── */
       res_eyebrow:     { es: 'Resultados científicos', en: 'Scientific results' },
       res_title:       { es: 'Métricas de rendimiento validadas.', en: 'Validated performance metrics.' },
-      res_sub:         { es: 'Evaluación sobre conjunto de prueba independiente · 356 imágenes · YOLOv8m mejor checkpoint (época 98)', en: 'Evaluation on independent test set · 356 images · YOLOv8m best checkpoint (epoch 98)' },
+      res_sub:         { es: 'Evaluación sobre conjunto de prueba independiente · 356 imágenes · YOLOv8m mejor checkpoint (época 97)', en: 'Evaluation on independent test set · 356 images · YOLOv8m best checkpoint (epoch 97)' },
       tab_overall:     { es: 'Métricas globales', en: 'Overall metrics' },
       tab_perclass:    { es: 'AP por clase', en: 'Per-class AP' },
       tab_confmat:     { es: 'Matriz de confusión', en: 'Confusion matrix' },
@@ -3639,7 +3630,7 @@
       confmat_note:    { es: 'Matriz de confusión normalizada en el conjunto de prueba (356 imágenes). Ultralytics la calcula con confianza 0,25; «background» corresponde a detecciones o lesiones no emparejadas.', en: 'Normalised confusion matrix on the test set (356 images). Ultralytics computes it at confidence 0.25; "background" corresponds to unmatched detections or lesions.' },
       pr_note:         { es: 'AP = área bajo la curva. Calculado sobre el conjunto de prueba (356 imágenes).', en: 'AP = area under the curve. Computed on the test set (356 images).' },
       train_epoch:     { es: 'Época', en: 'Epoch' },
-      train_note:      { es: 'Datos reales de entrenamiento (results.csv, decafia_grouped_v1, 100 épocas). Mejor checkpoint: época 98.', en: 'Real training data (results.csv, decafia_grouped_v1, 100 epochs). Best checkpoint: epoch 98.' },
+      train_note:      { es: 'Datos reales de entrenamiento (results.csv, decafia_grouped_v1, 100 épocas). Mejor checkpoint: época 97.', en: 'Real training data (results.csv, decafia_grouped_v1, 100 epochs). Best checkpoint: epoch 97.' },
 
       /* ── Overall metrics tab ── */
       overall_test_label:  { es: 'Métricas en conjunto de prueba (356 imágenes)', en: 'Test-set metrics (356 images)' },
@@ -3657,7 +3648,7 @@
       overall_map5095:     { es: 'mAP50-95', en: 'mAP50-95' },
 
       /* ── Training dynamics tab ── */
-      train_peak_note:     { es: 'Mejor checkpoint: época 98 de 100 · mAP50 val = 0.929 · Optimizador: AdamW · RTX 5070 Laptop 8 GB', en: 'Best checkpoint: epoch 98 of 100 · val mAP50 = 0.929 · Optimizer: AdamW · RTX 5070 Laptop 8 GB' },
+      train_peak_note:     { es: 'Mejor checkpoint: época 97 de 100 · fitness = 0.7507 · Optimizador: AdamW · RTX 5070 Laptop 8 GB', en: 'Best checkpoint: epoch 97 of 100 · fitness = 0.7507 · Optimizer: AdamW · RTX 5070 Laptop 8 GB' },
 
       /* ── Methodology ── */
       meth_eyebrow:    { es: 'Metodología', en: 'Methodology' },
@@ -3666,7 +3657,7 @@
       meth_pipe_label: { es: 'Pipeline de datos y modelado', en: 'Data & modelling pipeline' },
       meth_hp_label:   { es: 'Hiperparámetros de entrenamiento', en: 'Training hyperparameters' },
       meth_ds_label:   { es: 'Composición del dataset', en: 'Dataset composition' },
-      meth_ds_note:    { es: '2,315 imágenes (1,705 El Socorro 2022–2023 + 610 Silva et al., CC BY 4.0) · 12,810 instancias poligonales', en: '2,315 images (1,705 El Socorro 2022–2023 + 610 Silva et al., CC BY 4.0) · 12,810 polygon instances' },
+      meth_ds_note:    { es: '2,315 imágenes (1,705 El Socorro 2022–2023 + 610 Silva et al., CC BY 4.0) · 12,794 instancias poligonales', en: '2,315 images (1,705 El Socorro 2022–2023 + 610 Silva et al., CC BY 4.0) · 12,794 polygon instances' },
 
       /* ── Methodology section header ── */
       method_eyebrow:  { es: 'Metodología',                en: 'Methodology' },
@@ -3680,10 +3671,10 @@
       pipe1_sub:   { es: '640×480 px · JPEG · luz natural', en: '640×480 px · JPEG · natural light' },
       pipe2_title: { es: 'Anotación VIA + SAM',        en: 'Annotation VIA + SAM' },
       pipe2_sub:   { es: '2,315 imágenes · polígonos', en: '2,315 images · polygons' },
-      pipe3_title: { es: '12,810 instancias',           en: '12,810 instances' },
+      pipe3_title: { es: '12,794 instancias',           en: '12,794 instances' },
       pipe3_sub:   { es: '3 clases · polígonos segmentados', en: '3 classes · segmented polygons' },
       pipe4_title: { es: 'Fine-tuning YOLOv8m',        en: 'YOLOv8m fine-tuning' },
-      pipe4_sub:   { es: 'desde COCO preentrenado · época 98', en: 'from COCO weights · epoch 98' },
+      pipe4_sub:   { es: 'desde COCO preentrenado · época 97', en: 'from COCO weights · epoch 97' },
       pipe5_title: { es: 'Exportación ONNX',            en: 'ONNX export' },
       pipe5_sub:   { es: 'opset 12 · 99 MB FP32',       en: 'opset 12 · 99 MB FP32' },
       pipe6_title: { es: '3 superficies de despliegue', en: '3 deployment surfaces' },
@@ -3741,7 +3732,7 @@
       map_eyebrow:     { es: 'Área de estudio', en: 'Study area' },
       map_title:       { es: 'Desde el corazón cafetero de Santander', en: 'From the coffee heart of Santander' },
       map_sub:         { es: 'Fotos propias recolectadas en una finca en El Socorro, Santander (2022–2023). Las imágenes de minador de la hoja provienen de Silva et al. (Brasil), CC BY 4.0.', en: 'Own photos collected on a farm in El Socorro, Santander (2022–2023). Leaf miner images come from Silva et al. (Brazil), CC BY 4.0.' },
-      map_stat1:       { es: 'imágenes totales (1,705 El Socorro + 610 Silva et al.) · 12,810 instancias anotadas', en: 'total images (1,705 El Socorro + 610 Silva et al.) · 12,810 annotated instances' },
+      map_stat1:       { es: 'imágenes totales (1,705 El Socorro + 610 Silva et al.) · 12,794 instancias anotadas', en: 'total images (1,705 El Socorro + 610 Silva et al.) · 12,794 annotated instances' },
       /* map_stat2 removed — "30,000+ fincas" had no verified source */
       map_note:        { es: '<strong>Estado actual:</strong> prueba de concepto validada en una finca. El equipo aspira a escalar el sistema, en colaboración con el <strong>Comité de Cafeteros de Santander</strong>, a un ensayo de campo multi-municipio.', en: '<strong>Current status:</strong> proof of concept validated on one farm. The team aims to scale the system, in collaboration with the <strong>Santander Coffee Growers Committee</strong>, to a multi-municipality field trial.' },
       alt_band_label:  { es: 'Cinturón cafetero andino (1,200–2,000 m.s.n.m.)', en: 'Andean coffee belt (1,200–2,000 m.a.s.l.)' },
@@ -3810,13 +3801,13 @@
       faq2_q:          { es: '¿Funciona sin internet?', en: 'Does it work offline?' },
       faq2_a:          { es: 'El bot de WhatsApp y el dashboard web requieren conexión. La App Android (actualmente en desarrollo) usará ONNX on-device y funcionará sin internet, con GPS integrado para georreferenciación. En zonas rurales sin señal, la app será la opción recomendada una vez esté disponible.', en: 'The WhatsApp bot and web dashboard require a connection. The Android App (currently in development) will use on-device ONNX and work completely offline, with integrated GPS for georeferencing. In rural areas without signal, the app will be the recommended option once available.' },
       faq3_q:          { es: '¿Por qué solo 3 enfermedades?', en: 'Why only 3 diseases?' },
-      faq3_a:          { es: 'El dataset fue recolectado en una única finca en El Socorro, Santander durante 2022–2023, donde estas tres plagas son las de mayor incidencia económica según Cenicafé. Expandir a broca (Hypothenemus hampei) y otras patologías requiere datos de campo adicionales — está en la hoja de ruta para la siguiente fase del proyecto.', en: 'The dataset was collected on a single farm in El Socorro, Santander during 2022–2023, where these three pests have the highest economic incidence according to Cenicafé. Expanding to coffee berry borer (Hypothenemus hampei) and other pathologies requires additional field data — it\'s on the roadmap for the next project phase.' },
+      faq3_a:          { es: 'Las imágenes de roya y coco provienen de la finca en El Socorro, Santander (2022–2023); las imágenes de minador provienen de Silva et al. (Brasil, CC BY 4.0). Expandir a broca (Hypothenemus hampei) y otras patologías requiere datos de campo adicionales — está en la hoja de ruta para la siguiente fase del proyecto.', en: 'Rust and coco images come from the farm in El Socorro, Santander (2022–2023); leaf miner images come from Silva et al. (Brazil, CC BY 4.0). Expanding to coffee berry borer (Hypothenemus hampei) and other pathologies requires additional field data — it\'s on the roadmap for the next project phase.' },
       faq4_q:          { es: '¿En qué variedades de café se validó?', en: 'Which coffee varieties was it validated on?' },
-      faq4_a:          { es: 'El dataset fue recolectado en plantaciones predominantemente de <em>Coffea arabica</em> L. (variedades Colombia y Castillo) en una finca en El Socorro, Santander. No se realizó validación cruzada en variedades de robusta ni en otras regiones geográficas. La transferibilidad a otras variedades o regiones es una limitación conocida.', en: 'The dataset was collected in predominantly <em>Coffea arabica</em> L. plantations (Colombia and Castillo varieties) on a farm in El Socorro, Santander. No cross-validation was performed on robusta varieties or other geographic regions. Transferability to other varieties or regions is a known limitation.' },
+      faq4_a:          { es: 'El dataset fue recolectado en plantaciones de <em>Coffea arabica</em> L. (principalmente variedad Colombia, con algunas plantas de Cenicafé 1) en una finca en El Socorro, Santander. No se realizó validación cruzada en otras variedades ni en otras regiones geográficas. La transferibilidad a otras variedades o regiones es una limitación conocida.', en: 'The dataset was collected in <em>Coffea arabica</em> L. plantations (mainly Colombia variety, with some Cenicafé 1 plants) on a farm in El Socorro, Santander. No cross-validation was performed on other varieties or other geographic regions. Transferability to other varieties or regions is a known limitation.' },
       faq5_q:          { es: '¿Cómo puede acceder mi cooperativa?', en: 'How can my cooperative get access?' },
       faq5_a:          { es: 'Escríbenos a rosas.esteban.10@gmail.com con el asunto "DECAFIA — Demo cooperativa". Ofrecemos demostraciones técnicas del modelo, la API y el dashboard. El sistema es actualmente un prototipo de investigación; la integración a escala comercial requiere colaboración formal.', en: 'Email us at rosas.esteban.10@gmail.com with subject "DECAFIA — Cooperative demo". We offer technical demonstrations of the model, API and dashboard. The system is currently a research prototype; commercial-scale integration requires formal collaboration.' },
       faq6_q:          { es: '¿Cómo fue anotado el dataset?', en: 'How was the dataset annotated?' },
-      faq6_a:          { es: '2,315 imágenes fueron anotadas con polígonos (no bounding boxes) usando VIA (VGG Image Annotator) asistido por SAM (Segment Anything Model), produciendo 12,810 instancias. El dataset incluye 1,705 fotos propias de El Socorro, Santander (2022–2023) y 610 imágenes de minador de Silva et al. (Brasil), bajo licencia CC BY 4.0.', en: '2,315 images were annotated with polygons (not bounding boxes) using VIA (VGG Image Annotator) assisted by SAM (Segment Anything Model), producing 12,810 instances. The dataset includes 1,705 own field photos from El Socorro, Santander (2022–2023) and 610 leaf miner images from Silva et al. (Brazil), CC BY 4.0.' },
+      faq6_a:          { es: 'Las lesiones se anotaron con polígonos usando VIA (VGG Image Annotator) y una herramienta propia basada en SAM (Segment Anything Model), con supervisión de un ingeniero agrónomo. Para entrenar el detector, cada polígono se convirtió en una caja delimitadora. El dataset tiene 2.315 imágenes y 12.794 anotaciones: 1.705 fotos propias de El Socorro, Santander (2022–2023) y 610 imágenes derivadas de Silva et al. (Brasil, CC BY 4.0), que aportan parte de la roya y todo el minador.', en: 'Lesions were annotated with polygons using VIA (VGG Image Annotator) and a custom tool based on SAM (Segment Anything Model), supervised by an agricultural engineer. To train the detector, each polygon was converted to a bounding box. The dataset has 2,315 images and 12,794 annotations: 1,705 own field photos from El Socorro, Santander (2022–2023) and 610 images derived from Silva et al. (Brazil, CC BY 4.0), contributing part of the rust and all of the leaf miner images.' },
       faq7_q:          { es: '¿Está disponible el dataset públicamente?', en: 'Is the dataset publicly available?' },
       faq7_a:          { es: 'El dataset CoffeeLeaf-CO está disponible en Zenodo bajo licencia CC-BY-4.0: <a href="https://doi.org/10.5281/zenodo.19931903" target="_blank" rel="noopener noreferrer" style="color:var(--green-light)">doi.org/10.5281/zenodo.19931903</a>.', en: 'The CoffeeLeaf-CO dataset is available on Zenodo under a CC-BY-4.0 license: <a href="https://doi.org/10.5281/zenodo.19931903" target="_blank" rel="noopener noreferrer" style="color:var(--green-light)">doi.org/10.5281/zenodo.19931903</a>.' },
       faq8_q:          { es: '¿Cómo cito este trabajo?', en: 'How do I cite this work?' },
